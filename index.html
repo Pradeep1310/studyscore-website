@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudyScore — India's First Independent Rating for Study Abroad Agents</title>
+<meta name="description" content="Rate your study abroad agent. Help future students make informed decisions. India's first independent, student-powered agent quality assessment.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAF8;
+    --surface: #FFFFFF;
+    --navy: #0F1B2D;
+    --deep: #1A2A42;
+    --gold: #B8944F;
+    --gold-light: #D4B876;
+    --accent: #2D7A6E;
+    --accent-light: #E8F5F1;
+    --text: #2D2D2D;
+    --text-secondary: #6B7280;
+    --border: #E5E5E0;
+    --warm: #F5F0E8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 0;
+  }
+  .nav-inner {
+    max-width: 1100px; margin: 0 auto; padding: 0 24px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px; color: var(--navy);
+    text-decoration: none;
+  }
+  .logo span { color: var(--gold); }
+  .nav-cta {
+    background: var(--navy); color: white;
+    padding: 10px 24px; border-radius: 8px;
+    text-decoration: none; font-size: 14px; font-weight: 600;
+    transition: all 0.3s;
+  }
+  .nav-cta:hover { background: var(--deep); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    padding: 160px 24px 100px;
+    max-width: 900px; margin: 0 auto;
+    text-align: center;
+  }
+  .badge {
+    display: inline-block;
+    background: var(--warm);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 50px;
+    margin-bottom: 32px;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 6vw, 60px);
+    line-height: 1.15;
+    color: var(--navy);
+    margin-bottom: 24px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .hero p {
+    font-size: 19px;
+    color: var(--text-secondary);
+    max-width: 640px;
+    margin: 0 auto 40px;
+    line-height: 1.8;
+  }
+  .hero-cta {
+    display: inline-block;
+    background: var(--gold);
+    color: white;
+    padding: 16px 40px;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(184,148,79,0.3);
+  }
+  .hero-cta:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(184,148,79,0.4);
+  }
+  .hero-sub {
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    max-width: 800px; margin: 0 auto 80px;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    background: var(--navy);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .stat {
+    padding: 32px 24px;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    color: var(--gold);
+  }
+  .stat-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  /* SECTION BASE */
+  section { padding: 80px 24px; }
+  .container { max-width: 1000px; margin: 0 auto; }
+  .section-tag {
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    color: var(--navy);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  .section-desc {
+    font-size: 17px;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin-bottom: 48px;
+    line-height: 1.8;
+  }
+
+  /* THE PROBLEM */
+  .problem-section { background: var(--warm); }
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .problem-card {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    border: 1px solid var(--border);
+    transition: transform 0.3s;
+  }
+  .problem-card:hover { transform: translateY(-4px); }
+  .problem-icon {
+    width: 48px; height: 48px;
+    background: var(--accent-light);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  .problem-card h3 {
+    font-size: 18px; font-weight: 700;
+    color: var(--navy); margin-bottom: 12px;
+  }
+  .problem-card p {
+    font-size: 15px; color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  /* HOW IT WORKS */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 32px;
+    margin-top: 48px;
+  }
+  .step {
+    text-align: center;
+    padding: 32px 20px;
+  }
+  .step-num {
+    width: 56px; height: 56px;
+    background: var(--navy);
+    color: var(--gold);
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+  }
+  .step h3 {
+    font-size: 17px; font-weight: 700;
+    color: var(--navy); margin-bottom: 8px;
+  }
+  .step p {
+    font-size: 14px; color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* SURVEY CTA */
+  .survey-section {
+    background: var(--navy);
+    text-align: center;
+  }
+  .survey-section .section-tag { color: var(--gold-light); }
+  .survey-section .section-title { color: white; margin-bottom: 16px; }
+  .survey-section .section-desc {
+    color: rgba(255,255,255,0.7);
+    margin: 0 auto 40px;
+    max-width: 540px;
+  }
+  .survey-cta {
+    display: inline-block;
+    background: var(--gold);
+    color: white;
+    padding: 18px 48px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(184,148,79,0.4);
+  }
+  .survey-cta:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+  }
+  .survey-note {
+    margin-top: 20px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* ABOUT */
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .about-photo {
+    background: var(--warm);
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+  .about-photo .name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .about-photo .title {
+    font-size: 14px;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .about-photo .creds {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+  .about-text p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    line-height: 1.8;
+  }
+  .about-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .about-stat {
+    background: var(--warm);
+    padding: 16px 20px;
+    border-radius: 10px;
+  }
+  .about-stat strong {
+    display: block;
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    color: var(--navy);
+  }
+  .about-stat span {
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    padding: 48px 24px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .footer-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: white;
+    margin-bottom: 8px;
+  }
+  .footer-logo span { color: var(--gold); }
+  .footer-tagline {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 24px;
+  }
+  .footer-contact {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 4px;
+  }
+  .footer-contact a { color: var(--gold); text-decoration: none; }
+  .footer-legal {
+    margin-top: 32px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .stats-bar { grid-template-columns: 1fr; }
+    .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px; }
+    .stat:last-child { border-bottom: none; }
+    .about-content { grid-template-columns: 1fr; }
+    .hero { padding: 120px 20px 60px; }
+    .hero-cta { padding: 14px 32px; font-size: 16px; }
+    .about-stats { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Study<span>Score</span></a>
+    <a href="#survey" class="nav-cta">Rate Your Agent →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge">India's First Independent Study</div>
+  <h1>Your Agent Got a <em>Score.</em><br>You Just Don't Know It Yet.</h1>
+  <p>We're building India's first independent, student-powered rating system for study abroad agents. No bias. No sponsorships. Just the truth from students who've been through it.</p>
+  <a href="#survey" class="hero-cta">Share Your Experience — 3 Minutes</a>
+  <p class="hero-sub">100% anonymous · No login required · Your identity is never shared</p>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-num">25,000+</div>
+    <div class="stat-label">Education Agents in India</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">Zero</div>
+    <div class="stat-label">Independent Rating Systems</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">Rs 15-40L</div>
+    <div class="stat-label">Spent by Each Family on Blind Trust</div>
+  </div>
+</div>
+
+<!-- THE PROBLEM -->
+<section class="problem-section">
+  <div class="container">
+    <div class="section-tag">The Problem</div>
+    <div class="section-title">Rs 15 Lakh Decisions Based on Zero Data</div>
+    <div class="section-desc">Every year, lakhs of Indian families spend their life savings on study abroad — choosing agents based on newspaper ads, neighbour recommendations, and Instagram reels. Nobody has the data to make an informed choice.</div>
+
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-icon">🎯</div>
+        <h3>No Verified Track Record</h3>
+        <p>Every agent claims "99% success rate." But there's no independent system to verify these claims. Students and parents have no way to check the truth.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">💰</div>
+        <h3>Hidden Fee Structures</h3>
+        <p>Many students discover additional charges after signing up — "processing fees," "documentation charges," "service tax." By then, it's too late to switch.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">🔇</div>
+        <h3>Silent After the Visa</h3>
+        <p>The agent who called you 5 times a day before signing suddenly becomes unreachable after the visa is stamped. Post-departure support? Often nonexistent.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">📊</div>
+        <h3>No Way to Compare</h3>
+        <p>You can compare phones on Flipkart. Restaurants on Zomato. Hotels on MakeMyTrip. But you can't compare the people handling your child's future.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">⭐</div>
+        <h3>Good Agents Get No Credit</h3>
+        <p>Thousands of excellent agents exist — transparent, thorough, genuinely caring. But they're invisible because there's no platform to showcase their quality.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">🌍</div>
+        <h3>An Industry Without a Mirror</h3>
+        <p>Banking has CIBIL. Restaurants have Zomato. Hotels have TripAdvisor. International education — an industry handling lakhs of crores — has nothing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div class="container" style="text-align:center;">
+    <div class="section-tag">How StudyScore Works</div>
+    <div class="section-title" style="max-width:600px;margin:0 auto 12px;">Students Rate. Data Speaks.<br>The Industry Transforms.</div>
+    <div class="section-desc" style="margin:0 auto;">We collect anonymous feedback from students who've actually used study abroad agents. We analyse the data. We publish India's first independent agent quality report.</div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Students Share</h3>
+        <p>A 3-minute anonymous survey about your experience — communication, transparency, support, and overall satisfaction.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Data Aggregates</h3>
+        <p>We collect responses across agents, cities, and countries. Patterns emerge. Quality becomes measurable.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Scores Are Born</h3>
+        <p>Each agent receives a StudyScore — a transparent, data-driven quality rating based on real student experiences.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Families Decide Better</h3>
+        <p>Future students and parents check StudyScores before choosing an agent. Informed decisions replace blind trust.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SURVEY CTA -->
+<section class="survey-section" id="survey">
+  <div class="container">
+    <div class="section-tag">Your Voice Matters</div>
+    <div class="section-title">Studied Abroad? Rate Your Agent.</div>
+    <div class="section-desc">3 minutes. Completely anonymous. Your experience will help thousands of future students and parents make better choices. No agent will ever know who you are.</div>
+    <a href="https://forms.gle/YOUR_FORM_LINK_HERE" target="_blank" class="survey-cta">Take the 3-Minute Survey →</a>
+    <p class="survey-note">Your response is encrypted and anonymous. We will never share individual identities.<br>The survey covers: communication, transparency, support, and overall experience. No sensitive questions.</p>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section>
+  <div class="container">
+    <div class="section-tag">Who's Behind This</div>
+    <div class="section-title">Built by Someone Who Knows the System From Inside</div>
+
+    <div class="about-content">
+      <div class="about-photo">
+        <div class="name">Pradeep Pandey</div>
+        <div class="title">Founder, StudyScore</div>
+        <div class="creds">
+          17 years in International Education<br>
+          Ex-ApplyBoard · Ex-Google · Ex-StudyGroup<br>
+          Managed 7,000+ agent partnerships<br>
+          Processed 5,000+ applications/month<br>
+          Operations across 40+ countries<br><br>
+          <em>"I've been on the inside of this industry for nearly two decades. I've seen the best agents and the worst. Students deserve to know the difference before they sign."</em>
+        </div>
+      </div>
+
+      <div class="about-text">
+        <p>I've spent 17 years inside the international education machine — processing applications, managing agent partnerships, and building operations at companies like ApplyBoard, StudyGroup, and Google.</p>
+        <p>I've onboarded 7,000+ education agents across 40 countries. I've seen agents who genuinely transform students' lives with care and professionalism. I've also seen agents who charge Rs 2 lakh, submit a poorly written SOP, and disappear after the visa stamp.</p>
+        <p>The problem? Students and parents can't tell them apart. There's no Zomato rating. No CIBIL score. No independent data. Just marketing claims and word of mouth.</p>
+        <p>StudyScore changes that. We're building India's first independent, student-powered quality rating for study abroad agents — so that every family making a Rs 15-40 lakh decision has access to real data, not just promises.</p>
+        <p>This starts with your voice. One survey response at a time.</p>
+
+        <div class="about-stats">
+          <div class="about-stat">
+            <strong>7,000+</strong>
+            <span>Agent partners managed</span>
+          </div>
+          <div class="about-stat">
+            <strong>5,000+</strong>
+            <span>Applications processed/month</span>
+          </div>
+          <div class="about-stat">
+            <strong>40+</strong>
+            <span>Countries covered</span>
+          </div>
+          <div class="about-stat">
+            <strong>17 yrs</strong>
+            <span>Industry experience</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECOND CTA -->
+<section class="survey-section">
+  <div class="container">
+    <div class="section-title">Every Response Brings Transparency<br>Closer to Reality.</div>
+    <div class="section-desc">You spent months choosing your agent. It takes 3 minutes to help the next student choose better.</div>
+    <a href="https://forms.gle/YOUR_FORM_LINK_HERE" target="_blank" class="survey-cta">Share Your Experience →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Study<span>Score</span></div>
+  <div class="footer-tagline">India's First Independent Rating for Study Abroad Agents</div>
+  <div class="footer-contact"><a href="mailto:pradeep@studyscore.in">pradeep@studyscore.in</a></div>
+  <div class="footer-contact">Gurgaon, India</div>
+  <div class="footer-legal">© 2026 StudyScore. All rights reserved. An independent initiative — not affiliated with any education agency or institution.</div>
+</footer>
+
+</body>
+</html>
