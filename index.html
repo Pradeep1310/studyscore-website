@@ -18,7 +18,7 @@
 <link rel="canonical" href="https://studyscore.in">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Pradeep Pandey">
-<meta name="theme-color" content="#0B1120">
+<meta name="theme-color" content="#FFFFFF">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -71,72 +71,344 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        ink:   "#0B1120",
-        panel: "#0F172A",
-        gold:  "#B8944F",
-        goldlt:"#D4B876"
-      },
-      fontFamily: {
-        serif: ['"DM Serif Display"', "serif"],
-        sans:  ['"Plus Jakarta Sans"', "system-ui", "sans-serif"]
-      }
-    }
-  }
-};
-</script>
 <style>
-  html { scroll-behavior: smooth; }
-  body { background:
-    radial-gradient(1200px 600px at 80% -10%, rgba(184,148,79,0.07), transparent 60%),
-    radial-gradient(900px 500px at -10% 30%, rgba(45,122,110,0.06), transparent 60%),
-    #0B1120; }
+/* =====================================================================
+   StudyScore design system - hand-written production CSS.
+   No CSS framework, no CDN build scripts, no console warnings.
+===================================================================== */
+:root {
+  --ink:    #0F172A;   /* deep charcoal-slate headings */
+  --body:   #475569;   /* body copy */
+  --muted:  #64748B;
+  --faint:  #94A3B8;
+  --line:   #E2E8F0;   /* crisp borders */
+  --bg:     #FFFFFF;   /* milk white canvas */
+  --bg2:    #F8FAFC;   /* slate-50 accent surfaces */
+  --gold:   #B8944F;   /* brand accent */
+  --goldlt: #D4B876;
+  --amber:      #B45309;
+  --amber-bg:   #FFFBEB;
+  --amber-line: #FDE68A;
+  --ok:  #15803D;
+  --err: #B91C1C;
+  --shadow-sm: 0 1px 2px rgba(15,23,42,0.04);
+  --shadow-md: 0 10px 30px rgba(15,23,42,0.07);
+}
 
-  /* ---- Glass system ---- */
-  .glass { background: rgba(15,23,42,0.55); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(203,213,225,0.08); }
-  .glass-hover { transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease; }
-  .glass-hover:hover { transform: translateY(-3px); border-color: rgba(184,148,79,0.35); box-shadow: 0 0 40px rgba(184,148,79,0.10); }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--body);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+img, svg { display: inline-block; vertical-align: middle; }
+a { color: inherit; }
+::selection { background: rgba(184,148,79,0.25); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 4px; }
 
-  /* ---- Router views + fade ---- */
-  .route-view { display: none; }
-  .route-view.active { display: block; animation: fadeUp .35s ease; }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.wrap    { max-width: 1120px; margin: 0 auto; padding: 0 22px; }
+.wrap-md { max-width: 880px;  margin: 0 auto; padding: 0 22px; }
+.wrap-sm { max-width: 760px;  margin: 0 auto; padding: 0 22px; }
 
-  /* ---- Amber breathing pulse (unclaimed banner) ---- */
-  @keyframes breathe { 0%,100% { box-shadow: 0 0 0 0 rgba(245,158,11,0.35); } 50% { box-shadow: 0 0 0 10px rgba(245,158,11,0); } }
-  .pulse-amber { animation: breathe 2.4s ease-in-out infinite; }
+.kicker {
+  display: inline-block;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.serif { font-family: "DM Serif Display", serif; font-weight: 400; color: var(--ink); }
+.lede  { color: var(--muted); font-size: 17px; }
 
-  /* ---- Shimmer for pending metrics ---- */
-  @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
-  .shimmer { background: linear-gradient(90deg, rgba(148,163,184,0.08) 25%, rgba(184,148,79,0.25) 50%, rgba(148,163,184,0.08) 75%); background-size: 200% 100%; animation: shimmer 2.2s linear infinite; }
+/* ---- Buttons ---- */
+.btn {
+  display: inline-block;
+  border: 0; cursor: pointer; text-decoration: none;
+  font: inherit; font-weight: 700; font-size: 15px;
+  border-radius: 12px; padding: 14px 28px;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+}
+.btn-dark { background: var(--ink); color: #fff; }
+.btn-dark:hover { background: #1E293B; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.btn-line { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+.btn-line:hover { border-color: var(--gold); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.btn-sm { padding: 10px 20px; font-size: 14px; }
 
-  /* ---- Gold ping (reactive feedback: metric click -> rate CTA) ---- */
-  @keyframes ringPing { 0% { box-shadow: 0 0 0 0 rgba(184,148,79,0.6); } 100% { box-shadow: 0 0 0 16px rgba(184,148,79,0); } }
-  .ping-gold { animation: ringPing .9s ease-out 2; }
+/* ---- Nav ---- */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner { max-width: 1120px; margin: 0 auto; padding: 15px 22px; display: flex; align-items: center; justify-content: space-between; }
+.brand { font-family: "DM Serif Display", serif; font-size: 23px; color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
+.brand i { font-style: normal; color: var(--gold); font-weight: 300; }
+.nav-links { display: flex; align-items: center; gap: 26px; }
+.nav-links .nl { font-size: 14px; font-weight: 600; color: var(--muted); text-decoration: none; transition: color .2s ease; }
+.nav-links .nl:hover { color: var(--gold); }
 
-  ::selection { background: rgba(184,148,79,0.35); }
-  ::-webkit-scrollbar { width: 10px; }
-  ::-webkit-scrollbar-track { background: #0B1120; }
-  ::-webkit-scrollbar-thumb { background: #1E293B; border-radius: 8px; }
+/* ---- Router views ---- */
+.route-view { display: none; }
+.route-view.active { display: block; animation: fadeUp .38s ease; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* ---- Sections ---- */
+.sec { padding: 76px 0; border-top: 1px solid var(--line); }
+.sec-alt { background: var(--bg2); }
+.sec h2 { font-family: "DM Serif Display", serif; font-weight: 400; color: var(--ink); font-size: clamp(26px, 3.6vw, 38px); line-height: 1.22; margin-bottom: 14px; }
+
+/* ---- Hero ---- */
+.hero { padding: 152px 22px 62px; max-width: 880px; margin: 0 auto; text-align: center; }
+.badge-pill {
+  display: inline-block; font-size: 11px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold); background: #FDF9F0;
+  border: 1px solid rgba(184,148,79,0.4);
+  border-radius: 999px; padding: 7px 18px; margin-bottom: 30px;
+}
+.hero h1 { font-family: "DM Serif Display", serif; font-weight: 400; color: var(--ink); font-size: clamp(36px, 5.6vw, 58px); line-height: 1.14; margin-bottom: 22px; }
+.hero h1 em { font-style: normal; color: var(--gold); }
+.hero .lede { max-width: 620px; margin: 0 auto 34px; }
+.hero-note { font-size: 12.5px; color: var(--faint); margin-top: 15px; }
+
+/* ---- Stats bar ---- */
+.stats {
+  max-width: 820px; margin: 26px auto 0;
+  background: #fff; border: 1px solid var(--line); border-radius: 18px;
+  box-shadow: var(--shadow-sm);
+  display: grid; grid-template-columns: 1fr; overflow: hidden;
+}
+.stat { padding: 26px 22px; text-align: center; border-top: 1px solid var(--line); }
+.stat:first-child { border-top: 0; }
+.stat b { display: block; font-family: "DM Serif Display", serif; font-weight: 400; font-size: 30px; color: var(--ink); }
+.stat span { font-size: 12px; color: var(--muted); letter-spacing: 0.02em; }
+@media (min-width: 640px) {
+  .stats { grid-template-columns: repeat(3, 1fr); }
+  .stat { border-top: 0; border-left: 1px solid var(--line); }
+  .stat:first-child { border-left: 0; }
+}
+
+/* ---- Cards ---- */
+.card {
+  background: #fff; border: 1px solid var(--line); border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.card-hover:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: #CBD5E1; }
+
+.grid3 { display: grid; grid-template-columns: 1fr; gap: 22px; }
+@media (min-width: 640px)  { .grid3 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .grid3 { grid-template-columns: repeat(3, 1fr); } }
+
+.pcard { padding: 30px; }
+.pcard .ic {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: #FDF9F0; border: 1px solid rgba(184,148,79,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; margin-bottom: 18px;
+}
+.pcard h3 { color: var(--ink); font-size: 17px; font-weight: 700; margin-bottom: 9px; }
+.pcard p  { font-size: 14.5px; color: var(--muted); }
+
+/* ---- Steps ---- */
+.steps { display: grid; grid-template-columns: 1fr; gap: 34px; margin-top: 46px; }
+@media (min-width: 640px)  { .steps { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .steps { grid-template-columns: repeat(4, 1fr); } }
+.step { text-align: center; padding: 0 8px; }
+.step-num {
+  width: 54px; height: 54px; margin: 0 auto 18px;
+  border-radius: 50%; border: 1px solid rgba(184,148,79,0.55);
+  color: var(--gold); font-family: "DM Serif Display", serif; font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+  background: #fff;
+}
+.step h3 { color: var(--ink); font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.step p  { font-size: 14px; color: var(--muted); }
+
+/* ---- CTA panel ---- */
+.cta-panel {
+  max-width: 720px; margin: 0 auto; text-align: center;
+  background: #fff; border: 1px solid var(--line); border-top: 3px solid var(--gold);
+  border-radius: 20px; padding: 54px 34px;
+  box-shadow: var(--shadow-md);
+}
+
+/* ---- About ---- */
+.about-grid { display: grid; grid-template-columns: 1fr; gap: 36px; align-items: start; margin-top: 44px; }
+@media (min-width: 1000px) { .about-grid { grid-template-columns: 2fr 3fr; } }
+.founder-card { padding: 36px; text-align: center; }
+.avatar {
+  width: 76px; height: 76px; margin: 0 auto 18px;
+  border-radius: 50%; background: #FDF9F0; border: 1px solid rgba(184,148,79,0.45);
+  color: var(--gold); font-family: "DM Serif Display", serif; font-size: 24px;
+  display: flex; align-items: center; justify-content: center;
+}
+.founder-card .fname { font-family: "DM Serif Display", serif; font-size: 24px; color: var(--ink); }
+.founder-card .frole { font-size: 13px; font-weight: 700; color: var(--gold); margin: 4px 0 18px; }
+.founder-card .cred  { font-size: 13.5px; color: var(--muted); line-height: 1.9; }
+.founder-card blockquote { font-size: 13.5px; color: var(--faint); font-style: italic; margin-top: 20px; }
+.about-copy p { margin-bottom: 18px; font-size: 15.5px; }
+.mini-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 26px; }
+.mini { background: var(--bg2); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; }
+.mini b { display: block; font-family: "DM Serif Display", serif; font-weight: 400; font-size: 22px; color: var(--ink); }
+.mini span { font-size: 11.5px; color: var(--muted); }
+
+/* ---- FAQ ---- */
+.faq-item { padding: 26px 30px; margin-bottom: 15px; }
+.faq-item h3 { color: var(--ink); font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.faq-item p  { font-size: 14.5px; color: var(--muted); }
+
+/* ---- Footer ---- */
+.footer { border-top: 1px solid var(--line); background: var(--bg2); padding: 56px 22px; text-align: center; }
+.footer .brand { font-size: 24px; }
+.footer .tag { font-size: 13.5px; color: var(--muted); margin: 8px 0 22px; }
+.flinks { margin-bottom: 20px; }
+.flinks a { font-size: 12.5px; color: var(--muted); text-decoration: none; margin: 0 11px; transition: color .2s ease; }
+.flinks a:hover { color: var(--gold); }
+.footer .mail a { color: var(--gold); text-decoration: none; font-size: 14px; }
+.footer .loc { font-size: 13px; color: var(--faint); margin-top: 4px; }
+.footer .legal { font-size: 11.5px; color: var(--faint); margin-top: 30px; }
+
+/* ---- Page heads (directory / profile / legal) ---- */
+.page-head { padding: 150px 0 22px; }
+.page-head h1 { font-family: "DM Serif Display", serif; font-weight: 400; color: var(--ink); font-size: clamp(30px, 4.4vw, 46px); line-height: 1.18; margin-bottom: 14px; }
+.page-head .lede { max-width: 680px; }
+.back-link { font-size: 14px; font-weight: 700; color: var(--gold); text-decoration: none; }
+.back-link:hover { color: var(--goldlt); }
+
+/* ---- Directory ---- */
+.toolbar { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0 30px; }
+.field {
+  font: inherit; font-size: 14px; color: var(--ink);
+  background: #fff; border: 1px solid var(--line); border-radius: 11px;
+  padding: 12px 15px;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.field:hover { border-color: #CBD5E1; }
+.field:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(184,148,79,0.14); }
+.toolbar .field { min-width: 230px; }
+.agents-grid { display: grid; grid-template-columns: 1fr; gap: 22px; padding-bottom: 90px; }
+@media (min-width: 640px)  { .agents-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .agents-grid { grid-template-columns: repeat(3, 1fr); } }
+.agent-card { padding: 28px; display: flex; flex-direction: column; gap: 11px; }
+.agent-card h3 { font-family: "DM Serif Display", serif; font-weight: 400; font-size: 21px; color: var(--ink); }
+.agent-card .loc { font-size: 12.5px; color: var(--faint); }
+.badge-prov {
+  display: inline-block; width: fit-content;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--amber); background: var(--amber-bg);
+  border: 1px solid var(--amber-line); border-radius: 999px; padding: 4px 11px;
+}
+.chiprow { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  font-size: 11.5px; color: var(--body);
+  background: var(--bg2); border: 1px solid var(--line);
+  border-radius: 999px; padding: 4px 11px;
+}
+.chip-gold { background: #FDF9F0; border-color: rgba(184,148,79,0.3); color: #8A6D33; }
+.view-link { margin-top: auto; padding-top: 8px; font-size: 14px; font-weight: 700; color: var(--gold); text-decoration: none; }
+.view-link:hover { color: var(--goldlt); }
+.dir-empty { grid-column: 1 / -1; text-align: center; color: var(--faint); padding: 60px 0; }
+
+/* ---- Profile ---- */
+.pf-hero { padding: 40px; margin-bottom: 22px; }
+.pf-hero h1 { font-family: "DM Serif Display", serif; font-weight: 400; color: var(--ink); font-size: clamp(28px, 4.4vw, 46px); line-height: 1.15; margin: 14px 0 4px; }
+.pf-hero .loc { font-size: 13.5px; color: var(--faint); margin-bottom: 22px; }
+
+.prov-banner {
+  background: var(--amber-bg); border: 1px solid var(--amber-line); border-radius: 16px;
+  padding: 22px 24px; margin-bottom: 30px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+@media (min-width: 760px) { .prov-banner { flex-direction: row; align-items: center; } }
+.prov-left { display: flex; gap: 13px; flex: 1; }
+.prov-dot { width: 10px; height: 10px; border-radius: 50%; background: #F59E0B; margin-top: 7px; flex-shrink: 0; animation: breathe 2.4s ease-in-out infinite; }
+@keyframes breathe { 0%,100% { box-shadow: 0 0 0 0 rgba(245,158,11,0.45); } 50% { box-shadow: 0 0 0 9px rgba(245,158,11,0); } }
+.prov-title { font-size: 14px; font-weight: 700; color: var(--amber); letter-spacing: 0.02em; }
+.prov-sub { font-size: 12.5px; color: #92661C; margin-top: 4px; line-height: 1.7; }
+
+.pf-grid { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: start; padding-bottom: 90px; }
+@media (min-width: 1024px) {
+  .pf-grid { grid-template-columns: 2fr 1fr; }
+  .pf-aside { position: sticky; top: 96px; }
+}
+
+/* ---- Metric dashboard matrix ---- */
+.metrics3 { display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 640px) { .metrics3 { grid-template-columns: repeat(3, 1fr); } }
+.metric {
+  font: inherit; text-align: left; cursor: pointer; width: 100%;
+  background: #fff; border: 1px solid var(--line); border-radius: 16px;
+  padding: 22px; box-shadow: var(--shadow-sm);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.metric:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: rgba(184,148,79,0.5); }
+.metric .mlabel { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 13px; }
+.metric .mvalue { font-family: "DM Serif Display", serif; font-size: 30px; color: var(--ink); line-height: 1; }
+.metric .mvalue.pending { color: #CBD5E1; }
+.metric .munit { font-size: 15px; color: var(--muted); margin-left: 3px; }
+.spark { width: 100%; height: 26px; margin-top: 12px; }
+.spark line { stroke: #CBD5E1; stroke-width: 2; stroke-dasharray: 2 6; stroke-linecap: round; transition: stroke .25s ease; }
+.metric:hover .spark line { stroke: var(--gold); }
+.track { height: 4px; border-radius: 999px; margin-top: 12px;
+  background: linear-gradient(90deg, #F1F5F9 25%, #EADFC8 50%, #F1F5F9 75%);
+  background-size: 200% 100%; animation: shimmer 2.2s linear infinite; }
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.metric .mwait { font-size: 11px; color: var(--amber); margin-top: 12px; font-weight: 600; }
+.metric .mnote { font-size: 10.5px; color: var(--faint); margin-top: 3px; }
+.matrix-foot { font-size: 11.5px; color: var(--faint); margin-top: 12px; line-height: 1.7; }
+
+.about-card { padding: 30px; margin-top: 30px; }
+.about-card p { font-size: 14.5px; color: var(--muted); }
+
+.rate-card { padding: 32px; margin-top: 30px; border-top: 3px solid var(--gold); }
+.rate-card h3 { font-family: "DM Serif Display", serif; font-weight: 400; font-size: 23px; color: var(--ink); margin-bottom: 9px; }
+.rate-card p  { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+@keyframes ringPing { 0% { box-shadow: 0 0 0 0 rgba(184,148,79,0.55); } 100% { box-shadow: 0 0 0 16px rgba(184,148,79,0); } }
+.ping-gold { animation: ringPing .9s ease-out 2; }
+
+/* ---- Lead gateway form ---- */
+.lf { padding: 28px; border-top: 3px solid var(--ink); }
+.lf h3 { font-family: "DM Serif Display", serif; font-weight: 400; font-size: 21px; color: var(--ink); margin-bottom: 6px; }
+.lf .small { font-size: 12.5px; color: var(--faint); margin-bottom: 14px; line-height: 1.7; }
+.lf label { display: block; font-size: 12.5px; font-weight: 600; color: var(--ink); margin: 13px 0 5px; }
+.lf .field { width: 100%; }
+.lf textarea.field { min-height: 92px; resize: vertical; }
+.lf button { width: 100%; margin-top: 18px; }
+.lf button:disabled { opacity: 0.6; cursor: wait; }
+.fstatus { display: none; margin-top: 12px; font-size: 13.5px; }
+.fstatus.ok  { display: block; color: var(--ok); }
+.fstatus.err { display: block; color: var(--err); }
+.fineprint { font-size: 11px; color: var(--faint); margin-top: 12px; line-height: 1.7; }
+.fineprint a { color: var(--gold); }
+.hp { position: absolute; left: -9999px; opacity: 0; height: 0; overflow: hidden; }
+
+/* ---- Legal ---- */
+.legal { padding-bottom: 90px; }
+.legal h2 { font-family: "DM Serif Display", serif; font-weight: 400; color: var(--ink); font-size: 23px; margin: 30px 0 10px; }
+.legal p, .legal li { font-size: 15px; color: var(--body); margin-bottom: 14px; }
+.legal ul { padding-left: 22px; }
+.legal a { color: var(--gold); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
 </style>
 </head>
-<body class="font-sans text-slate-300 antialiased min-h-screen">
+<body>
 
 <!-- ============================ NAV ============================ -->
-<nav class="fixed top-0 inset-x-0 z-50 glass border-x-0 border-t-0">
-  <div class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
-    <a href="#/" class="font-serif text-2xl text-slate-100 tracking-tight" aria-label="StudyScore home">
-      Study<span class="text-gold font-light">[</span>Score<span class="text-gold font-light">]</span>
-    </a>
-    <div class="flex items-center gap-6">
-      <a href="#/" class="hidden md:inline text-sm font-semibold text-slate-400 hover:text-gold transition-colors">Home</a>
-      <a href="#/agents" class="hidden md:inline text-sm font-semibold text-slate-400 hover:text-gold transition-colors">Agent Directory</a>
-      <a href="#survey" class="bg-gold hover:bg-goldlt text-ink text-sm font-bold px-5 py-2.5 rounded-lg transition-colors">Rate Your Agent &#8594;</a>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#/" class="brand" aria-label="StudyScore home">Study<i>[</i>Score<i>]</i></a>
+    <div class="nav-links">
+      <a href="#/" class="nl">Home</a>
+      <a href="#/agents" class="nl">Agent Directory</a>
+      <a href="#survey" class="btn btn-dark btn-sm">Rate Your Agent &#8594;</a>
     </div>
   </div>
 </nav>
@@ -144,116 +416,115 @@ tailwind.config = {
 <!-- ============================ HOME (route: #/) ============================ -->
 <main id="view-home" class="route-view active">
 
-  <header class="pt-36 pb-16 px-5 max-w-4xl mx-auto text-center">
-    <span class="inline-block text-[11px] font-bold tracking-[0.2em] uppercase text-gold border border-gold/40 bg-gold/5 rounded-full px-4 py-1.5 mb-8">India's First Independent Study</span>
-    <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-slate-100 leading-[1.15] mb-6">Your Agent Got a <em class="not-italic text-gold">Score.</em><br>You Just Don't Know It Yet.</h1>
-    <p class="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed mb-9">We're building India's first independent, student-powered rating system for study abroad agents. No bias. No sponsorships. Just the truth from students who've been through it.</p>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScyYLD9XH-Txy2auOWGcPjdvfjdPiIFGjfc7IGt4gV4RmCcJQ/viewform" target="_blank" rel="noopener" class="inline-block bg-gold hover:bg-goldlt text-ink font-bold text-base px-9 py-4 rounded-xl shadow-[0_4px_30px_rgba(184,148,79,0.25)] hover:shadow-[0_8px_40px_rgba(184,148,79,0.35)] hover:-translate-y-0.5 transition-all">Share Your Experience &mdash; 3 Minutes</a>
-    <p class="text-xs text-slate-500 mt-4">100% anonymous &middot; No login required &middot; Your identity is never shared</p>
+  <header class="hero">
+    <span class="badge-pill">India's First Independent Study</span>
+    <h1>Your Agent Got a <em>Score.</em><br>You Just Don't Know It Yet.</h1>
+    <p class="lede">We're building India's first independent, student-powered rating system for study abroad agents. No bias. No sponsorships. Just the truth from students who've been through it.</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScyYLD9XH-Txy2auOWGcPjdvfjdPiIFGjfc7IGt4gV4RmCcJQ/viewform" target="_blank" rel="noopener" class="btn btn-dark">Share Your Experience &mdash; 3 Minutes</a>
+    <p class="hero-note">100% anonymous &middot; No login required &middot; Your identity is never shared</p>
+    <div class="stats">
+      <div class="stat"><b>25,000+</b><span>Education Agents in India</span></div>
+      <div class="stat"><b>Zero</b><span>Independent Rating Systems</span></div>
+      <div class="stat"><b>&#8377;15-40L</b><span>Spent by Each Family on Blind Trust</span></div>
+    </div>
   </header>
 
-  <div class="max-w-3xl mx-auto px-5 mb-20">
-    <div class="glass rounded-2xl grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-white/5 overflow-hidden">
-      <div class="p-7 text-center"><div class="font-serif text-3xl text-gold">25,000+</div><div class="text-xs text-slate-500 mt-1 tracking-wide">Education Agents in India</div></div>
-      <div class="p-7 text-center"><div class="font-serif text-3xl text-gold">Zero</div><div class="text-xs text-slate-500 mt-1 tracking-wide">Independent Rating Systems</div></div>
-      <div class="p-7 text-center"><div class="font-serif text-3xl text-gold">&#8377;15-40L</div><div class="text-xs text-slate-500 mt-1 tracking-wide">Spent by Each Family on Blind Trust</div></div>
-    </div>
-  </div>
-
-  <section class="px-5 py-16 border-t border-white/5" aria-label="Why StudyScore is needed">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-[11px] font-bold tracking-[0.2em] uppercase text-gold mb-3">The Problem</div>
-      <h2 class="font-serif text-3xl sm:text-4xl text-slate-100 mb-4">&#8377;15 Lakh Decisions Based on Zero Data</h2>
-      <p class="text-slate-400 max-w-2xl mb-12 leading-relaxed">Every year, lakhs of Indian families spend their life savings on study abroad &mdash; choosing agents based on newspaper ads, neighbour recommendations, and Instagram reels. Nobody has the data to make an informed choice.</p>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <article class="glass glass-hover rounded-2xl p-8"><div class="w-11 h-11 rounded-xl bg-gold/10 flex items-center justify-center text-xl mb-5">&#127919;</div><h3 class="text-slate-100 font-bold mb-2.5">No Verified Track Record</h3><p class="text-sm text-slate-400 leading-relaxed">Every agent claims "99% success rate." But there's no independent system to verify these claims. Students and parents have no way to check the truth before paying lakhs of rupees.</p></article>
-        <article class="glass glass-hover rounded-2xl p-8"><div class="w-11 h-11 rounded-xl bg-gold/10 flex items-center justify-center text-xl mb-5">&#128176;</div><h3 class="text-slate-100 font-bold mb-2.5">Hidden Fee Structures</h3><p class="text-sm text-slate-400 leading-relaxed">Many students discover additional charges after signing up &mdash; "processing fees," "documentation charges," "service tax." By then, it's too late to switch to another agent.</p></article>
-        <article class="glass glass-hover rounded-2xl p-8"><div class="w-11 h-11 rounded-xl bg-gold/10 flex items-center justify-center text-xl mb-5">&#128263;</div><h3 class="text-slate-100 font-bold mb-2.5">Silent After the Visa</h3><p class="text-sm text-slate-400 leading-relaxed">The agent who called you 5 times a day before signing suddenly becomes unreachable after the visa is stamped. Post-departure support like accommodation and airport pickup? Often nonexistent.</p></article>
-        <article class="glass glass-hover rounded-2xl p-8"><div class="w-11 h-11 rounded-xl bg-gold/10 flex items-center justify-center text-xl mb-5">&#128202;</div><h3 class="text-slate-100 font-bold mb-2.5">No Way to Compare</h3><p class="text-sm text-slate-400 leading-relaxed">You can compare phones on Flipkart. Restaurants on Zomato. Hotels on MakeMyTrip. But you can't compare the education consultants handling your child's future abroad.</p></article>
-        <article class="glass glass-hover rounded-2xl p-8"><div class="w-11 h-11 rounded-xl bg-gold/10 flex items-center justify-center text-xl mb-5">&#11088;</div><h3 class="text-slate-100 font-bold mb-2.5">Good Agents Get No Credit</h3><p class="text-sm text-slate-400 leading-relaxed">Thousands of excellent study abroad agents exist &mdash; transparent, thorough, genuinely caring. But they're invisible because there's no platform to showcase their quality and student satisfaction.</p></article>
-        <article class="glass glass-hover rounded-2xl p-8"><div class="w-11 h-11 rounded-xl bg-gold/10 flex items-center justify-center text-xl mb-5">&#127757;</div><h3 class="text-slate-100 font-bold mb-2.5">An Industry Without a Mirror</h3><p class="text-sm text-slate-400 leading-relaxed">Banking has CIBIL. Restaurants have Zomato. Hotels have TripAdvisor. International education &mdash; an industry where Indian families spend lakhs of crores &mdash; has nothing. Until now.</p></article>
+  <section class="sec" aria-label="Why StudyScore is needed">
+    <div class="wrap">
+      <div class="kicker">The Problem</div>
+      <h2>&#8377;15 Lakh Decisions Based on Zero Data</h2>
+      <p class="lede" style="max-width:660px;margin-bottom:44px;">Every year, lakhs of Indian families spend their life savings on study abroad &mdash; choosing agents based on newspaper ads, neighbour recommendations, and Instagram reels. Nobody has the data to make an informed choice.</p>
+      <div class="grid3">
+        <article class="card card-hover pcard"><div class="ic">&#127919;</div><h3>No Verified Track Record</h3><p>Every agent claims "99% success rate." But there's no independent system to verify these claims. Students and parents have no way to check the truth before paying lakhs of rupees.</p></article>
+        <article class="card card-hover pcard"><div class="ic">&#128176;</div><h3>Hidden Fee Structures</h3><p>Many students discover additional charges after signing up &mdash; "processing fees," "documentation charges," "service tax." By then, it's too late to switch to another agent.</p></article>
+        <article class="card card-hover pcard"><div class="ic">&#128263;</div><h3>Silent After the Visa</h3><p>The agent who called you 5 times a day before signing suddenly becomes unreachable after the visa is stamped. Post-departure support like accommodation and airport pickup? Often nonexistent.</p></article>
+        <article class="card card-hover pcard"><div class="ic">&#128202;</div><h3>No Way to Compare</h3><p>You can compare phones on Flipkart. Restaurants on Zomato. Hotels on MakeMyTrip. But you can't compare the education consultants handling your child's future abroad.</p></article>
+        <article class="card card-hover pcard"><div class="ic">&#11088;</div><h3>Good Agents Get No Credit</h3><p>Thousands of excellent study abroad agents exist &mdash; transparent, thorough, genuinely caring. But they're invisible because there's no platform to showcase their quality and student satisfaction.</p></article>
+        <article class="card card-hover pcard"><div class="ic">&#127757;</div><h3>An Industry Without a Mirror</h3><p>Banking has CIBIL. Restaurants have Zomato. Hotels have TripAdvisor. International education &mdash; an industry where Indian families spend lakhs of crores &mdash; has nothing. Until now.</p></article>
       </div>
     </div>
   </section>
 
-  <section class="px-5 py-16 border-t border-white/5 text-center" aria-label="How StudyScore works">
-    <div class="max-w-5xl mx-auto">
-      <div class="text-[11px] font-bold tracking-[0.2em] uppercase text-gold mb-3">How StudyScore Works</div>
-      <h2 class="font-serif text-3xl sm:text-4xl text-slate-100 mb-4">Students Rate. Data Speaks.<br>The Industry Transforms.</h2>
-      <p class="text-slate-400 max-w-2xl mx-auto mb-14 leading-relaxed">We collect anonymous feedback from students who've actually used study abroad agents and overseas education consultants. We analyse the data. We publish India's first independent agent quality report.</p>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div class="px-3"><div class="w-14 h-14 mx-auto mb-5 rounded-full border border-gold/50 text-gold font-serif text-xl flex items-center justify-center">1</div><h3 class="text-slate-100 font-bold mb-2">Students Share</h3><p class="text-sm text-slate-400 leading-relaxed">A 3-minute anonymous survey about your agent experience &mdash; communication, fee transparency, visa support, and overall satisfaction.</p></div>
-        <div class="px-3"><div class="w-14 h-14 mx-auto mb-5 rounded-full border border-gold/50 text-gold font-serif text-xl flex items-center justify-center">2</div><h3 class="text-slate-100 font-bold mb-2">Data Aggregates</h3><p class="text-sm text-slate-400 leading-relaxed">Responses accumulate across agents, cities, and destination countries. Patterns emerge. Agent quality becomes measurable for the first time.</p></div>
-        <div class="px-3"><div class="w-14 h-14 mx-auto mb-5 rounded-full border border-gold/50 text-gold font-serif text-xl flex items-center justify-center">3</div><h3 class="text-slate-100 font-bold mb-2">Scores Are Born</h3><p class="text-sm text-slate-400 leading-relaxed">Each agent receives a StudyScore &mdash; a transparent, data-driven quality rating based only on verified student experiences.</p></div>
-        <div class="px-3"><div class="w-14 h-14 mx-auto mb-5 rounded-full border border-gold/50 text-gold font-serif text-xl flex items-center justify-center">4</div><h3 class="text-slate-100 font-bold mb-2">Families Decide Better</h3><p class="text-sm text-slate-400 leading-relaxed">Future students and parents check StudyScores before choosing a consultant. Informed decisions replace blind trust. Trust before you sign.</p></div>
+  <section class="sec sec-alt" aria-label="How StudyScore works">
+    <div class="wrap" style="text-align:center;">
+      <div class="kicker">How StudyScore Works</div>
+      <h2>Students Rate. Data Speaks.<br>The Industry Transforms.</h2>
+      <p class="lede" style="max-width:640px;margin:0 auto;">We collect anonymous feedback from students who've actually used study abroad agents and overseas education consultants. We analyse the data. We publish India's first independent agent quality report.</p>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><h3>Students Share</h3><p>A 3-minute anonymous survey about your agent experience &mdash; communication, fee transparency, visa support, and overall satisfaction.</p></div>
+        <div class="step"><div class="step-num">2</div><h3>Data Aggregates</h3><p>Responses accumulate across agents, cities, and destination countries. Patterns emerge. Agent quality becomes measurable for the first time.</p></div>
+        <div class="step"><div class="step-num">3</div><h3>Scores Are Born</h3><p>Each agent receives a StudyScore &mdash; a transparent, data-driven quality rating based only on verified student experiences.</p></div>
+        <div class="step"><div class="step-num">4</div><h3>Families Decide Better</h3><p>Future students and parents check StudyScores before choosing a consultant. Informed decisions replace blind trust. Trust before you sign.</p></div>
       </div>
     </div>
   </section>
 
-  <section id="survey" class="px-5 py-20 border-t border-white/5" aria-label="Take the StudyScore survey">
-    <div class="max-w-3xl mx-auto glass rounded-3xl p-10 sm:p-14 text-center border-gold/20 shadow-[0_0_60px_rgba(184,148,79,0.08)]">
-      <div class="text-[11px] font-bold tracking-[0.2em] uppercase text-goldlt mb-3">Your Voice Matters</div>
-      <h2 class="font-serif text-3xl sm:text-4xl text-slate-100 mb-4">Studied Abroad? Rate Your Agent.</h2>
-      <p class="text-slate-400 max-w-xl mx-auto mb-9 leading-relaxed">3 minutes. Completely anonymous. Your experience will help thousands of future students and parents make better choices. No agent will ever know who you are.</p>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScyYLD9XH-Txy2auOWGcPjdvfjdPiIFGjfc7IGt4gV4RmCcJQ/viewform" target="_blank" rel="noopener" class="inline-block bg-gold hover:bg-goldlt text-ink font-bold text-lg px-11 py-4 rounded-xl shadow-[0_4px_30px_rgba(184,148,79,0.3)] hover:-translate-y-0.5 transition-all">Take the 3-Minute Survey &#8594;</a>
-      <p class="text-xs text-slate-500 mt-5 leading-relaxed">Your response is anonymous. We will never share individual identities.<br>The survey covers communication, fee transparency, visa support, and overall experience. No sensitive questions.</p>
+  <section id="survey" class="sec" aria-label="Take the StudyScore survey">
+    <div class="wrap">
+      <div class="cta-panel">
+        <div class="kicker">Your Voice Matters</div>
+        <h2>Studied Abroad? Rate Your Agent.</h2>
+        <p class="lede" style="max-width:540px;margin:0 auto 32px;">3 minutes. Completely anonymous. Your experience will help thousands of future students and parents make better choices. No agent will ever know who you are.</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScyYLD9XH-Txy2auOWGcPjdvfjdPiIFGjfc7IGt4gV4RmCcJQ/viewform" target="_blank" rel="noopener" class="btn btn-dark">Take the 3-Minute Survey &#8594;</a>
+        <p class="hero-note">Your response is anonymous. We will never share individual identities.<br>The survey covers communication, fee transparency, visa support, and overall experience. No sensitive questions.</p>
+      </div>
     </div>
   </section>
 
-  <section class="px-5 py-16 border-t border-white/5" aria-label="About the founder of StudyScore">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-[11px] font-bold tracking-[0.2em] uppercase text-gold mb-3">Who's Behind This</div>
-      <h2 class="font-serif text-3xl sm:text-4xl text-slate-100 mb-12">Built by Someone Who Knows the Study Abroad System From Inside</h2>
-      <div class="grid lg:grid-cols-5 gap-10 items-start">
-        <div class="lg:col-span-2 glass rounded-2xl p-9 text-center">
-          <div class="w-20 h-20 mx-auto mb-5 rounded-full bg-gold/10 border border-gold/40 flex items-center justify-center font-serif text-2xl text-gold">PP</div>
-          <div class="font-serif text-2xl text-slate-100 mb-1">Pradeep Pandey</div>
-          <div class="text-sm font-semibold text-gold mb-5">Founder, Study[Score]</div>
-          <div class="text-sm text-slate-400 leading-relaxed">
+  <section class="sec" aria-label="About the founder of StudyScore">
+    <div class="wrap">
+      <div class="kicker">Who's Behind This</div>
+      <h2>Built by Someone Who Knows the Study Abroad System From Inside</h2>
+      <div class="about-grid">
+        <div class="card founder-card">
+          <div class="avatar">PP</div>
+          <div class="fname">Pradeep Pandey</div>
+          <div class="frole">Founder, Study[Score]</div>
+          <div class="cred">
             18 years in International Education<br>
             Ex-ApplyBoard &middot; Ex-Google &middot; Ex-StudyGroup<br>
             Managed 7,000+ agent partnerships<br>
             Processed 5,000+ applications/month<br>
             Operations across 40+ countries
           </div>
-          <p class="text-sm text-slate-500 italic mt-6 leading-relaxed">"I've been on the inside of this industry for nearly two decades. I've seen the best study abroad agents and the worst. Students and parents deserve to know the difference before they sign and pay."</p>
+          <blockquote>"I've been on the inside of this industry for nearly two decades. I've seen the best study abroad agents and the worst. Students and parents deserve to know the difference before they sign and pay."</blockquote>
         </div>
-        <div class="lg:col-span-3">
-          <p class="text-slate-400 leading-relaxed mb-5">I've spent 18 years inside the international education machine &mdash; processing student visa applications, managing education agent partnerships, and building operations at companies like ApplyBoard, StudyGroup, and Google.</p>
-          <p class="text-slate-400 leading-relaxed mb-5">I've onboarded 7,000+ study abroad agents across 40 countries. I've seen agents who genuinely transform students' lives with care and professionalism. I've also seen agents who charge &#8377;2 lakh, submit a poorly written SOP, and disappear after the visa stamp.</p>
-          <p class="text-slate-400 leading-relaxed mb-5">The problem? Students and parents can't tell them apart. There's no Zomato rating for education consultants. No CIBIL score for study abroad agents. No independent data. Just marketing claims and word of mouth.</p>
-          <p class="text-slate-400 leading-relaxed mb-8">StudyScore changes that &mdash; one anonymous survey response at a time. Help us build the CIBIL of education.</p>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="glass rounded-xl px-6 py-5"><div class="font-serif text-2xl text-slate-100">7,000+</div><div class="text-xs text-slate-500 mt-0.5">Agent partners managed</div></div>
-            <div class="glass rounded-xl px-6 py-5"><div class="font-serif text-2xl text-slate-100">5,000+</div><div class="text-xs text-slate-500 mt-0.5">Applications processed/month</div></div>
-            <div class="glass rounded-xl px-6 py-5"><div class="font-serif text-2xl text-slate-100">40+</div><div class="text-xs text-slate-500 mt-0.5">Countries covered</div></div>
-            <div class="glass rounded-xl px-6 py-5"><div class="font-serif text-2xl text-slate-100">18 yrs</div><div class="text-xs text-slate-500 mt-0.5">Industry experience</div></div>
+        <div class="about-copy">
+          <p>I've spent 18 years inside the international education machine &mdash; processing student visa applications, managing education agent partnerships, and building operations at companies like ApplyBoard, StudyGroup, and Google.</p>
+          <p>I've onboarded 7,000+ study abroad agents across 40 countries. I've seen agents who genuinely transform students' lives with care and professionalism. I've also seen agents who charge &#8377;2 lakh, submit a poorly written SOP, and disappear after the visa stamp.</p>
+          <p>The problem? Students and parents can't tell them apart. There's no Zomato rating for education consultants. No CIBIL score for study abroad agents. No independent data. Just marketing claims and word of mouth.</p>
+          <p>StudyScore changes that &mdash; one anonymous survey response at a time. Help us build the CIBIL of education.</p>
+          <div class="mini-stats">
+            <div class="mini"><b>7,000+</b><span>Agent partners managed</span></div>
+            <div class="mini"><b>5,000+</b><span>Applications processed/month</span></div>
+            <div class="mini"><b>40+</b><span>Countries covered</span></div>
+            <div class="mini"><b>18 yrs</b><span>Industry experience</span></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="px-5 py-16 border-t border-white/5" aria-label="Frequently asked questions about StudyScore">
-    <div class="max-w-3xl mx-auto">
-      <div class="text-[11px] font-bold tracking-[0.2em] uppercase text-gold mb-3 text-center">Frequently Asked Questions</div>
-      <h2 class="font-serif text-3xl sm:text-4xl text-slate-100 mb-12 text-center">Common Questions About StudyScore</h2>
-      <div class="space-y-4">
-        <article class="glass rounded-2xl p-7"><h3 class="text-slate-100 font-bold mb-2">What is StudyScore?</h3><p class="text-sm text-slate-400 leading-relaxed">StudyScore is India's first independent, student-powered rating system for study abroad agents and overseas education consultants. Think of it as CIBIL for education agents &mdash; a transparent, data-driven quality score based on real student experiences. We are not affiliated with any education agency.</p></article>
-        <article class="glass rounded-2xl p-7"><h3 class="text-slate-100 font-bold mb-2">Is my survey response anonymous?</h3><p class="text-sm text-slate-400 leading-relaxed">Yes, 100% anonymous. We do not collect your name, email, or any identifying information. No study abroad agent will ever know who submitted a specific response. Your privacy is absolute.</p></article>
-        <article class="glass rounded-2xl p-7"><h3 class="text-slate-100 font-bold mb-2">How is StudyScore different from Google Reviews?</h3><p class="text-sm text-slate-400 leading-relaxed">Google Reviews can be manipulated &mdash; agents often ask staff and friends to post fake positive reviews. StudyScore collects structured, anonymous feedback on specific parameters like fee transparency, communication quality, and post-visa support. The data is aggregated across many responses to create a quality score that cannot be gamed by agents.</p></article>
-        <article class="glass rounded-2xl p-7"><h3 class="text-slate-100 font-bold mb-2">Is StudyScore affiliated with any education agency?</h3><p class="text-sm text-slate-400 leading-relaxed">No. StudyScore is completely independent. We are not affiliated with, sponsored by, or funded by any education agent, university, or recruitment company. Our only stakeholder is the student and their family.</p></article>
-        <article class="glass rounded-2xl p-7"><h3 class="text-slate-100 font-bold mb-2">How will study abroad agents be rated?</h3><p class="text-sm text-slate-400 leading-relaxed">Each education agent receives a StudyScore from 0 to 100 based on verified student feedback across five parameters: fee transparency (20%), communication quality (15%), visa support quality (25%), post-visa support (10%), and overall student satisfaction (30%). Higher scores indicate better student experiences.</p></article>
-        <article class="glass rounded-2xl p-7"><h3 class="text-slate-100 font-bold mb-2">Why do some agent profiles show no metrics yet?</h3><p class="text-sm text-slate-400 leading-relaxed">Provisional profiles are compiled from publicly available information and remain unclaimed and unverified. StudyScore never publishes estimated or invented figures. Metrics such as visa success rates appear only after enough verified, anonymous student reviews have been collected for that agency.</p></article>
+  <section class="sec sec-alt" aria-label="Frequently asked questions about StudyScore">
+    <div class="wrap-md">
+      <div style="text-align:center;">
+        <div class="kicker">Frequently Asked Questions</div>
+        <h2 style="margin-bottom:40px;">Common Questions About StudyScore</h2>
       </div>
+      <article class="card faq-item"><h3>What is StudyScore?</h3><p>StudyScore is India's first independent, student-powered rating system for study abroad agents and overseas education consultants. Think of it as CIBIL for education agents &mdash; a transparent, data-driven quality score based on real student experiences. We are not affiliated with any education agency.</p></article>
+      <article class="card faq-item"><h3>Is my survey response anonymous?</h3><p>Yes, 100% anonymous. We do not collect your name, email, or any identifying information. No study abroad agent will ever know who submitted a specific response. Your privacy is absolute.</p></article>
+      <article class="card faq-item"><h3>How is StudyScore different from Google Reviews?</h3><p>Google Reviews can be manipulated &mdash; agents often ask staff and friends to post fake positive reviews. StudyScore collects structured, anonymous feedback on specific parameters like fee transparency, communication quality, and post-visa support. The data is aggregated across many responses to create a quality score that cannot be gamed by agents.</p></article>
+      <article class="card faq-item"><h3>Is StudyScore affiliated with any education agency?</h3><p>No. StudyScore is completely independent. We are not affiliated with, sponsored by, or funded by any education agent, university, or recruitment company. Our only stakeholder is the student and their family.</p></article>
+      <article class="card faq-item"><h3>How will study abroad agents be rated?</h3><p>Each education agent receives a StudyScore from 0 to 100 based on verified student feedback across five parameters: fee transparency (20%), communication quality (15%), visa support quality (25%), post-visa support (10%), and overall student satisfaction (30%). Higher scores indicate better student experiences.</p></article>
+      <article class="card faq-item"><h3>Why do some agent profiles show no metrics yet?</h3><p>Provisional profiles are compiled from publicly available information and remain unclaimed and unverified. StudyScore never publishes estimated or invented figures. Metrics such as visa success rates appear only after enough verified, anonymous student reviews have been collected for that agency.</p></article>
     </div>
   </section>
 
-  <section class="px-5 py-20 border-t border-white/5 text-center" aria-label="Share your study abroad experience">
-    <div class="max-w-3xl mx-auto">
-      <h2 class="font-serif text-3xl sm:text-4xl text-slate-100 mb-4">Every Response Brings Transparency<br>Closer to Reality.</h2>
-      <p class="text-slate-400 max-w-xl mx-auto mb-9 leading-relaxed">You spent months choosing your study abroad agent. It takes 3 minutes to help the next student choose better. Be the data point that protects a family.</p>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScyYLD9XH-Txy2auOWGcPjdvfjdPiIFGjfc7IGt4gV4RmCcJQ/viewform" target="_blank" rel="noopener" class="inline-block bg-gold hover:bg-goldlt text-ink font-bold text-lg px-11 py-4 rounded-xl shadow-[0_4px_30px_rgba(184,148,79,0.3)] hover:-translate-y-0.5 transition-all">Share Your Experience &#8594;</a>
+  <section class="sec" style="text-align:center;" aria-label="Share your study abroad experience">
+    <div class="wrap-sm">
+      <h2>Every Response Brings Transparency<br>Closer to Reality.</h2>
+      <p class="lede" style="max-width:560px;margin:0 auto 32px;">You spent months choosing your study abroad agent. It takes 3 minutes to help the next student choose better. Be the data point that protects a family.</p>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScyYLD9XH-Txy2auOWGcPjdvfjdPiIFGjfc7IGt4gV4RmCcJQ/viewform" target="_blank" rel="noopener" class="btn btn-dark">Share Your Experience &#8594;</a>
     </div>
   </section>
 
@@ -261,100 +532,108 @@ tailwind.config = {
 
 <!-- ============================ AGENT DIRECTORY (route: #/agents) ============================ -->
 <main id="view-agents" class="route-view">
-  <div class="pt-36 pb-6 px-5 max-w-6xl mx-auto">
-    <div class="text-[11px] font-bold tracking-[0.2em] uppercase text-gold mb-3">Agent Directory</div>
-    <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-slate-100 mb-4">Study Abroad Agent Directory</h1>
-    <p class="text-slate-400 max-w-2xl leading-relaxed">Provisional profiles of education agencies, compiled from publicly available information. These profiles are unclaimed and have not been verified by the agencies. No StudyScore rating or metric is shown for any agency until enough verified, anonymous student reviews are collected. If you represent an agency listed here, you can claim or correct your profile at any time.</p>
+  <div class="wrap">
+    <div class="page-head">
+      <div class="kicker">Agent Directory</div>
+      <h1>Study Abroad Agent Directory</h1>
+      <p class="lede">Provisional profiles of education agencies, compiled from publicly available information. These profiles are unclaimed and have not been verified by the agencies. No StudyScore rating or metric is shown for any agency until enough verified, anonymous student reviews are collected. If you represent an agency listed here, you can claim or correct your profile at any time.</p>
+    </div>
+    <div class="toolbar">
+      <input id="dirSearch" type="search" class="field" placeholder="Search by agency or city" aria-label="Search agencies">
+      <select id="dirDest" class="field" aria-label="Filter by destination">
+        <option value="">All destinations</option>
+      </select>
+    </div>
+    <div id="dirGrid" class="agents-grid" aria-live="polite"></div>
   </div>
-  <div class="px-5 max-w-6xl mx-auto flex flex-wrap gap-3 mt-4">
-    <input id="dirSearch" type="search" placeholder="Search by agency or city" aria-label="Search agencies" class="glass rounded-xl px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none focus:border-gold/50 min-w-[240px]">
-    <select id="dirDest" aria-label="Filter by destination" class="glass rounded-xl px-4 py-3 text-sm text-slate-200 outline-none focus:border-gold/50 bg-panel min-w-[200px]">
-      <option value="">All destinations</option>
-    </select>
-  </div>
-  <div id="dirGrid" class="px-5 max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 mb-24" aria-live="polite"></div>
 </main>
 
 <!-- ============================ AGENT PROFILE (route: #/agents/:city/:slug) ============================ -->
 <main id="view-profile" class="route-view">
-  <div class="pt-36 pb-4 px-5 max-w-6xl mx-auto">
-    <a href="#/agents" class="text-sm font-bold text-gold hover:text-goldlt transition-colors">&#8592; Back to directory</a>
+  <div class="wrap">
+    <div class="page-head" style="padding-bottom:10px;">
+      <a href="#/agents" class="back-link">&#8592; Back to directory</a>
+    </div>
+    <div id="profileWrap"></div>
   </div>
-  <div id="profileWrap" class="px-5 max-w-6xl mx-auto mb-24"></div>
 </main>
 
 <!-- ============================ PRIVACY (route: #/privacy) ============================ -->
 <main id="view-privacy" class="route-view">
-  <div class="pt-36 pb-6 px-5 max-w-3xl mx-auto">
-    <div class="text-[11px] font-bold tracking-[0.2em] uppercase text-gold mb-3">Legal</div>
-    <h1 class="font-serif text-4xl text-slate-100 mb-2">Privacy Policy</h1>
-    <p class="text-sm text-slate-500">Last updated: April 2026</p>
-  </div>
-  <div class="px-5 max-w-3xl mx-auto mb-24 space-y-4">
-    <h2 class="font-serif text-2xl text-slate-100 pt-4">What we collect</h2>
-    <p class="text-slate-400 leading-relaxed">The StudyScore survey is anonymous by design. It does not ask for your name or email address, does not require a login, and responses are stored securely with our form provider (Google Forms). Individual survey responses are never published and are never shared with any agency in identifiable form. Only aggregated, anonymised findings may appear in public reports.</p>
-    <p class="text-slate-400 leading-relaxed">If you submit an inquiry form on an agent profile page, you choose to share the details you enter (such as your name, contact information, and message). We use that information only to route and respond to your inquiry through our lead management system. We do not sell personal data.</p>
-    <h2 class="font-serif text-2xl text-slate-100 pt-4">Cookies and third parties</h2>
-    <p class="text-slate-400 leading-relaxed">This site does not set its own tracking cookies and does not run third-party advertising trackers. The site is hosted on GitHub Pages and loads fonts and styling libraries from Google Fonts and Tailwind's CDN; those providers may receive standard technical request data (such as IP address and browser type) under their own privacy policies.</p>
-    <h2 class="font-serif text-2xl text-slate-100 pt-4">Corrections and removal</h2>
-    <p class="text-slate-400 leading-relaxed">To request correction or deletion of information you have submitted, email <a href="mailto:pradeep@studyscore.in" class="text-gold hover:text-goldlt">pradeep@studyscore.in</a>. We respond to all genuine requests.</p>
+  <div class="wrap-sm">
+    <div class="page-head">
+      <div class="kicker">Legal</div>
+      <h1>Privacy Policy</h1>
+      <p style="font-size:13px;color:var(--faint);">Last updated: April 2026</p>
+    </div>
+    <div class="legal">
+      <h2>What we collect</h2>
+      <p>The StudyScore survey is anonymous by design. It does not ask for your name or email address, does not require a login, and responses are stored securely with our form provider (Google Forms). Individual survey responses are never published and are never shared with any agency in identifiable form. Only aggregated, anonymised findings may appear in public reports.</p>
+      <p>If you submit an inquiry form on an agent profile page, you choose to share the details you enter (such as your name, contact information, and message). We use that information only to route and respond to your inquiry through our lead management system. We do not sell personal data.</p>
+      <h2>Cookies and third parties</h2>
+      <p>This site does not set its own tracking cookies and does not run third-party advertising trackers. The site is hosted on GitHub Pages and loads fonts from Google Fonts; those providers may receive standard technical request data (such as IP address and browser type) under their own privacy policies.</p>
+      <h2>Corrections and removal</h2>
+      <p>To request correction or deletion of information you have submitted, email <a href="mailto:pradeep@studyscore.in">pradeep@studyscore.in</a>. We respond to all genuine requests.</p>
+    </div>
   </div>
 </main>
 
 <!-- ============================ TERMS (route: #/terms) ============================ -->
 <main id="view-terms" class="route-view">
-  <div class="pt-36 pb-6 px-5 max-w-3xl mx-auto">
-    <div class="text-[11px] font-bold tracking-[0.2em] uppercase text-gold mb-3">Legal</div>
-    <h1 class="font-serif text-4xl text-slate-100 mb-2">Terms of Use</h1>
-    <p class="text-sm text-slate-500">Last updated: April 2026</p>
-  </div>
-  <div class="px-5 max-w-3xl mx-auto mb-24 space-y-4">
-    <h2 class="font-serif text-2xl text-slate-100 pt-4">What StudyScore is</h2>
-    <p class="text-slate-400 leading-relaxed">StudyScore is an independent, informational platform. We are not an education agent, recruiter, broker, or advisor, and we are not affiliated with any agency, university, or recruitment company. Nothing on this site is professional advice; students and families should do their own diligence before engaging any agency.</p>
-    <h2 class="font-serif text-2xl text-slate-100 pt-4">Provisional profiles</h2>
-    <p class="text-slate-400 leading-relaxed">Directory profiles marked as provisional are compiled in good faith from publicly available information, such as an agency's own website and public listings. They are unclaimed and unverified. Inclusion in the directory is not an endorsement, and absence from it is not a criticism. No rating or performance metric is displayed for any agency until a minimum volume of verified, anonymous student reviews has been collected.</p>
-    <h2 class="font-serif text-2xl text-slate-100 pt-4">Claims and corrections</h2>
-    <p class="text-slate-400 leading-relaxed">If you represent a listed agency, you may claim your profile or request a factual correction by emailing <a href="mailto:pradeep@studyscore.in" class="text-gold hover:text-goldlt">pradeep@studyscore.in</a>. We correct verified factual errors promptly.</p>
-    <h2 class="font-serif text-2xl text-slate-100 pt-4">Content and liability</h2>
-    <ul class="list-disc pl-6 text-slate-400 leading-relaxed space-y-2">
-      <li>Site content is &copy; StudyScore. Short quotations with attribution and a link are welcome.</li>
-      <li>We make no guarantees about outcomes with any agency and accept no liability for decisions made based on directory information.</li>
-      <li>These terms are governed by the laws of India.</li>
-    </ul>
+  <div class="wrap-sm">
+    <div class="page-head">
+      <div class="kicker">Legal</div>
+      <h1>Terms of Use</h1>
+      <p style="font-size:13px;color:var(--faint);">Last updated: April 2026</p>
+    </div>
+    <div class="legal">
+      <h2>What StudyScore is</h2>
+      <p>StudyScore is an independent, informational platform. We are not an education agent, recruiter, broker, or advisor, and we are not affiliated with any agency, university, or recruitment company. Nothing on this site is professional advice; students and families should do their own diligence before engaging any agency.</p>
+      <h2>Provisional profiles</h2>
+      <p>Directory profiles marked as provisional are compiled in good faith from publicly available information, such as an agency's own website and public listings. They are unclaimed and unverified. Inclusion in the directory is not an endorsement, and absence from it is not a criticism. No rating or performance metric is displayed for any agency until a minimum volume of verified, anonymous student reviews has been collected.</p>
+      <h2>Claims and corrections</h2>
+      <p>If you represent a listed agency, you may claim your profile or request a factual correction by emailing <a href="mailto:pradeep@studyscore.in">pradeep@studyscore.in</a>. We correct verified factual errors promptly.</p>
+      <h2>Content and liability</h2>
+      <ul>
+        <li>Site content is &copy; StudyScore. Short quotations with attribution and a link are welcome.</li>
+        <li>We make no guarantees about outcomes with any agency and accept no liability for decisions made based on directory information.</li>
+        <li>These terms are governed by the laws of India.</li>
+      </ul>
+    </div>
   </div>
 </main>
 
 <!-- ============================ FOOTER ============================ -->
-<footer class="border-t border-white/5 px-5 py-14 text-center">
-  <div class="font-serif text-2xl text-slate-100 mb-2">Study<span class="text-gold font-light">[</span>Score<span class="text-gold font-light">]</span></div>
-  <div class="text-sm text-slate-500 mb-6">India's First Independent Rating for Study Abroad Agents &middot; Trust Before You Sign</div>
-  <div class="mb-5 space-x-5">
-    <a href="#/agents" class="text-xs text-slate-500 hover:text-gold transition-colors">Agent Directory</a>
-    <a href="#/privacy" class="text-xs text-slate-500 hover:text-gold transition-colors">Privacy Policy</a>
-    <a href="#/terms" class="text-xs text-slate-500 hover:text-gold transition-colors">Terms of Use</a>
+<footer class="footer">
+  <div class="brand">Study<i>[</i>Score<i>]</i></div>
+  <div class="tag">India's First Independent Rating for Study Abroad Agents &middot; Trust Before You Sign</div>
+  <div class="flinks">
+    <a href="#/agents">Agent Directory</a>
+    <a href="#/privacy">Privacy Policy</a>
+    <a href="#/terms">Terms of Use</a>
   </div>
-  <div class="text-sm text-slate-500"><a href="mailto:pradeep@studyscore.in" class="text-gold hover:text-goldlt">pradeep@studyscore.in</a></div>
-  <div class="text-sm text-slate-600 mt-1">Gurgaon, India</div>
-  <div class="text-xs text-slate-700 mt-8">&copy; 2026 StudyScore. All rights reserved. An independent initiative &mdash; not affiliated with any education agency or institution.</div>
+  <div class="mail"><a href="mailto:pradeep@studyscore.in">pradeep@studyscore.in</a></div>
+  <div class="loc">Gurgaon, India</div>
+  <div class="legal">&copy; 2026 StudyScore. All rights reserved. An independent initiative &mdash; not affiliated with any education agency or institution.</div>
 </footer>
 
 <script>
 /* =====================================================================
    StudyScore App
-   Vanilla JS hash router | directory | HUD profiles | metric matrix |
+   Vanilla JS hash router | directory | dashboard-matrix profiles |
    Secure Inbound Lead Gateway (CRM fetch POST) | JSON-LD injection
 
    -------------------------- CONFIG (READ ME) --------------------------
    CRM_BASE_URL  Absolute origin of your CRM backend, NO trailing slash.
                  Example: "https://your-crm-app.example.com"
-                 The lead form POSTs to:
+                 The lead form POSTs JSON to:
                    CRM_BASE_URL + "/api/public/leads/" + agent_slug
                  Requirements on the CRM side:
                    (a) this endpoint must exist and accept JSON POST
                    (b) CORS must allow origin https://studyscore.in
                  A bare relative "/api/..." cannot work on GitHub Pages
-                 because static hosting has no backend. If CRM_BASE_URL
-                 is left empty, the form falls back to opening a
+                 because static hosting has no backend. While
+                 CRM_BASE_URL is empty, the form falls back to opening a
                  pre-filled email draft so no lead is silently lost.
 
    DATA POLICY   AGENTS[].metrics values are null on purpose. StudyScore
@@ -461,14 +740,14 @@ function allDestinations() {
   return out.sort();
 }
 function agentCard(a) {
-  return '<article class="glass glass-hover rounded-2xl p-7 flex flex-col gap-3">' +
-    '<span class="inline-block w-fit text-[10px] font-bold tracking-widest uppercase text-amber-300 bg-amber-500/10 border border-amber-500/40 rounded-full px-3 py-1">Unclaimed Provisional Profile</span>' +
-    '<h3 class="font-serif text-xl text-slate-100">' + esc(a.name) + '</h3>' +
-    '<div class="text-xs text-slate-500">' + esc(a.city) + ', ' + esc(a.state) + ', India</div>' +
-    '<div class="flex flex-wrap gap-1.5">' +
-      a.destinations.map(function (d) { return '<span class="text-[11px] text-slate-300 bg-white/5 border border-white/10 rounded-full px-2.5 py-0.5">' + esc(d) + '</span>'; }).join('') +
+  return '<article class="card card-hover agent-card">' +
+    '<span class="badge-prov">Unclaimed Provisional Profile</span>' +
+    '<h3>' + esc(a.name) + '</h3>' +
+    '<div class="loc">' + esc(a.city) + ', ' + esc(a.state) + ', India</div>' +
+    '<div class="chiprow">' +
+      a.destinations.map(function (d) { return '<span class="chip">' + esc(d) + '</span>'; }).join('') +
     '</div>' +
-    '<a class="mt-auto pt-2 text-sm font-bold text-gold hover:text-goldlt transition-colors" href="' + profileHash(a) + '">View profile &#8594;</a>' +
+    '<a class="view-link" href="' + profileHash(a) + '">View profile &#8594;</a>' +
   '</article>';
 }
 function renderDirectory() {
@@ -481,7 +760,7 @@ function renderDirectory() {
   var grid = document.getElementById("dirGrid");
   grid.innerHTML = list.length
     ? list.map(agentCard).join("")
-    : '<div class="col-span-full text-center text-slate-500 py-16">No agencies match that search yet. The directory is growing; check back soon.</div>';
+    : '<div class="dir-empty">No agencies match that search yet. The directory is growing; check back soon.</div>';
 }
 function initDirectoryControls() {
   var sel = document.getElementById("dirDest");
@@ -494,20 +773,23 @@ function initDirectoryControls() {
   sel.addEventListener("change", renderDirectory);
 }
 
-/* --------------------- Metric matrix (honest states) --------------------- */
+/* --------------------- Dashboard matrix (honest states) --------------------- */
 function metricWidget(label, value, unit, note) {
   var hasValue = (value !== null && value !== undefined);
-  var valueHtml = hasValue
-    ? '<div class="font-serif text-3xl text-slate-100">' + esc(value) + '<span class="text-base text-slate-400 ml-1">' + esc(unit || "") + '</span></div>'
-    : '<div class="font-serif text-3xl text-slate-600">&mdash;</div>' +
-      '<div class="shimmer h-1.5 rounded-full mt-3"></div>';
-  var noteHtml = hasValue
-    ? '<div class="text-[11px] text-slate-500 mt-2">' + esc(note || "") + '</div>'
-    : '<div class="text-[11px] text-amber-300/80 mt-3">Awaiting verified student data</div>' +
-      '<div class="text-[10px] text-slate-600 mt-1">Unlocks after verified anonymous reviews</div>';
-  return '<button type="button" onclick="metricPing()" class="glass glass-hover rounded-2xl p-6 text-left w-full cursor-pointer" title="This metric is published only from verified student reviews">' +
-    '<div class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mb-3">' + esc(label) + '</div>' +
-    valueHtml + noteHtml +
+  var body;
+  if (hasValue) {
+    body = '<div class="mvalue">' + esc(value) + '<span class="munit">' + esc(unit || "") + '</span></div>' +
+           '<svg class="spark" viewBox="0 0 120 26" aria-hidden="true"><line x1="4" y1="20" x2="116" y2="20"></line></svg>' +
+           '<div class="mnote">' + esc(note || "") + '</div>';
+  } else {
+    body = '<div class="mvalue pending">&mdash;</div>' +
+           '<svg class="spark" viewBox="0 0 120 26" aria-hidden="true"><line x1="4" y1="20" x2="116" y2="20"></line></svg>' +
+           '<div class="track"></div>' +
+           '<div class="mwait">Awaiting verified student data</div>' +
+           '<div class="mnote">Unlocks after verified anonymous reviews</div>';
+  }
+  return '<button type="button" class="metric" onclick="metricPing()" title="This metric is published only from verified student reviews">' +
+    '<div class="mlabel">' + esc(label) + '</div>' + body +
   '</button>';
 }
 function metricPing() {
@@ -523,8 +805,9 @@ function renderProfile(citySlug, agentSlug) {
   var wrap = document.getElementById("profileWrap");
   var a = findAgent(citySlug, agentSlug);
   if (!a) {
-    wrap.innerHTML = '<div class="glass rounded-2xl p-10"><h1 class="font-serif text-3xl text-slate-100 mb-3">Profile not found</h1>' +
-      '<p class="text-slate-400">This agency is not in the directory yet. <a href="#/agents" class="text-gold hover:text-goldlt">Browse the full directory</a>.</p></div>';
+    wrap.innerHTML = '<div class="card" style="padding:40px;margin-bottom:90px;">' +
+      '<h1 class="serif" style="font-size:30px;margin-bottom:10px;">Profile not found</h1>' +
+      '<p style="color:var(--muted);">This agency is not in the directory yet. <a href="#/agents" style="color:var(--gold);">Browse the full directory</a>.</p></div>';
     document.title = "Profile not found | StudyScore";
     injectSchema(null);
     return;
@@ -532,80 +815,78 @@ function renderProfile(citySlug, agentSlug) {
   var mailClaim = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent("Claim profile: " + a.name + " (" + a.city + ")");
 
   wrap.innerHTML =
-    /* -------- HUD hero header -------- */
-    '<section class="glass rounded-3xl p-8 sm:p-12 mb-6">' +
-      '<span class="inline-block text-[10px] font-bold tracking-widest uppercase text-amber-300 bg-amber-500/10 border border-amber-500/40 rounded-full px-3 py-1 mb-5">Unclaimed Provisional Profile</span>' +
-      '<h1 class="font-serif text-3xl sm:text-5xl text-slate-100 mb-2">' + esc(a.name) + '</h1>' +
-      '<div class="text-sm text-slate-500 mb-6">' + esc(a.city) + ', ' + esc(a.state) + ', India</div>' +
-      '<div class="flex flex-wrap gap-2 mb-2">' +
-        a.destinations.map(function (d) { return '<span class="text-xs text-slate-200 bg-white/5 border border-white/10 rounded-full px-3.5 py-1.5">' + esc(d) + '</span>'; }).join('') +
+    /* -------- Profile hero -------- */
+    '<section class="card pf-hero">' +
+      '<span class="badge-prov">Unclaimed Provisional Profile</span>' +
+      '<h1>' + esc(a.name) + '</h1>' +
+      '<div class="loc">' + esc(a.city) + ', ' + esc(a.state) + ', India</div>' +
+      '<div class="chiprow" style="margin-bottom:10px;">' +
+        a.destinations.map(function (d) { return '<span class="chip">' + esc(d) + '</span>'; }).join('') +
       '</div>' +
-      '<div class="flex flex-wrap gap-2 mt-3">' +
-        a.services.map(function (s) { return '<span class="text-[11px] text-slate-400 bg-gold/5 border border-gold/20 rounded-full px-3 py-1">' + esc(s) + '</span>'; }).join('') +
+      '<div class="chiprow">' +
+        a.services.map(function (s) { return '<span class="chip chip-gold">' + esc(s) + '</span>'; }).join('') +
       '</div>' +
     '</section>' +
 
-    /* -------- Breathing amber banner -------- */
-    '<div class="rounded-2xl border border-amber-500/40 bg-amber-500/10 p-5 sm:p-6 mb-8 flex flex-col sm:flex-row sm:items-center gap-4">' +
-      '<div class="flex items-center gap-3 flex-1">' +
-        '<span class="w-2.5 h-2.5 rounded-full bg-amber-400 pulse-amber shrink-0"></span>' +
+    /* -------- Provisional banner (clean white, breathing amber) -------- */
+    '<div class="prov-banner">' +
+      '<div class="prov-left">' +
+        '<span class="prov-dot"></span>' +
         '<div>' +
-          '<div class="text-sm font-bold text-amber-300 tracking-wide">Provisional Listing &bull; Audit Pending</div>' +
-          '<div class="text-xs text-amber-200/70 mt-1 leading-relaxed">Compiled from publicly available information. Not claimed or verified by ' + esc(a.name) + '. No rating or metric is shown until verified, anonymous student reviews are collected.</div>' +
+          '<div class="prov-title">Provisional Listing &bull; Independent Audit Pending</div>' +
+          '<div class="prov-sub">Compiled from publicly available information. Not claimed or verified by ' + esc(a.name) + '. No rating or metric is shown until verified, anonymous student reviews are collected.</div>' +
         '</div>' +
       '</div>' +
-      '<a href="' + mailClaim + '" class="shrink-0 text-center text-sm font-bold text-amber-300 border border-amber-400/60 hover:bg-amber-400/10 rounded-xl px-6 py-3 transition-colors">Claim Workspace</a>' +
+      '<a href="' + mailClaim + '" class="btn btn-dark btn-sm" style="flex-shrink:0;text-align:center;">Claim Workspace</a>' +
     '</div>' +
 
-    /* -------- Content grid: left metrics + about, right lead gateway -------- */
-    '<div class="grid lg:grid-cols-3 gap-8 items-start">' +
-      '<div class="lg:col-span-2 space-y-8">' +
+    /* -------- Content grid -------- */
+    '<div class="pf-grid">' +
+      '<div>' +
 
-        '<div>' +
-          '<div class="text-[11px] font-bold tracking-[0.2em] uppercase text-gold mb-4">Performance Matrix</div>' +
-          '<div class="grid sm:grid-cols-3 gap-4">' +
-            metricWidget("Visa Success Coefficient", a.metrics.visaSuccess, "%", "From verified reviews") +
-            metricWidget("Turnaround SLA", a.metrics.slaDays, " days", "From verified reviews") +
-            metricWidget("Verified Alumni Count", a.metrics.alumni, "", "Verified reviewers") +
-          '</div>' +
-          '<p class="text-[11px] text-slate-600 mt-3 leading-relaxed">StudyScore publishes performance figures only from verified, anonymous student reviews. This agency has no verified data yet, so no figures are displayed or estimated.</p>' +
+        '<div class="kicker">Performance Matrix</div>' +
+        '<div class="metrics3">' +
+          metricWidget("Visa Success Coefficient", a.metrics.visaSuccess, "%", "From verified reviews") +
+          metricWidget("Document Processing SLA", a.metrics.slaDays, " days", "From verified reviews") +
+          metricWidget("Verified Alumni Count", a.metrics.alumni, "", "Verified reviewers") +
+        '</div>' +
+        '<p class="matrix-foot">StudyScore publishes performance figures only from verified, anonymous student reviews. This agency has no verified data yet, so no figures are displayed or estimated.</p>' +
+
+        '<div class="card about-card">' +
+          '<div class="kicker">About (as publicly listed)</div>' +
+          '<p>' + esc(a.summary) + '</p>' +
         '</div>' +
 
-        '<div class="glass rounded-2xl p-8">' +
-          '<div class="text-[11px] font-bold tracking-[0.2em] uppercase text-gold mb-3">About (as publicly listed)</div>' +
-          '<p class="text-sm text-slate-400 leading-relaxed">' + esc(a.summary) + '</p>' +
-        '</div>' +
-
-        '<div id="rateCta" class="glass rounded-2xl p-8 border-gold/25">' +
-          '<h3 class="font-serif text-2xl text-slate-100 mb-2">Used this agency? Your review builds the score.</h3>' +
-          '<p class="text-sm text-slate-400 leading-relaxed mb-5">Ratings on StudyScore come only from verified, anonymous student reviews. 3 minutes. No login. No agent ever sees who you are.</p>' +
-          '<a href="' + FORM_URL + '" target="_blank" rel="noopener" class="inline-block bg-gold hover:bg-goldlt text-ink font-bold text-sm px-7 py-3.5 rounded-xl transition-colors">Rate this agency (3 min, anonymous) &#8594;</a>' +
+        '<div class="card rate-card" id="rateCta">' +
+          '<h3>Used this agency? Your review builds the score.</h3>' +
+          '<p>Ratings on StudyScore come only from verified, anonymous student reviews. 3 minutes. No login. No agent ever sees who you are.</p>' +
+          '<a href="' + FORM_URL + '" target="_blank" rel="noopener" class="btn btn-dark btn-sm">Rate this agency (3 min, anonymous) &#8594;</a>' +
         '</div>' +
 
       '</div>' +
 
-      /* -------- Secure Inbound Lead Gateway (floating right column) -------- */
-      '<aside class="lg:sticky lg:top-24">' +
-        '<form id="leadForm" novalidate class="glass rounded-2xl p-7 border-t-2 border-t-gold/60">' +
-          '<h3 class="font-serif text-xl text-slate-100 mb-1.5">Secure Inbound Lead Gateway</h3>' +
-          '<p class="text-xs text-slate-500 leading-relaxed mb-4">Send an inquiry related to ' + esc(a.name) + ' or your study plans. StudyScore routes your message; we are independent and not this agency.</p>' +
-          '<div class="absolute -left-[9999px] opacity-0 h-0 overflow-hidden" aria-hidden="true"><label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>' +
-          '<label class="block text-xs font-semibold text-slate-300 mt-3 mb-1.5" for="lfName">Your name</label>' +
-          '<input id="lfName" name="name" type="text" required autocomplete="name" class="w-full bg-panel border border-white/10 focus:border-gold/50 rounded-lg px-3.5 py-2.5 text-sm text-slate-200 outline-none">' +
-          '<label class="block text-xs font-semibold text-slate-300 mt-3 mb-1.5" for="lfEmail">Email</label>' +
-          '<input id="lfEmail" name="email" type="email" required autocomplete="email" class="w-full bg-panel border border-white/10 focus:border-gold/50 rounded-lg px-3.5 py-2.5 text-sm text-slate-200 outline-none">' +
-          '<label class="block text-xs font-semibold text-slate-300 mt-3 mb-1.5" for="lfPhone">WhatsApp / phone (optional)</label>' +
-          '<input id="lfPhone" name="phone" type="tel" autocomplete="tel" class="w-full bg-panel border border-white/10 focus:border-gold/50 rounded-lg px-3.5 py-2.5 text-sm text-slate-200 outline-none">' +
-          '<label class="block text-xs font-semibold text-slate-300 mt-3 mb-1.5" for="lfDest">Destination you are considering</label>' +
-          '<select id="lfDest" name="destination" class="w-full bg-panel border border-white/10 focus:border-gold/50 rounded-lg px-3.5 py-2.5 text-sm text-slate-200 outline-none">' +
+      /* -------- Secure Inbound Lead Gateway (right-anchored, sticky) -------- */
+      '<aside class="pf-aside">' +
+        '<form id="leadForm" novalidate class="card lf">' +
+          '<h3>Secure Inbound Lead Gateway</h3>' +
+          '<p class="small">Send an inquiry related to ' + esc(a.name) + ' or your study plans. StudyScore routes your message; we are independent and not this agency.</p>' +
+          '<div class="hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>' +
+          '<label for="lfName">Your name</label>' +
+          '<input id="lfName" name="name" type="text" required autocomplete="name" class="field">' +
+          '<label for="lfEmail">Email</label>' +
+          '<input id="lfEmail" name="email" type="email" required autocomplete="email" class="field">' +
+          '<label for="lfPhone">WhatsApp / phone (optional)</label>' +
+          '<input id="lfPhone" name="phone" type="tel" autocomplete="tel" class="field">' +
+          '<label for="lfDest">Destination you are considering</label>' +
+          '<select id="lfDest" name="destination" class="field">' +
             a.destinations.map(function (d) { return '<option value="' + esc(d) + '">' + esc(d) + '</option>'; }).join('') +
             '<option value="Not sure yet">Not sure yet</option>' +
           '</select>' +
-          '<label class="block text-xs font-semibold text-slate-300 mt-3 mb-1.5" for="lfMsg">Your question</label>' +
-          '<textarea id="lfMsg" name="message" required class="w-full bg-panel border border-white/10 focus:border-gold/50 rounded-lg px-3.5 py-2.5 text-sm text-slate-200 outline-none min-h-[90px] resize-y"></textarea>' +
-          '<button type="submit" id="lfBtn" class="mt-5 w-full bg-gold hover:bg-goldlt disabled:opacity-60 disabled:cursor-wait text-ink font-bold text-sm px-6 py-3.5 rounded-xl transition-colors">Send inquiry</button>' +
-          '<div id="lfStatus" role="status" class="hidden mt-3 text-sm"></div>' +
-          '<div class="text-[11px] text-slate-600 mt-3 leading-relaxed">By submitting, you agree we may contact you about your inquiry. See our <a href="#/privacy" class="text-gold">Privacy Policy</a>.</div>' +
+          '<label for="lfMsg">Your question</label>' +
+          '<textarea id="lfMsg" name="message" required class="field"></textarea>' +
+          '<button type="submit" id="lfBtn" class="btn btn-dark">Send inquiry</button>' +
+          '<div id="lfStatus" role="status" class="fstatus"></div>' +
+          '<div class="fineprint">By submitting, you agree we may contact you about your inquiry. See our <a href="#/privacy">Privacy Policy</a>.</div>' +
         '</form>' +
       '</aside>' +
     '</div>';
@@ -621,7 +902,7 @@ function renderProfile(citySlug, agentSlug) {
 /* ------------------ Lead submission: CRM fetch + fallback ------------------ */
 function setStatus(kind, msg) {
   var status = document.getElementById("lfStatus");
-  status.className = "mt-3 text-sm " + (kind === "ok" ? "text-emerald-400" : "text-rose-400");
+  status.className = "fstatus " + (kind === "ok" ? "ok" : "err");
   status.textContent = msg;
 }
 function mailtoFallback(a, payload) {
