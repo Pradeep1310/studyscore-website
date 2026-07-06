@@ -1,1148 +1,265 @@
+```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StudyScore — India's First Independent Rating for Study Abroad Agents | Trust Before You Sign</title>
-<meta name="description" content="StudyScore is India's first independent, student-powered rating system for study abroad education agents and consultants. We collect anonymous student feedback to rate agents on transparency, communication, and support quality. Like CIBIL for education agents. Trust before you sign. Founded by Pradeep Pandey, 18-year international education veteran.">
-<meta name="keywords" content="StudyScore, study abroad agent rating, education agent review, CIBIL for education agents, independent agent rating India, study abroad consultant review, student feedback education agent, best study abroad agent India, rate education consultant, study abroad agent comparison, overseas education consultant rating, trusted education agent India">
-<meta property="og:title" content="StudyScore — India's First Independent Rating for Study Abroad Agents">
-<meta property="og:description" content="Rate your study abroad agent. Help future students make informed decisions. India's first independent, student-powered agent quality assessment. Trust before you sign.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://studyscore.in">
-<meta property="og:site_name" content="StudyScore">
-<meta property="og:locale" content="en_IN">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="StudyScore — India's First Independent Rating for Study Abroad Agents">
-<meta name="twitter:description" content="India's first independent, student-powered rating system for study abroad agents. Like CIBIL, but for education consultants. Trust before you sign.">
-<link rel="canonical" href="https://studyscore.in">
-<meta name="robots" content="index, follow">
-<meta name="author" content="Pradeep Pandey">
-<meta name="theme-color" content="#0F1B2D">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "StudyScore",
-  "alternateName": "Study[Score]",
-  "url": "https://studyscore.in",
-  "description": "India's first independent, student-powered rating system for study abroad education agents. Like CIBIL for education. We collect anonymous feedback from students to rate agents on transparency, communication, fees, and post-visa support quality.",
-  "founder": {
-    "@type": "Person",
-    "name": "Pradeep Pandey",
-    "jobTitle": "Founder",
-    "description": "18-year international education veteran. Former ApplyBoard, Google, StudyGroup. Managed 7,000+ agent partnerships across 40+ countries."
-  },
-  "foundingDate": "2026",
-  "areaServed": {
-    "@type": "Country",
-    "name": "India"
-  },
-  "knowsAbout": ["study abroad agents", "overseas education consultants", "international student recruitment", "education agent ratings", "student visa consultants", "IELTS coaching", "study abroad reviews"],
-  "slogan": "Trust Before You Sign",
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "email": "pradeep@studyscore.in",
-    "contactType": "customer service"
-  }
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "StudyScore",
-  "url": "https://studyscore.in",
-  "description": "India's first independent rating system for study abroad agents. Rate your education consultant. Check agent quality before you sign. Anonymous student reviews."
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is StudyScore?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "StudyScore is India's first independent, student-powered rating system for study abroad agents and overseas education consultants. Think of it as CIBIL for education agents — a transparent, data-driven quality score based on real student experiences."
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Prestige immigration consultant directory with verified profile intelligence, lead gateway, and destination-focused service metrics." />
+  <title>Prestige Agent Directory</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"] },
+          colors: { slateglass: "rgba(15,23,42,.66)", platinum: "#e5e7eb", ambercore: "#f59e0b" },
+          boxShadow: { glow: "0 0 40px rgba(245,158,11,.18)", silver: "0 24px 90px rgba(148,163,184,.13)" },
+          animation: { pulseAmber: "pulseAmber 2.4s ease-in-out infinite", fadeIn: "fadeIn .38s ease-out both", float: "float 6s ease-in-out infinite" },
+          keyframes: {
+            pulseAmber: { "0%,100%": { boxShadow: "0 0 0 rgba(245,158,11,.1)" }, "50%": { boxShadow: "0 0 32px rgba(245,158,11,.42)" } },
+            fadeIn: { from: { opacity: 0, transform: "translateY(10px)" }, to: { opacity: 1, transform: "translateY(0)" } },
+            float: { "0%,100%": { transform: "translateY(0)" }, "50%": { transform: "translateY(-10px)" } }
+          }
+        }
       }
-    },
-    {
-      "@type": "Question",
-      "name": "Is the StudyScore survey anonymous?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, 100% anonymous. We do not collect your name, email, or any identifying information. No agent will ever know who submitted a specific response."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How is StudyScore different from Google Reviews?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Google Reviews can be manipulated by agents asking staff to post fake reviews. StudyScore collects structured, anonymous feedback on specific parameters like fee transparency, communication quality, and post-visa support. The data is aggregated across hundreds of responses to create a reliable quality score."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is StudyScore affiliated with any education agency?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. StudyScore is completely independent. We are not affiliated with, sponsored by, or funded by any education agent, university, or recruitment company."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How will study abroad agents be rated on StudyScore?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Each agent receives a StudyScore from 0 to 100 based on verified student feedback across five parameters: fee transparency, communication quality, visa support quality, post-visa support, and overall student satisfaction."
-      }
-    }
-  ]
-}
-</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #FAFAF8;
-    --surface: #FFFFFF;
-    --navy: #0F1B2D;
-    --deep: #1A2A42;
-    --gold: #B8944F;
-    --gold-light: #D4B876;
-    --accent: #2D7A6E;
-    --accent-light: #E8F5F1;
-    --text: #2D2D2D;
-    --text-secondary: #6B7280;
-    --border: #E5E5E0;
-    --warm: #F5F0E8;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.7;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  nav {
-    position: fixed; top: 0; width: 100%; z-index: 100;
-    background: rgba(250,250,248,0.92);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
-    padding: 16px 0;
-  }
-  .nav-inner {
-    max-width: 1100px; margin: 0 auto; padding: 0 24px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .logo {
-    font-family: 'DM Serif Display', serif;
-    font-size: 24px; color: var(--navy);
-    text-decoration: none;
-  }
-  .logo .bracket { color: var(--gold); font-weight: 300; }
-  .nav-cta {
-    background: var(--navy); color: white;
-    padding: 10px 24px; border-radius: 8px;
-    text-decoration: none; font-size: 14px; font-weight: 600;
-    transition: all 0.3s;
-  }
-  .nav-cta:hover { background: var(--deep); transform: translateY(-1px); }
-
-  .hero {
-    padding: 160px 24px 100px;
-    max-width: 900px; margin: 0 auto;
-    text-align: center;
-  }
-  .badge {
-    display: inline-block;
-    background: var(--warm);
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    font-size: 12px; font-weight: 700;
-    letter-spacing: 2px; text-transform: uppercase;
-    padding: 6px 16px; border-radius: 50px;
-    margin-bottom: 32px;
-  }
-  .hero h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(36px, 6vw, 60px);
-    line-height: 1.15;
-    color: var(--navy);
-    margin-bottom: 24px;
-  }
-  .hero h1 em {
-    font-style: normal;
-    color: var(--gold);
-  }
-  .hero p {
-    font-size: 19px;
-    color: var(--text-secondary);
-    max-width: 640px;
-    margin: 0 auto 40px;
-    line-height: 1.8;
-  }
-  .hero-cta {
-    display: inline-block;
-    background: var(--gold);
-    color: white;
-    padding: 16px 40px;
-    border-radius: 10px;
-    font-size: 17px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: all 0.3s;
-    box-shadow: 0 4px 20px rgba(184,148,79,0.3);
-  }
-  .hero-cta:hover {
-    background: var(--gold-light);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(184,148,79,0.4);
-  }
-  .hero-sub {
-    margin-top: 16px;
-    font-size: 13px;
-    color: var(--text-secondary);
-  }
-
-  .stats-bar {
-    max-width: 800px; margin: 0 auto 80px;
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    background: var(--navy);
-    border-radius: 16px;
-    overflow: hidden;
-  }
-  .stat {
-    padding: 32px 24px;
-    text-align: center;
-    border-right: 1px solid rgba(255,255,255,0.1);
-  }
-  .stat:last-child { border-right: none; }
-  .stat-num {
-    font-family: 'DM Serif Display', serif;
-    font-size: 36px;
-    color: var(--gold);
-  }
-  .stat-label {
-    font-size: 13px;
-    color: rgba(255,255,255,0.6);
-    margin-top: 4px;
-    letter-spacing: 0.5px;
-  }
-
-  section { padding: 80px 24px; }
-  .container { max-width: 1000px; margin: 0 auto; }
-  .section-tag {
-    font-size: 12px; font-weight: 700;
-    letter-spacing: 2px; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 12px;
-  }
-  .section-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(28px, 4vw, 42px);
-    color: var(--navy);
-    margin-bottom: 20px;
-    line-height: 1.2;
-  }
-  .section-desc {
-    font-size: 17px;
-    color: var(--text-secondary);
-    max-width: 600px;
-    margin-bottom: 48px;
-    line-height: 1.8;
-  }
-
-  .problem-section { background: var(--warm); }
-  .problem-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-  }
-  .problem-card {
-    background: white;
-    border-radius: 12px;
-    padding: 32px;
-    border: 1px solid var(--border);
-    transition: transform 0.3s;
-  }
-  .problem-card:hover { transform: translateY(-4px); }
-  .problem-icon {
-    width: 48px; height: 48px;
-    background: var(--accent-light);
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  .problem-card h3 {
-    font-size: 18px; font-weight: 700;
-    color: var(--navy); margin-bottom: 12px;
-  }
-  .problem-card p {
-    font-size: 15px; color: var(--text-secondary);
-    line-height: 1.7;
-  }
-
-  .steps {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 32px;
-    margin-top: 48px;
-  }
-  .step {
-    text-align: center;
-    padding: 32px 20px;
-  }
-  .step-num {
-    width: 56px; height: 56px;
-    background: var(--navy);
-    color: var(--gold);
-    font-family: 'DM Serif Display', serif;
-    font-size: 24px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 20px;
-  }
-  .step h3 {
-    font-size: 17px; font-weight: 700;
-    color: var(--navy); margin-bottom: 8px;
-  }
-  .step p {
-    font-size: 14px; color: var(--text-secondary);
-    line-height: 1.6;
-  }
-
-  .survey-section {
-    background: var(--navy);
-    text-align: center;
-  }
-  .survey-section .section-tag { color: var(--gold-light); }
-  .survey-section .section-title { color: white; margin-bottom: 16px; }
-  .survey-section .section-desc {
-    color: rgba(255,255,255,0.7);
-    margin: 0 auto 40px;
-    max-width: 540px;
-  }
-  .survey-cta {
-    display: inline-block;
-    background: var(--gold);
-    color: white;
-    padding: 18px 48px;
-    border-radius: 10px;
-    font-size: 18px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: all 0.3s;
-    box-shadow: 0 4px 20px rgba(184,148,79,0.4);
-  }
-  .survey-cta:hover {
-    background: var(--gold-light);
-    transform: translateY(-2px);
-  }
-  .survey-note {
-    margin-top: 20px;
-    font-size: 13px;
-    color: rgba(255,255,255,0.5);
-  }
-
-  .about-content {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 48px;
-    align-items: start;
-  }
-  .about-photo {
-    background: var(--warm);
-    border-radius: 16px;
-    padding: 40px;
-    text-align: center;
-    border: 1px solid var(--border);
-  }
-  .about-photo .name {
-    font-family: 'DM Serif Display', serif;
-    font-size: 28px;
-    color: var(--navy);
-    margin-bottom: 8px;
-  }
-  .about-photo .title {
-    font-size: 14px;
-    color: var(--gold);
-    font-weight: 600;
-    margin-bottom: 16px;
-  }
-  .about-photo .creds {
-    font-size: 13px;
-    color: var(--text-secondary);
-    line-height: 1.8;
-  }
-  .about-text p {
-    font-size: 16px;
-    color: var(--text-secondary);
-    margin-bottom: 16px;
-    line-height: 1.8;
-  }
-  .about-stats {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    margin-top: 24px;
-  }
-  .about-stat {
-    background: var(--warm);
-    padding: 16px 20px;
-    border-radius: 10px;
-  }
-  .about-stat strong {
-    display: block;
-    font-family: 'DM Serif Display', serif;
-    font-size: 24px;
-    color: var(--navy);
-  }
-  .about-stat span {
-    font-size: 12px;
-    color: var(--text-secondary);
-  }
-
-  .faq-section { background: var(--bg); }
-  .faq-item {
-    max-width: 700px;
-    margin: 0 auto 24px;
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px 32px;
-  }
-  .faq-item h3 {
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--navy);
-    margin-bottom: 8px;
-  }
-  .faq-item p {
-    font-size: 15px;
-    color: var(--text-secondary);
-    line-height: 1.7;
-  }
-
-  footer {
-    background: var(--navy);
-    padding: 48px 24px;
-    text-align: center;
-    border-top: 1px solid rgba(255,255,255,0.1);
-  }
-  .footer-logo {
-    font-family: 'DM Serif Display', serif;
-    font-size: 28px;
-    color: white;
-    margin-bottom: 8px;
-  }
-  .footer-logo .bracket { color: var(--gold); font-weight: 300; }
-  .footer-tagline {
-    font-size: 14px;
-    color: rgba(255,255,255,0.5);
-    margin-bottom: 24px;
-  }
-  .footer-contact {
-    font-size: 14px;
-    color: rgba(255,255,255,0.7);
-    margin-bottom: 4px;
-  }
-  .footer-contact a { color: var(--gold); text-decoration: none; }
-  .footer-legal {
-    margin-top: 32px;
-    font-size: 12px;
-    color: rgba(255,255,255,0.3);
-  }
-
-  @media (max-width: 768px) {
-    .stats-bar { grid-template-columns: 1fr; }
-    .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px; }
-    .stat:last-child { border-bottom: none; }
-    .about-content { grid-template-columns: 1fr; }
-    .hero { padding: 120px 20px 60px; }
-    .hero-cta { padding: 14px 32px; font-size: 16px; }
-    .about-stats { grid-template-columns: 1fr; }
-  }
-
-  /* ===== App views / hash router ===== */
-  .route-view{display:none}
-  .route-view.active{display:block}
-  .nav-links{display:flex;align-items:center;gap:18px}
-  .nav-link{color:var(--navy);text-decoration:none;font-size:14px;font-weight:600}
-  .nav-link:hover{color:var(--gold)}
-  .page-head{padding:140px 24px 20px;max-width:1000px;margin:0 auto}
-  .page-head h1{font-family:'DM Serif Display',serif;font-size:clamp(30px,4.5vw,44px);color:var(--navy);line-height:1.2;margin-bottom:12px}
-  .page-head p{color:var(--text-secondary);max-width:660px;font-size:16px}
-  .back-link{color:var(--gold);text-decoration:none;font-weight:700;font-size:14px}
-  .dir-tools{max-width:1000px;margin:8px auto;padding:0 24px;display:flex;gap:12px;flex-wrap:wrap}
-  .dir-tools input,.dir-tools select{padding:12px 14px;border:1px solid var(--border);border-radius:10px;font:inherit;background:#fff;min-width:220px}
-  .dir-grid{max-width:1000px;margin:16px auto 60px;padding:0 24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
-  .agent-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:10px}
-  .agent-card h3{color:var(--navy);font-size:18px}
-  .badge-unclaimed{display:inline-block;background:#FFF7E6;border:1px solid #E5B76A;color:#8a6a1f;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:4px 10px;border-radius:50px;width:fit-content}
-  .chip-row{display:flex;flex-wrap:wrap;gap:6px}
-  .chip{background:var(--warm);border:1px solid var(--border);color:var(--navy);font-size:12px;padding:4px 10px;border-radius:50px}
-  .card-loc{font-size:13px;color:var(--text-secondary)}
-  .card-link{margin-top:auto;font-weight:700;color:var(--gold);text-decoration:none;font-size:14px}
-  .dir-empty{grid-column:1/-1;text-align:center;color:var(--text-secondary);padding:40px 0}
-  .profile-wrap{max-width:820px;margin:0 auto 70px;padding:0 24px}
-  .alert-provisional{background:#FFF7E6;border:1px solid #E5B76A;border-radius:12px;padding:14px 18px;color:#7a5c14;font-size:14px;line-height:1.7;margin:8px 0 20px}
-  .profile-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:28px}
-  .profile-card h1{font-family:'DM Serif Display',serif;font-size:clamp(26px,4vw,38px);color:var(--navy);line-height:1.2;margin:10px 0 4px}
-  .score-pill{display:inline-block;background:var(--warm);border:1px dashed var(--gold);color:var(--navy);border-radius:12px;padding:10px 16px;font-size:14px;margin:14px 0}
-  .profile-sub{font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-top:18px}
-  .profile-actions{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0 6px}
-  .btn-gold{display:inline-block;background:var(--gold);color:#fff;padding:12px 22px;border-radius:10px;text-decoration:none;font-weight:700;font-size:14px}
-  .btn-gold:hover{background:var(--gold-light)}
-  .btn-line{display:inline-block;background:#fff;color:var(--navy);border:1px solid var(--border);padding:12px 22px;border-radius:10px;text-decoration:none;font-weight:700;font-size:14px}
-  .lead-form{margin-top:26px;background:var(--warm);border:1px solid var(--border);border-radius:16px;padding:24px}
-  .lead-form h3{color:var(--navy);margin-bottom:6px;font-size:19px}
-  .lead-form>p{font-size:13px;color:var(--text-secondary);margin-bottom:8px}
-  .lead-form label{display:block;font-size:13px;font-weight:600;color:var(--navy);margin:12px 0 4px}
-  .lead-form input,.lead-form select,.lead-form textarea{width:100%;padding:12px;border:1px solid var(--border);border-radius:10px;font:inherit;background:#fff}
-  .lead-form textarea{min-height:90px;resize:vertical}
-  .lead-form button{margin-top:16px;background:var(--navy);color:#fff;border:0;padding:13px 26px;border-radius:10px;font-weight:700;font-size:15px;cursor:pointer}
-  .lead-form button:disabled{opacity:.6;cursor:wait}
-  .form-note{font-size:12px;color:var(--text-secondary);margin-top:10px}
-  .form-note a{color:var(--gold)}
-  .form-status{margin-top:12px;font-size:14px;display:none}
-  .form-status.ok{display:block;color:#166534}
-  .form-status.err{display:block;color:#991B1B}
-  .hp-field{position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden}
-  .legal-wrap{max-width:760px;margin:0 auto 70px;padding:0 24px}
-  .legal-wrap h2{font-family:'DM Serif Display',serif;color:var(--navy);font-size:24px;margin:28px 0 8px}
-  .legal-wrap p,.legal-wrap li{font-size:15px;color:var(--text);line-height:1.8;margin-bottom:12px}
-  .legal-wrap ul{padding-left:20px;margin:8px 0 16px}
-  .footer-links{margin:16px 0 4px}
-  .footer-links a{color:rgba(255,255,255,0.7);text-decoration:none;font-size:13px;margin:0 10px}
-  .footer-links a:hover{color:var(--gold)}
-  @media(max-width:768px){.page-head{padding:120px 20px 14px}.nav-link{display:none}}
-
-</style>
+    };
+  </script>
+  <style>
+    *{box-sizing:border-box} body{min-height:100vh;background:radial-gradient(circle at 20% 0%,rgba(245,158,11,.13),transparent 34%),radial-gradient(circle at 80% 10%,rgba(148,163,184,.14),transparent 32%),linear-gradient(135deg,#020617,#0f172a 46%,#111827);color:#e5e7eb} .glass{background:rgba(15,23,42,.62);backdrop-filter:blur(18px);border:1px solid rgba(226,232,240,.12);box-shadow:0 20px 70px rgba(0,0,0,.28)} .glass-hover{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}.glass-hover:hover{transform:translateY(-3px);border-color:rgba(245,158,11,.38);box-shadow:0 0 48px rgba(245,158,11,.13),0 26px 80px rgba(0,0,0,.34)} .btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;border-radius:999px;padding:.82rem 1.1rem;font-weight:700;transition:all .2s ease}.btn-primary{background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#111827;box-shadow:0 16px 40px rgba(245,158,11,.28)} .btn-primary:hover{filter:brightness(1.06);transform:translateY(-1px)} .btn-ghost{border:1px solid rgba(226,232,240,.14);background:rgba(255,255,255,.04);color:#e5e7eb}.btn-ghost:hover{border-color:rgba(226,232,240,.32);background:rgba(255,255,255,.08)} input,select,textarea{width:100%;border-radius:1rem;border:1px solid rgba(226,232,240,.13);background:rgba(2,6,23,.58);padding:.88rem 1rem;color:#f8fafc;outline:none} input:focus,select:focus,textarea:focus{border-color:rgba(245,158,11,.58);box-shadow:0 0 0 4px rgba(245,158,11,.08)} .metric-active{border-color:rgba(245,158,11,.5)!important;background:rgba(245,158,11,.08)!important}.legal p{margin:.75rem 0;color:#cbd5e1;line-height:1.8}.legal h2{margin-top:1.5rem;color:#f8fafc;font-size:1.25rem;font-weight:800}
+  </style>
 </head>
-<body>
-
-<nav>
-  <div class="nav-inner">
-    <a href="/" class="logo" aria-label="StudyScore - India's First Independent Rating for Study Abroad Agents">Study<span class="bracket">[</span>Score<span class="bracket">]</span></a>
-    <div class="nav-links"><a href="#/agents" class="nav-link">Agent Directory</a><a href="#survey" class="nav-cta">Rate Your Agent &#8594;</a></div>
+<body class="font-sans antialiased">
+  <div class="fixed inset-0 pointer-events-none overflow-hidden">
+    <div class="absolute -top-24 left-1/4 h-72 w-72 rounded-full bg-amber-500/10 blur-3xl animate-float"></div>
+    <div class="absolute bottom-10 right-10 h-80 w-80 rounded-full bg-slate-300/10 blur-3xl animate-float" style="animation-delay:1.2s"></div>
   </div>
-</nav>
 
-<main id="view-home" class="route-view active">
-<header class="hero">
-  <div class="badge">India's First Independent Study</div>
-  <h1>Your Agent Got a <em>Score.</em><br>You Just Don't Know It Yet.</h1>
-  <p>We're building India's first independent, student-powered rating system for study abroad agents. No bias. No sponsorships. Just the truth from students who've been through it.</p>
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLScyYLD9XH-Txy2auOWGcPjdvfjdPiIFGjfc7IGt4gV4RmCcJQ/viewform" target="_blank" rel="noopener" class="hero-cta">Share Your Experience &mdash; 3 Minutes</a>
-  <p class="hero-sub">100% anonymous &middot; No login required &middot; Your identity is never shared</p>
-</header>
-
-<div class="stats-bar" role="region" aria-label="Key statistics about study abroad industry in India">
-  <div class="stat">
-    <div class="stat-num">25,000+</div>
-    <div class="stat-label">Education Agents in India</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">Zero</div>
-    <div class="stat-label">Independent Rating Systems</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">&#8377;15-40L</div>
-    <div class="stat-label">Spent by Each Family on Blind Trust</div>
-  </div>
-</div>
-
-<section class="problem-section" aria-label="Why StudyScore is needed">
-  <div class="container">
-    <div class="section-tag">The Problem</div>
-    <h2 class="section-title">&#8377;15 Lakh Decisions Based on Zero Data</h2>
-    <p class="section-desc">Every year, lakhs of Indian families spend their life savings on study abroad &mdash; choosing agents based on newspaper ads, neighbour recommendations, and Instagram reels. Nobody has the data to make an informed choice.</p>
-
-    <div class="problem-grid">
-      <article class="problem-card">
-        <div class="problem-icon" aria-hidden="true">&#127919;</div>
-        <h3>No Verified Track Record</h3>
-        <p>Every agent claims "99% success rate." But there's no independent system to verify these claims. Students and parents have no way to check the truth before paying lakhs of rupees.</p>
-      </article>
-      <article class="problem-card">
-        <div class="problem-icon" aria-hidden="true">&#128176;</div>
-        <h3>Hidden Fee Structures</h3>
-        <p>Many students discover additional charges after signing up &mdash; "processing fees," "documentation charges," "service tax." By then, it's too late to switch to another agent.</p>
-      </article>
-      <article class="problem-card">
-        <div class="problem-icon" aria-hidden="true">&#128263;</div>
-        <h3>Silent After the Visa</h3>
-        <p>The agent who called you 5 times a day before signing suddenly becomes unreachable after the visa is stamped. Post-departure support like accommodation and airport pickup? Often nonexistent.</p>
-      </article>
-      <article class="problem-card">
-        <div class="problem-icon" aria-hidden="true">&#128202;</div>
-        <h3>No Way to Compare</h3>
-        <p>You can compare phones on Flipkart. Restaurants on Zomato. Hotels on MakeMyTrip. But you can't compare the education consultants handling your child's future abroad.</p>
-      </article>
-      <article class="problem-card">
-        <div class="problem-icon" aria-hidden="true">&#11088;</div>
-        <h3>Good Agents Get No Credit</h3>
-        <p>Thousands of excellent study abroad agents exist &mdash; transparent, thorough, genuinely caring. But they're invisible because there's no platform to showcase their quality and student satisfaction.</p>
-      </article>
-      <article class="problem-card">
-        <div class="problem-icon" aria-hidden="true">&#127757;</div>
-        <h3>An Industry Without a Mirror</h3>
-        <p>Banking has CIBIL. Restaurants have Zomato. Hotels have TripAdvisor. International education &mdash; an industry where Indian families spend lakhs of crores &mdash; has nothing. Until now.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section aria-label="How StudyScore works">
-  <div class="container" style="text-align:center;">
-    <div class="section-tag">How StudyScore Works</div>
-    <h2 class="section-title" style="max-width:600px;margin:0 auto 12px;">Students Rate. Data Speaks.<br>The Industry Transforms.</h2>
-    <p class="section-desc" style="margin:0 auto;">We collect anonymous feedback from students who've actually used study abroad agents and overseas education consultants. We analyse the data. We publish India's first independent agent quality report.</p>
-
-    <div class="steps">
-      <div class="step">
-        <div class="step-num" aria-hidden="true">1</div>
-        <h3>Students Share</h3>
-        <p>A 3-minute anonymous survey about your study abroad agent experience &mdash; communication, fee transparency, visa support, and overall satisfaction.</p>
+  <header class="sticky top-0 z-50 border-b border-white/10 bg-slate-950/72 backdrop-blur-xl">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <a href="#/agents" class="flex items-center gap-3">
+        <span class="grid h-10 w-10 place-items-center rounded-2xl bg-amber-400 text-slate-950 font-black shadow-glow">P</span>
+        <span>
+          <span class="block text-sm font-black tracking-[.22em] text-slate-100">PRESTIGE</span>
+          <span class="block text-xs text-slate-400">Agent Intelligence Network</span>
+        </span>
+      </a>
+      <div class="flex items-center gap-2 text-sm">
+        <a class="btn btn-ghost px-4 py-2" href="#/agents">Directory</a>
+        <a class="hidden sm:inline-flex btn btn-ghost px-4 py-2" href="#/privacy">Privacy</a>
+        <a class="hidden sm:inline-flex btn btn-ghost px-4 py-2" href="#/terms">Terms</a>
       </div>
-      <div class="step">
-        <div class="step-num" aria-hidden="true">2</div>
-        <h3>Data Aggregates</h3>
-        <p>We collect responses across education agents, cities, and destination countries. Patterns emerge. Agent quality becomes measurable for the first time.</p>
+    </nav>
+  </header>
+
+  <main id="app" class="relative z-10 mx-auto min-h-screen max-w-7xl px-4 py-8 sm:px-6 lg:px-8"></main>
+
+  <template id="contact-template">
+    <aside class="glass sticky top-24 rounded-[1.5rem] p-5">
+      <div class="mb-5">
+        <p class="text-xs font-bold uppercase tracking-[.24em] text-amber-300">Secure Inbound Lead Gateway</p>
+        <h3 class="mt-2 text-2xl font-black text-white">Request a private callback</h3>
+        <p class="mt-2 text-sm leading-6 text-slate-400">Encrypted intake routed directly to this workspace for profile-specific follow-up.</p>
       </div>
-      <div class="step">
-        <div class="step-num" aria-hidden="true">3</div>
-        <h3>Scores Are Born</h3>
-        <p>Each study abroad agent receives a StudyScore &mdash; a transparent, data-driven quality rating based on real student experiences. Like a CIBIL score for education.</p>
-      </div>
-      <div class="step">
-        <div class="step-num" aria-hidden="true">4</div>
-        <h3>Families Decide Better</h3>
-        <p>Future students and parents check StudyScores before choosing an education consultant. Informed decisions replace blind trust. Trust before you sign.</p>
-      </div>
-    </div>
-  </div>
-</section>
+      <form id="leadForm" class="space-y-3">
+        <input name="name" required placeholder="Full name" autocomplete="name" />
+        <input name="email" required type="email" placeholder="Email address" autocomplete="email" />
+        <input name="phone" required placeholder="Phone / WhatsApp" autocomplete="tel" />
+        <select name="destination" required></select>
+        <textarea name="message" rows="4" placeholder="Briefly describe your study, work, or visa goal"></textarea>
+        <button class="btn btn-primary w-full" type="submit">Submit Secure Lead</button>
+        <p id="formStatus" class="min-h-6 text-sm text-slate-400"></p>
+      </form>
+    </aside>
+  </template>
 
-<section class="survey-section" id="survey" aria-label="Take the StudyScore survey">
-  <div class="container">
-    <div class="section-tag">Your Voice Matters</div>
-    <h2 class="section-title">Studied Abroad? Rate Your Agent.</h2>
-    <p class="section-desc">3 minutes. Completely anonymous. Your experience will help thousands of future students and parents make better choices. No agent will ever know who you are.</p>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScyYLD9XH-Txy2auOWGcPjdvfjdPiIFGjfc7IGt4gV4RmCcJQ/viewform" target="_blank" rel="noopener" class="survey-cta">Take the 3-Minute Survey &#8594;</a>
-    <p class="survey-note">Your response is encrypted and anonymous. We will never share individual identities.<br>The survey covers: communication, fee transparency, visa support, and overall experience. No sensitive questions.</p>
-  </div>
-</section>
+  <script>
+    const agents = [
+      { city:"delhi", slug:"northstar-global-visas", name:"Northstar Global Visas", claimed:false, rating:"4.8", address:"Connaught Place, New Delhi", phone:"+91 11 4000 1200", alumni:1840, sla:36, success:92, destinations:["Canada","United Kingdom","Australia","Germany","New Zealand"], specialties:["Student Visa","PR Pathways","Skilled Migration"], summary:"A destination-led immigration desk with strong documentation discipline, alumni proof trails, and premium case intake." },
+      { city:"mumbai", slug:"atlas-overseas-advisory", name:"Atlas Overseas Advisory", claimed:true, rating:"4.9", address:"Bandra Kurla Complex, Mumbai", phone:"+91 22 6100 4500", alumni:2615, sla:24, success:95, destinations:["United States","Canada","Ireland","France","Singapore"], specialties:["F-1 Visa","MBA Admissions","Work Permits"], summary:"Executive-grade consulting for high-intent applicants seeking fast document review, interview preparation, and admissions alignment." },
+      { city:"bangalore", slug:"summit-edu-mobility", name:"Summit Edu Mobility", claimed:false, rating:"4.7", address:"Indiranagar, Bengaluru", phone:"+91 80 4700 8800", alumni:1320, sla:48, success:89, destinations:["Australia","Germany","Netherlands","Sweden","Canada"], specialties:["STEM Admissions","Blocked Account","Post Study Work"], summary:"Technology-focused mobility advisory for students and professionals targeting European and Pacific pathways." }
+    ];
 
-<section aria-label="About the founder of StudyScore">
-  <div class="container">
-    <div class="section-tag">Who's Behind This</div>
-    <h2 class="section-title">Built by Someone Who Knows the Study Abroad System From Inside</h2>
+    const app = document.getElementById("app");
+    const fmt = new Intl.NumberFormat("en-IN");
+    const route = () => {
+      const hash = location.hash || "#/agents";
+      const parts = hash.replace(/^#\/?/, "").split("/");
+      if (parts[0] === "privacy") return renderLegal("privacy");
+      if (parts[0] === "terms") return renderLegal("terms");
+      if (parts[0] === "agents" && parts[1] && parts[2]) return renderProfile(parts[1], parts[2]);
+      return renderDirectory();
+    };
 
-    <div class="about-content">
-      <div class="about-photo">
-        <div class="name">Pradeep Pandey</div>
-        <div class="title">Founder, Study[Score]</div>
-        <div class="creds">
-          18 years in International Education<br>
-          Ex-ApplyBoard &middot; Ex-Google &middot; Ex-StudyGroup<br>
-          Managed 7,000+ agent partnerships<br>
-          Processed 5,000+ applications/month<br>
-          Operations across 40+ countries<br><br>
-          <em>"I've been on the inside of this industry for nearly two decades. I've seen the best study abroad agents and the worst. Students and parents deserve to know the difference before they sign and pay."</em>
-        </div>
-      </div>
+    function shell(html){ app.innerHTML = `<section class="animate-fadeIn">${html}</section>`; }
 
-      <div class="about-text">
-        <p>I've spent 18 years inside the international education machine &mdash; processing student visa applications, managing education agent partnerships, and building operations at companies like ApplyBoard, StudyGroup, and Google.</p>
-        <p>I've onboarded 7,000+ study abroad agents across 40 countries. I've seen agents who genuinely transform students' lives with care and professionalism. I've also seen agents who charge &#8377;2 lakh, submit a poorly written SOP, and disappear after the visa stamp.</p>
-        <p>The problem? Students and parents can't tell them apart. There's no Zomato rating for education consultants. No CIBIL score for study abroad agents. No independent data. Just marketing claims and word of mouth.</p>
-        <p>StudyScore changes that. We're building India's first independent, student-powered quality rating for study abroad agents &mdash; so that every family making a &#8377;15-40 lakh decision has access to real data, not just promises.</p>
-        <p>This starts with your voice. One survey response at a time. Help us build the CIBIL of education.</p>
-
-        <div class="about-stats">
-          <div class="about-stat">
-            <strong>7,000+</strong>
-            <span>Agent partners managed</span>
+    function renderDirectory(){
+      removeSchema();
+      shell(`
+        <section class="grid gap-8 lg:grid-cols-[1fr_360px]">
+          <div>
+            <div class="glass rounded-[2rem] p-7 sm:p-10">
+              <p class="text-xs font-black uppercase tracking-[.28em] text-amber-300">Zomato Prestige HUD</p>
+              <h1 class="mt-4 max-w-4xl text-4xl font-black tracking-tight text-white sm:text-6xl">A cinematic directory for high-trust immigration workspaces.</h1>
+              <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-300">Browse profile intelligence, destination coverage, response SLAs, alumni validation, and verified consultant intake channels.</p>
+              <div class="mt-7 flex flex-wrap gap-3">${["Canada","UK","Australia","USA","Germany","Ireland"].map(x=>`<span class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-200">${x}</span>`).join("")}</div>
+            </div>
+            <div class="mt-8 grid gap-4">
+              ${agents.map(a=>`
+                <a href="#/agents/${a.city}/${a.slug}" class="glass glass-hover block rounded-[1.5rem] p-5">
+                  <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+                    <div>
+                      <div class="flex flex-wrap items-center gap-2">
+                        <h2 class="text-2xl font-black text-white">${a.name}</h2>
+                        ${a.claimed ? `<span class="rounded-full bg-emerald-400/12 px-3 py-1 text-xs font-bold text-emerald-300">Verified Workspace</span>` : `<span class="rounded-full bg-amber-400/12 px-3 py-1 text-xs font-bold text-amber-300">Audit Pending</span>`}
+                      </div>
+                      <p class="mt-2 text-sm text-slate-400">${a.address}</p>
+                      <div class="mt-4 flex flex-wrap gap-2">${a.destinations.map(d=>`<span class="rounded-full border border-slate-200/10 px-3 py-1 text-xs text-slate-300">${d}</span>`).join("")}</div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 text-center sm:w-72">
+                      <span class="rounded-2xl bg-white/5 p-3"><b class="block text-xl text-white">${a.success}%</b><small class="text-slate-400">Success</small></span>
+                      <span class="rounded-2xl bg-white/5 p-3"><b class="block text-xl text-white">${a.sla}h</b><small class="text-slate-400">SLA</small></span>
+                      <span class="rounded-2xl bg-white/5 p-3"><b class="block text-xl text-white">${fmt.format(a.alumni)}</b><small class="text-slate-400">Alumni</small></span>
+                    </div>
+                  </div>
+                </a>`).join("")}
+            </div>
           </div>
-          <div class="about-stat">
-            <strong>5,000+</strong>
-            <span>Applications processed/month</span>
+          <div class="glass rounded-[1.5rem] p-6 h-max">
+            <p class="text-xs font-bold uppercase tracking-[.24em] text-slate-400">Network Signal</p>
+            <h3 class="mt-3 text-3xl font-black text-white">${fmt.format(agents.reduce((s,a)=>s+a.alumni,0))}</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-400">Verified alumni records indexed across active destination corridors.</p>
           </div>
-          <div class="about-stat">
-            <strong>40+</strong>
-            <span>Countries covered</span>
+        </section>`);
+    }
+
+    function renderProfile(city, slug){
+      const a = agents.find(x => x.city === city && x.slug === slug) || agents[0];
+      injectSchema(a);
+      shell(`
+        <section class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_380px]">
+          <div>
+            <div class="glass overflow-hidden rounded-[2rem]">
+              <div class="relative p-6 sm:p-10">
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(245,158,11,.16),transparent_35%)]"></div>
+                <div class="relative">
+                  <div class="flex flex-wrap gap-2">${a.destinations.map(d=>`<span class="rounded-full border border-amber-300/20 bg-amber-300/8 px-3 py-1 text-xs font-bold text-amber-200">${d}</span>`).join("")}</div>
+                  <div class="mt-6 flex flex-col justify-between gap-5 xl:flex-row xl:items-end">
+                    <div>
+                      <p class="text-xs font-black uppercase tracking-[.3em] text-slate-400">${a.city.replace(/^\w/,c=>c.toUpperCase())} Prestige Profile</p>
+                      <h1 class="mt-3 text-4xl font-black tracking-tight text-white sm:text-6xl">${a.name}</h1>
+                      <p class="mt-4 max-w-3xl text-lg leading-8 text-slate-300">${a.summary}</p>
+                    </div>
+                    <div class="rounded-[1.25rem] border border-white/10 bg-white/5 p-4 text-right">
+                      <p class="text-sm text-slate-400">Public Rating</p>
+                      <p class="text-4xl font-black text-white">${a.rating}</p>
+                    </div>
+                  </div>
+                  ${!a.claimed ? `<div class="mt-7 flex flex-col gap-4 rounded-[1.4rem] border border-amber-300/25 bg-amber-400/10 p-4 shadow-glow animate-pulseAmber sm:flex-row sm:items-center sm:justify-between"><div><p class="font-black text-amber-100">Provisional Listing • Audit Pending</p><p class="mt-1 text-sm text-amber-100/70">This workspace can verify ownership, enrich service evidence, and activate profile controls.</p></div><button class="btn btn-primary" onclick="document.getElementById('leadForm')?.scrollIntoView({behavior:'smooth',block:'center'})">Claim Workspace</button></div>` : ""}
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 grid gap-4 md:grid-cols-3" id="metrics">
+              ${metric("Visa Success Coefficient", a.success+"%", "Case approval strength across recent documented cohorts.", "success")}
+              ${metric("Turnaround SLA Timer", a.sla+"h", "Average first-response and document triage commitment.", "sla")}
+              ${metric("Verified Alumni Count", fmt.format(a.alumni), "Indexed applicants with destination and outcome validation.", "alumni")}
+            </div>
+
+            <div class="mt-8 glass rounded-[1.5rem] p-6">
+              <h2 class="text-2xl font-black text-white">Workspace Intelligence</h2>
+              <div class="mt-5 grid gap-4 sm:grid-cols-2">
+                ${a.specialties.map(s=>`<div class="rounded-2xl border border-white/10 bg-white/[.04] p-4"><p class="font-bold text-white">${s}</p><p class="mt-2 text-sm leading-6 text-slate-400">Dedicated advisory flow with document validation and milestone tracking.</p></div>`).join("")}
+              </div>
+              <div class="mt-6 rounded-2xl border border-white/10 bg-slate-950/40 p-5">
+                <p class="text-sm text-slate-400">Registered contact</p>
+                <p class="mt-1 font-bold text-slate-100">${a.address} · ${a.phone}</p>
+              </div>
+            </div>
           </div>
-          <div class="about-stat">
-            <strong>18 yrs</strong>
-            <span>Industry experience</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+          <div id="contactMount"></div>
+        </section>`);
+      mountContact(a);
+      document.querySelectorAll("[data-metric]").forEach(card => card.addEventListener("click", () => {
+        document.querySelectorAll("[data-metric]").forEach(x => x.classList.remove("metric-active"));
+        card.classList.add("metric-active");
+      }));
+    }
 
-<section class="faq-section" aria-label="Frequently asked questions about StudyScore">
-  <div class="container">
-    <div class="section-tag">Frequently Asked Questions</div>
-    <h2 class="section-title" style="text-align:center;">Common Questions About StudyScore</h2>
+    function metric(title, value, copy, key){
+      return `<button data-metric="${key}" class="glass glass-hover rounded-[1.5rem] p-5 text-left">
+        <span class="text-xs font-black uppercase tracking-[.2em] text-slate-400">${title}</span>
+        <strong class="mt-3 block text-4xl font-black text-white">${value}</strong>
+        <span class="mt-3 block text-sm leading-6 text-slate-400">${copy}</span>
+      </button>`;
+    }
 
-    <article class="faq-item">
-      <h3>What is StudyScore?</h3>
-      <p>StudyScore is India's first independent, student-powered rating system for study abroad agents and overseas education consultants. Think of it as CIBIL for education agents &mdash; a transparent, data-driven quality score based on real student experiences. We are not affiliated with any education agency.</p>
-    </article>
-    <article class="faq-item">
-      <h3>Is my survey response anonymous?</h3>
-      <p>Yes, 100% anonymous. We do not collect your name, email, or any identifying information. No study abroad agent will ever know who submitted a specific response. Your privacy is absolute.</p>
-    </article>
-    <article class="faq-item">
-      <h3>Who can fill the StudyScore survey?</h3>
-      <p>Any student who has used a study abroad agent or overseas education consultant to apply for a student visa to any country &mdash; Canada, UK, Australia, USA, Ireland, Germany, New Zealand, or any other destination.</p>
-    </article>
-    <article class="faq-item">
-      <h3>How is StudyScore different from Google Reviews?</h3>
-      <p>Google Reviews can be manipulated &mdash; agents often ask staff and friends to post fake positive reviews. StudyScore collects structured, anonymous feedback on specific parameters like fee transparency, communication quality, and post-visa support. The data is aggregated across hundreds of responses to create a reliable quality score that cannot be gamed by agents.</p>
-    </article>
-    <article class="faq-item">
-      <h3>Is StudyScore affiliated with any education agency?</h3>
-      <p>No. StudyScore is completely independent. We are not affiliated with, sponsored by, or funded by any education agent, university, or recruitment company. Our only stakeholder is the student and their family.</p>
-    </article>
-    <article class="faq-item">
-      <h3>How will study abroad agents be rated?</h3>
-      <p>Each education agent receives a StudyScore from 0 to 100 based on verified student feedback across five parameters: fee transparency (20%), communication quality (15%), visa support quality (25%), post-visa support (10%), and overall student satisfaction (30%). Higher scores indicate better student experiences.</p>
-    </article>
-  </div>
-</section>
+    function mountContact(a){
+      const node = document.getElementById("contact-template").content.cloneNode(true);
+      document.getElementById("contactMount").appendChild(node);
+      const form = document.getElementById("leadForm"), status = document.getElementById("formStatus"), select = form.destination;
+      select.innerHTML = `<option value="">Destination interest</option>` + a.destinations.map(d=>`<option>${d}</option>`).join("");
+      form.addEventListener("submit", async e => {
+        e.preventDefault();
+        status.textContent = "Submitting secure lead...";
+        const body = Object.fromEntries(new FormData(form).entries());
+        body.agent_slug = a.slug; body.agent_city = a.city; body.source = location.href; body.timestamp = new Date().toISOString();
+        try {
+          const res = await fetch(`/api/public/leads/${a.slug}`, { method:"POST", headers:{ "Content-Type":"application/json" }, body:JSON.stringify(body) });
+          if (!res.ok) throw new Error("Lead gateway rejected the request.");
+          status.textContent = "Lead received. The workspace will respond shortly.";
+          status.className = "min-h-6 text-sm text-emerald-300";
+          form.reset();
+        } catch (err) {
+          status.textContent = "Unable to submit right now. Please retry in a moment.";
+          status.className = "min-h-6 text-sm text-rose-300";
+        }
+      });
+    }
 
-<section class="survey-section" aria-label="Share your study abroad experience">
-  <div class="container">
-    <h2 class="section-title">Every Response Brings Transparency<br>Closer to Reality.</h2>
-    <p class="section-desc">You spent months choosing your study abroad agent. It takes 3 minutes to help the next student choose better. Be the data point that protects a family.</p>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScyYLD9XH-Txy2auOWGcPjdvfjdPiIFGjfc7IGt4gV4RmCcJQ/viewform" target="_blank" rel="noopener" class="survey-cta">Share Your Experience &#8594;</a>
-  </div>
-</section>
+    function renderLegal(type){
+      removeSchema();
+      const isPrivacy = type === "privacy";
+      shell(`
+        <article class="glass legal mx-auto max-w-4xl rounded-[2rem] p-7 sm:p-10">
+          <p class="text-xs font-black uppercase tracking-[.28em] text-amber-300">${isPrivacy ? "Privacy Notice" : "Terms of Use"}</p>
+          <h1 class="mt-4 text-4xl font-black text-white">${isPrivacy ? "Privacy Policy" : "Terms and Conditions"}</h1>
+          <p>Effective date: July 7, 2026. This page explains the operating standards for the Prestige Agent Directory, including profile discovery, inbound lead handling, compliance notices, and user obligations.</p>
+          ${isPrivacy ? privacyCopy() : termsCopy()}
+        </article>`);
+    }
 
+    function privacyCopy(){ return `
+      <h2>Information We Collect</h2><p>We may collect contact details, destination interests, form messages, device metadata, referral URLs, profile interactions, and operational records needed to route inquiries to listed workspaces.</p>
+      <h2>How We Use Information</h2><p>Information is used to process lead requests, support profile verification, prevent misuse, improve directory quality, maintain audit logs, and comply with lawful obligations.</p>
+      <h2>Sharing and Disclosure</h2><p>Lead submissions may be shared with the specific agent profile selected by the user. We do not sell personal information. We may disclose data to service providers, security partners, and authorities where legally required.</p>
+      <h2>Retention and Security</h2><p>Records are retained only for legitimate business, compliance, and dispute-resolution needs. Administrative, technical, and organizational safeguards are used to reduce unauthorized access risk.</p>
+      <h2>Your Choices</h2><p>Users may request access, correction, deletion, or restriction of personal data where applicable law grants those rights. Some records may be retained when required for legal, fraud-prevention, or operational reasons.</p>
+      <h2>International Transfers</h2><p>Because immigration services often involve multiple countries, information may be processed across jurisdictions subject to appropriate safeguards and applicable legal requirements.</p>
+      <h2>Contact</h2><p>Privacy requests can be submitted through the directory operator’s official support channel with sufficient information to verify the request.</p>`; }
 
-</main>
+    function termsCopy(){ return `
+      <h2>Directory Role</h2><p>The platform provides profile discovery, business information, and lead routing. It does not provide legal, immigration, financial, or admissions advice and does not guarantee any visa, admission, employment, or migration outcome.</p>
+      <h2>User Responsibilities</h2><p>Users must provide accurate information, evaluate any consultant independently, verify credentials before engagement, and avoid submitting unlawful, misleading, confidential, or third-party data without authority.</p>
+      <h2>Profile Accuracy</h2><p>Some listings may be provisional, unclaimed, or pending audit. Ratings, alumni indicators, SLA metrics, and success coefficients are directory signals and should be treated as informational rather than guarantees.</p>
+      <h2>Lead Routing</h2><p>By submitting a form, users authorize the directory to transmit inquiry details to the selected workspace and related service systems for response, qualification, and recordkeeping.</p>
+      <h2>Acceptable Use</h2><p>Scraping, abusive automation, impersonation, security testing without permission, spam submissions, and attempts to interfere with platform availability are prohibited.</p>
+      <h2>Limitation of Liability</h2><p>The directory is provided on an as-available basis. To the maximum extent permitted by law, the operator is not liable for indirect losses, consultant conduct, application outcomes, or third-party service decisions.</p>
+      <h2>Changes</h2><p>Terms may be updated from time to time. Continued use after publication of revised terms constitutes acceptance of the updated version.</p>`; }
 
-<!-- ===================== AGENT DIRECTORY (route: #/agents) ===================== -->
-<main id="view-agents" class="route-view">
-  <div class="page-head">
-    <div class="section-tag">Agent Directory</div>
-    <h1>Study Abroad Agent Directory</h1>
-    <p>Provisional profiles of education agencies, compiled from publicly available information. These profiles are unclaimed and have not been verified by the agencies. No StudyScore rating is shown for any agency until enough verified, anonymous student reviews are collected. If you represent an agency listed here, you can claim or correct your profile at any time.</p>
-  </div>
-  <div class="dir-tools">
-    <input id="dirSearch" type="search" placeholder="Search by agency or city" aria-label="Search agencies">
-    <select id="dirDest" aria-label="Filter by destination"><option value="">All destinations</option></select>
-  </div>
-  <div id="dirGrid" class="dir-grid" aria-live="polite"></div>
-</main>
+    function injectSchema(a){
+      removeSchema();
+      const script = document.createElement("script");
+      script.type = "application/ld+json"; script.id = "active-profile-schema";
+      script.textContent = JSON.stringify({
+        "@context":"https://schema.org","@type":"LocalBusiness",name:a.name,address:a.address,telephone:a.phone,aggregateRating:{"@type":"AggregateRating",ratingValue:a.rating,bestRating:"5",ratingCount:Math.max(25, Math.round(a.alumni/12))},areaServed:a.destinations,description:a.summary,url:location.href
+      });
+      document.head.appendChild(script);
+    }
+    function removeSchema(){ document.getElementById("active-profile-schema")?.remove(); }
 
-<!-- ===================== AGENT PROFILE (route: #/agents/:city/:agent) ===================== -->
-<main id="view-profile" class="route-view">
-  <div class="page-head"><a class="back-link" href="#/agents">&#8592; Back to directory</a></div>
-  <div class="profile-wrap" id="profileWrap"></div>
-</main>
-
-<!-- ===================== PRIVACY (route: #/privacy) ===================== -->
-<main id="view-privacy" class="route-view">
-  <div class="page-head">
-    <div class="section-tag">Legal</div>
-    <h1>Privacy Policy</h1>
-    <p>Last updated: April 2026</p>
-  </div>
-  <div class="legal-wrap">
-    <h2>What we collect</h2>
-    <p>The StudyScore survey is anonymous by design. It does not ask for your name or email address, does not require a login, and responses are stored securely with our form provider (Google Forms). Individual survey responses are never published and are never shared with any agency in identifiable form. Only aggregated, anonymised findings may appear in public reports.</p>
-    <p>If you submit an inquiry form on an agent profile page, you choose to share the details you enter (such as your name, contact information, and message). We use that information only to route and respond to your inquiry through our lead management system. We do not sell personal data.</p>
-    <h2>Cookies and third parties</h2>
-    <p>This site does not set its own tracking cookies and does not run third-party advertising trackers. The site is hosted on GitHub Pages and loads fonts from Google Fonts; those providers may receive standard technical request data (such as IP address and browser type) under their own privacy policies.</p>
-    <h2>Corrections and removal</h2>
-    <p>To request correction or deletion of information you have submitted, email <a href="mailto:pradeep@studyscore.in" style="color:var(--gold)">pradeep@studyscore.in</a>. We respond to all genuine requests.</p>
-  </div>
-</main>
-
-<!-- ===================== TERMS (route: #/terms) ===================== -->
-<main id="view-terms" class="route-view">
-  <div class="page-head">
-    <div class="section-tag">Legal</div>
-    <h1>Terms of Use</h1>
-    <p>Last updated: April 2026</p>
-  </div>
-  <div class="legal-wrap">
-    <h2>What StudyScore is</h2>
-    <p>StudyScore is an independent, informational platform. We are not an education agent, recruiter, broker, or advisor, and we are not affiliated with any agency, university, or recruitment company. Nothing on this site is professional advice; students and families should do their own diligence before engaging any agency.</p>
-    <h2>Provisional profiles</h2>
-    <p>Directory profiles marked as provisional are compiled in good faith from publicly available information, such as an agency's own website and public listings. They are unclaimed and unverified. Inclusion in the directory is not an endorsement, and absence from it is not a criticism. No rating is displayed for any agency until a minimum volume of verified, anonymous student reviews has been collected.</p>
-    <h2>Claims and corrections</h2>
-    <p>If you represent a listed agency, you may claim your profile or request a factual correction by emailing <a href="mailto:pradeep@studyscore.in" style="color:var(--gold)">pradeep@studyscore.in</a>. We correct verified factual errors promptly.</p>
-    <h2>Content and liability</h2>
-    <ul>
-      <li>Site content is &copy; StudyScore. Short quotations with attribution and a link are welcome.</li>
-      <li>We make no guarantees about outcomes with any agency and accept no liability for decisions made based on directory information.</li>
-      <li>These terms are governed by the laws of India.</li>
-    </ul>
-  </div>
-</main>
-
-<footer>
-  <div class="footer-logo">Study<span class="bracket">[</span>Score<span class="bracket">]</span></div>
-  <div class="footer-tagline">India's First Independent Rating for Study Abroad Agents &middot; Trust Before You Sign</div>
-  <div class="footer-contact"><a href="mailto:pradeep@studyscore.in">pradeep@studyscore.in</a></div>
-  <div class="footer-contact">Gurgaon, India</div>
-  <div class="footer-links"><a href="#/agents">Agent Directory</a><a href="#/privacy">Privacy Policy</a><a href="#/terms">Terms of Use</a></div>
-  <div class="footer-legal">&copy; 2026 StudyScore. All rights reserved. An independent initiative &mdash; not affiliated with any education agency or institution.</div>
-</footer>
-
-
-<script>
-/* =====================================================================
-   StudyScore app: vanilla JS hash router, directory, profiles,
-   dynamic JSON-LD injection, and lead form wiring.
-
-   CONFIG - set these two values before relying on the lead form:
-
-   CRM_BASE_URL  Absolute origin of your CRM, no trailing slash.
-                 Example: "https://your-crm-app.example.com"
-                 The form posts to CRM_BASE_URL + "/api/public/leads/" + TENANT_SLUG
-                 IMPORTANT: your CRM must (a) actually expose this endpoint and
-                 (b) allow cross-origin POSTs from https://studyscore.in (CORS).
-                 If left empty, the form falls back to opening an email draft
-                 so no lead is ever silently lost.
-
-   TENANT_SLUG   Your tenant identifier in the CRM path.
-===================================================================== */
-var CRM_BASE_URL = "";            /* TODO: set to your CRM origin */
-var TENANT_SLUG  = "studyscore";  /* TODO: confirm against your CRM settings */
-
-var FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScyYLD9XH-Txy2auOWGcPjdvfjdPiIFGjfc7IGt4gV4RmCcJQ/viewform";
-var CONTACT_EMAIL = "pradeep@studyscore.in";
-
-/* SEED DATA. Drawn from each agency's own public website. Verify every field
-   before launch and extend this list over time. Do NOT add ratings here;
-   ratings must come only from verified survey data. */
-var AGENTS = [
-  {
-    name: "CHD Consultants", slug: "chd-consultants",
-    city: "Bathinda", citySlug: "bathinda", state: "Punjab",
-    destinations: ["Canada", "Australia", "UK", "USA"],
-    services: ["Study visa counselling", "IELTS / PTE coaching"],
-    summary: "Study abroad consultancy operating from Bathinda, Punjab, offering counselling for major English-speaking destinations along with IELTS and PTE coaching."
-  },
-  {
-    name: "Visa Point Consultants", slug: "visa-point-consultants",
-    city: "Bathinda", citySlug: "bathinda", state: "Punjab",
-    destinations: ["UK", "Canada", "Australia", "New Zealand", "Europe", "Singapore"],
-    services: ["Immigration and study visa services", "IELTS coaching"],
-    summary: "Immigration and IELTS consultancy based in Bathinda, Punjab, serving students across multiple destination countries."
-  },
-  {
-    name: "Career Creators Edu", slug: "career-creators-edu",
-    city: "Mohali", citySlug: "mohali", state: "Punjab",
-    destinations: ["Canada", "Australia", "UK", "Europe", "New Zealand"],
-    services: ["Overseas education counselling", "IELTS coaching"],
-    summary: "Overseas education consultancy headquartered in Mohali, Punjab, with counselling services across popular study destinations."
-  }
-];
-
-var DEFAULT_TITLE = document.title;
-
-function esc(s) {
-  return String(s == null ? "" : s)
-    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
-}
-function findAgent(citySlug, slug) {
-  for (var i = 0; i < AGENTS.length; i++) {
-    if (AGENTS[i].citySlug === citySlug && AGENTS[i].slug === slug) return AGENTS[i];
-  }
-  return null;
-}
-function profileHash(a) { return "#/agents/" + a.citySlug + "/" + a.slug; }
-function profileUrl(a) { return "https://studyscore.in/" + profileHash(a); }
-
-/* ---------- Dynamic JSON-LD injection (schema.org LocalBusiness) ---------- */
-function clearDynamicSchema() {
-  var old = document.getElementById("dyn-jsonld");
-  if (old && old.parentNode) old.parentNode.removeChild(old);
-}
-function injectSchema(obj) {
-  clearDynamicSchema();
-  if (!obj) return;
-  var s = document.createElement("script");
-  s.type = "application/ld+json";
-  s.id = "dyn-jsonld";
-  s.text = JSON.stringify(obj);
-  document.head.appendChild(s);
-}
-function agentSchema(a) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": a.name,
-    "description": a.summary + " Provisional, unclaimed profile listed on StudyScore. No verified rating yet.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": a.city,
-      "addressRegion": a.state,
-      "addressCountry": "IN"
-    },
-    "knowsAbout": a.destinations,
-    "url": profileUrl(a)
-  };
-}
-function directorySchema() {
-  var items = [];
-  for (var i = 0; i < AGENTS.length; i++) {
-    items.push({
-      "@type": "ListItem",
-      "position": i + 1,
-      "item": agentSchema(AGENTS[i])
-    });
-  }
-  return {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": "StudyScore Agent Directory",
-    "description": "Provisional directory of study abroad agencies in India, compiled from public information by StudyScore.",
-    "itemListElement": items
-  };
-}
-
-/* ---------- Directory rendering ---------- */
-function allDestinations() {
-  var seen = {}, out = [];
-  AGENTS.forEach(function (a) {
-    a.destinations.forEach(function (d) {
-      if (!seen[d]) { seen[d] = true; out.push(d); }
-    });
-  });
-  return out.sort();
-}
-function agentCard(a) {
-  return '<article class="agent-card">' +
-    '<span class="badge-unclaimed">Unclaimed Provisional Profile</span>' +
-    '<h3>' + esc(a.name) + '</h3>' +
-    '<div class="card-loc">' + esc(a.city) + ', ' + esc(a.state) + ', India</div>' +
-    '<div class="chip-row">' + a.destinations.map(function (d) { return '<span class="chip">' + esc(d) + '</span>'; }).join('') + '</div>' +
-    '<a class="card-link" href="' + profileHash(a) + '">View profile &#8594;</a>' +
-    '</article>';
-}
-function renderDirectory() {
-  var q = (document.getElementById("dirSearch").value || "").toLowerCase();
-  var dest = document.getElementById("dirDest").value || "";
-  var list = AGENTS.filter(function (a) {
-    var text = (a.name + " " + a.city + " " + a.state).toLowerCase();
-    var okQ = !q || text.indexOf(q) !== -1;
-    var okD = !dest || a.destinations.indexOf(dest) !== -1;
-    return okQ && okD;
-  });
-  var grid = document.getElementById("dirGrid");
-  grid.innerHTML = list.length
-    ? list.map(agentCard).join("")
-    : '<div class="dir-empty">No agencies match that search yet. The directory is growing; check back soon.</div>';
-}
-function initDirectoryControls() {
-  var sel = document.getElementById("dirDest");
-  allDestinations().forEach(function (d) {
-    var o = document.createElement("option");
-    o.value = d; o.textContent = d;
-    sel.appendChild(o);
-  });
-  document.getElementById("dirSearch").addEventListener("input", renderDirectory);
-  sel.addEventListener("change", renderDirectory);
-}
-
-/* ---------- Profile rendering + lead form ---------- */
-function renderProfile(citySlug, agentSlug) {
-  var wrap = document.getElementById("profileWrap");
-  var a = findAgent(citySlug, agentSlug);
-  if (!a) {
-    wrap.innerHTML = '<div class="profile-card"><h1>Profile not found</h1>' +
-      '<p style="margin-top:10px;color:var(--text-secondary)">This agency is not in the directory yet. ' +
-      '<a href="#/agents" style="color:var(--gold)">Browse the full directory</a>.</p></div>';
-    document.title = "Profile not found | StudyScore";
-    injectSchema(null);
-    return;
-  }
-  var mailClaim = "mailto:" + CONTACT_EMAIL +
-    "?subject=" + encodeURIComponent("Claim profile: " + a.name + " (" + a.city + ")");
-  wrap.innerHTML =
-    '<div class="profile-card">' +
-      '<span class="badge-unclaimed">Unclaimed Provisional Profile</span>' +
-      '<h1>' + esc(a.name) + '</h1>' +
-      '<div class="card-loc">' + esc(a.city) + ', ' + esc(a.state) + ', India</div>' +
-      '<div class="alert-provisional">This is a provisional profile created by StudyScore from publicly available information. It has not been claimed or verified by ' + esc(a.name) + '. No rating is shown until verified, anonymous student reviews are collected. Represent this agency? <a href="' + mailClaim + '" style="color:#7a5c14;font-weight:700">Claim or correct this profile</a>.</div>' +
-      '<div class="score-pill">StudyScore: Not yet rated. Awaiting verified student reviews.</div>' +
-      '<p style="color:var(--text-secondary);font-size:15px;line-height:1.8">' + esc(a.summary) + '</p>' +
-      '<div class="profile-sub">Target Destinations</div>' +
-      '<div class="chip-row" style="margin-top:8px">' + a.destinations.map(function (d) { return '<span class="chip">' + esc(d) + '</span>'; }).join('') + '</div>' +
-      '<div class="profile-sub">Services (as publicly listed)</div>' +
-      '<div class="chip-row" style="margin-top:8px">' + a.services.map(function (s) { return '<span class="chip">' + esc(s) + '</span>'; }).join('') + '</div>' +
-      '<div class="profile-actions">' +
-        '<a class="btn-gold" href="' + FORM_URL + '" target="_blank" rel="noopener">Used this agency? Rate them (3 min, anonymous)</a>' +
-        '<a class="btn-line" href="' + mailClaim + '">Own this agency? Claim this profile</a>' +
-      '</div>' +
-    '</div>' +
-    '<form class="lead-form" id="leadForm" novalidate>' +
-      '<h3>Ask a question about studying abroad</h3>' +
-      '<p>Send an inquiry related to ' + esc(a.name) + ' or your study plans. StudyScore routes your message; we are independent and not this agency.</p>' +
-      '<div class="hp-field"><label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>' +
-      '<label for="lfName">Your name</label>' +
-      '<input id="lfName" name="name" type="text" required autocomplete="name">' +
-      '<label for="lfEmail">Email</label>' +
-      '<input id="lfEmail" name="email" type="email" required autocomplete="email">' +
-      '<label for="lfPhone">WhatsApp / phone (optional)</label>' +
-      '<input id="lfPhone" name="phone" type="tel" autocomplete="tel">' +
-      '<label for="lfDest">Destination you are considering</label>' +
-      '<select id="lfDest" name="destination">' +
-        a.destinations.map(function (d) { return '<option value="' + esc(d) + '">' + esc(d) + '</option>'; }).join('') +
-        '<option value="Not sure yet">Not sure yet</option>' +
-      '</select>' +
-      '<label for="lfMsg">Your question</label>' +
-      '<textarea id="lfMsg" name="message" required></textarea>' +
-      '<button type="submit" id="lfBtn">Send inquiry</button>' +
-      '<div class="form-status" id="lfStatus" role="status"></div>' +
-      '<div class="form-note">By submitting, you agree we may contact you about your inquiry. See our <a href="#/privacy">Privacy Policy</a>.</div>' +
-    '</form>';
-  document.getElementById("leadForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-    submitLead(a);
-  });
-  document.title = esc(a.name) + " (" + esc(a.city) + ") | Provisional Profile | StudyScore";
-  injectSchema(agentSchema(a));
-}
-
-function mailtoFallback(a, payload) {
-  var body =
-    "Agency: " + a.name + " (" + a.city + ")\n" +
-    "Name: " + payload.contact.name + "\n" +
-    "Email: " + payload.contact.email + "\n" +
-    "Phone: " + (payload.contact.phone || "-") + "\n" +
-    "Destination: " + payload.destination + "\n\n" +
-    payload.message + "\n\n" +
-    "(Sent via StudyScore agent profile: " + payload.page_url + ")";
-  window.location.href = "mailto:" + CONTACT_EMAIL +
-    "?subject=" + encodeURIComponent("StudyScore inquiry: " + a.name) +
-    "&body=" + encodeURIComponent(body);
-}
-
-function submitLead(a) {
-  var f = document.getElementById("leadForm");
-  var status = document.getElementById("lfStatus");
-  var btn = document.getElementById("lfBtn");
-  status.className = "form-status";
-  if (f.website && f.website.value) {           /* honeypot: silently accept */
-    status.className = "form-status ok";
-    status.textContent = "Thank you. Your inquiry has been recorded.";
-    return;
-  }
-  if (!f.name.value.trim() || !f.email.value.trim() || !f.message.value.trim()) {
-    status.className = "form-status err";
-    status.textContent = "Please fill in your name, email, and question.";
-    return;
-  }
-  var payload = {
-    tenant_slug: TENANT_SLUG,
-    source: "studyscore.in",
-    type: "agent_profile_inquiry",
-    agent: { name: a.name, slug: a.slug, city: a.city },
-    contact: {
-      name: f.name.value.trim(),
-      email: f.email.value.trim(),
-      phone: f.phone.value.trim()
-    },
-    destination: f.destination.value,
-    message: f.message.value.trim(),
-    page_url: profileUrl(a),
-    submitted_at: new Date().toISOString()
-  };
-  if (!CRM_BASE_URL) {
-    mailtoFallback(a, payload);
-    status.className = "form-status ok";
-    status.textContent = "An email draft has been opened with your inquiry. Press send in your mail app to complete it.";
-    return;
-  }
-  btn.disabled = true;
-  status.textContent = "";
-  fetch(CRM_BASE_URL + "/api/public/leads/" + encodeURIComponent(TENANT_SLUG), {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-  }).then(function (res) {
-    if (!res.ok) throw new Error("HTTP " + res.status);
-    btn.disabled = false;
-    f.reset();
-    status.className = "form-status ok";
-    status.textContent = "Thank you. Your inquiry has been sent. We will get back to you shortly.";
-  }).catch(function () {
-    btn.disabled = false;
-    status.className = "form-status err";
-    status.textContent = "We could not reach our lead system, so an email draft has been opened instead.";
-    mailtoFallback(a, payload);
-  });
-}
-
-/* ---------- Router ---------- */
-var VIEWS = ["view-home", "view-agents", "view-profile", "view-privacy", "view-terms"];
-function activate(id) {
-  VIEWS.forEach(function (v) {
-    var el = document.getElementById(v);
-    if (el) el.classList.toggle("active", v === id);
-  });
-}
-function router() {
-  var raw = location.hash || "";
-  /* Plain in-page anchors like #survey: show home and let the browser scroll */
-  if (raw && raw.indexOf("#/") !== 0) {
-    activate("view-home");
-    document.title = DEFAULT_TITLE;
-    injectSchema(null);
-    var el = document.getElementById(raw.slice(1));
-    if (el) el.scrollIntoView();
-    return;
-  }
-  var parts = raw.replace(/^#\//, "").split("/").filter(function (p) { return p.length; });
-  if (parts[0] === "agents" && parts.length === 3) {
-    activate("view-profile");
-    renderProfile(parts[1], parts[2]);
-  } else if (parts[0] === "agents") {
-    activate("view-agents");
-    renderDirectory();
-    document.title = "Study Abroad Agent Directory | StudyScore";
-    injectSchema(directorySchema());
-  } else if (parts[0] === "privacy") {
-    activate("view-privacy");
-    document.title = "Privacy Policy | StudyScore";
-    injectSchema(null);
-  } else if (parts[0] === "terms") {
-    activate("view-terms");
-    document.title = "Terms of Use | StudyScore";
-    injectSchema(null);
-  } else {
-    activate("view-home");
-    document.title = DEFAULT_TITLE;
-    injectSchema(null);
-  }
-  window.scrollTo(0, 0);
-}
-document.addEventListener("DOMContentLoaded", function () {
-  initDirectoryControls();
-  router();
-});
-window.addEventListener("hashchange", router);
-</script>
-
+    addEventListener("hashchange", route);
+    route();
+  </script>
 </body>
 </html>
+```
