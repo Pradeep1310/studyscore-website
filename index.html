@@ -1466,6 +1466,26 @@ function submitLead(a) {
 }
 
 /* ============ SEQUENCE 2: survey ingestion + client anti-fraud ============ */
+/* Translate a Supabase error into an actionable, visible message instead of
+   a generic one, so real deployment problems (missing table, missing RLS
+   policy, bad project URL) can actually be diagnosed. */
+function sbErrText(e) {
+  var code = e && e.code ? String(e.code) : "";
+  var msg  = e && e.message ? e.message : "unknown error";
+  var hint = "";
+  if (code === "42P01" || code.indexOf("PGRST2") === 0 || /schema cache/i.test(msg)) {
+    hint = " The 'surveys' table was not found - run the setup SQL from the comment block at the top of this file in the Supabase SQL editor.";
+  } else if (code === "42501" || /row-level security/i.test(msg)) {
+    hint = " Row-level security blocked the insert - create the 'public insert pending surveys' policy from the setup SQL.";
+  } else if (code === "23503") {
+    hint = " The selected agency id does not exist in the agents table.";
+  } else if (code === "22P02") {
+    hint = " The agency id sent is not a valid UUID.";
+  } else if (code === "401" || code === "PGRST301" || /JWT|api key/i.test(msg)) {
+    hint = " The anon API key was rejected - re-copy it from Supabase dashboard > Settings > API.";
+  }
+  return "We could not save your review." + hint + " [" + (code ? code + ": " : "") + msg + "]";
+}
 function setSrvStatus(kind, msg) {
   var status = document.getElementById("srvStatus");
   status.className = "fstatus " + (kind === "ok" ? "ok" : "err");
@@ -1582,7 +1602,7 @@ function submitSurvey() {
         /* Storage duplicate or policy errors are non-fatal: the DB unique
            constraint on document_crypto_hash is the real gate. */
       })
-      .catch(function () { /* continue: document is optional */ });
+      .catch(function (e) { console.warn("StudyScore: doc upload skipped (non-fatal)", e); });
   }
 
   chain.then(function () {
@@ -1627,7 +1647,8 @@ function submitSurvey() {
           "This specific verification document has already been registered on our network tracker. Each document can support only one review. If you believe this is an error, email " + CONTACT_EMAIL + ".");
         setSrvStatus("err", "Duplicate verification document detected. Submission blocked.");
       } else {
-        setSrvStatus("err", "We could not save your review right now. Please try again, or email " + CONTACT_EMAIL + ".");
+        console.error("StudyScore: survey insert failed", res.error);
+        setSrvStatus("err", sbErrText(res.error));
       }
       return;
     }
@@ -1635,9 +1656,12 @@ function submitSurvey() {
     document.getElementById("srvUnlistedWrap").style.display = "none";
     setSrvStatus("ok", "Thank you. Your review has been received and is pending verification. Verified reviews power the public StudyScore.");
     cache.ts = 0;
-  }).catch(function () {
+  }).catch(function (err) {
     btn.disabled = false;
-    setSrvStatus("err", "We could not save your review right now. Please try again, or email " + CONTACT_EMAIL + ".");
+    console.error("StudyScore: survey submit crashed", err);
+    setSrvStatus("err", "Network error: could not reach the database at " + SUPABASE_URL +
+      ". Verify this exact URL appears under Supabase dashboard > Settings > API, then retry. (" +
+      (err && err.message ? err.message : err) + ")");
   });
 }
 
