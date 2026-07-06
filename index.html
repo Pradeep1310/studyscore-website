@@ -893,12 +893,12 @@ a { color: inherit; }
      FinalScore = ( v/(v+m) )*R + ( m/(v+m) )*C_global, m = 10
      Display rule: score renders only when v >= DISPLAY_FLOOR reviews.
 ===================================================================== */
-var SUPABASE_URL      = "https://supabase.co";
+var SUPABASE_URL      = "https://bcydrffohjpbnmdujkig.supabase.co";  /* project ref from the anon key's "ref" claim - verify in Supabase dashboard > Settings > API */
 var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjeWRyZmZvaGpwYm5tZHVqa2lnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzNTg5OTcsImV4cCI6MjA5ODkzNDk5N30.8yT-39gIJgjJszkSpgeIBKFJa4PjPHf8tpGAibXFqrI";
 
 var sb = null;
 try {
-  if (SUPABASE_URL.indexOf("https://") === 0 && SUPABASE_ANON_KEY.length > 20 && window.supabase) {
+  if (/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(SUPABASE_URL) && SUPABASE_ANON_KEY.length > 20 && window.supabase) {
     sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   }
 } catch (e) { sb = null; }
@@ -920,63 +920,67 @@ var CACHE_TTL     = 60000;
    earlier; the seven national brands below carry best-effort city and
    destination data from general knowledge. VERIFY EACH before launch.
 -------------------------------------------------------------------- */
+/* Seed ids are valid placeholder UUID strings so any code path that
+   expects uuid-shaped ids (including DEMO_MODE scoring) never breaks.
+   They do NOT exist in the database - see SEED_AGENT_IDS handling in
+   submitSurvey(). */
 var SEED_AGENTS = [
-  { id: "chd-consultants", name: "CHD Consultants", slug: "chd-consultants",
+  { id: "00000000-0000-4000-8000-000000000001", name: "CHD Consultants", slug: "chd-consultants",
     city: "Bathinda", city_slug: "bathinda", state: "Punjab",
     destinations: ["Canada", "Australia", "UK", "USA"],
     services: ["Study visa counselling", "IELTS / PTE coaching"],
     summary: "Study abroad consultancy operating from Bathinda, Punjab, offering counselling for major English-speaking destinations along with IELTS and PTE coaching.",
     master_agency_id: null },
-  { id: "visa-point-consultants", name: "Visa Point Consultants", slug: "visa-point-consultants",
+  { id: "00000000-0000-4000-8000-000000000002", name: "Visa Point Consultants", slug: "visa-point-consultants",
     city: "Bathinda", city_slug: "bathinda", state: "Punjab",
     destinations: ["UK", "Canada", "Australia", "New Zealand", "Europe", "Singapore"],
     services: ["Immigration and study visa services", "IELTS coaching"],
     summary: "Immigration and IELTS consultancy based in Bathinda, Punjab, serving students across multiple destination countries.",
     master_agency_id: null },
-  { id: "career-creators-edu", name: "Career Creators Edu", slug: "career-creators-edu",
+  { id: "00000000-0000-4000-8000-000000000003", name: "Career Creators Edu", slug: "career-creators-edu",
     city: "Mohali", city_slug: "mohali", state: "Punjab",
     destinations: ["Canada", "Australia", "UK", "Europe", "New Zealand"],
     services: ["Overseas education counselling", "IELTS coaching"],
     summary: "Overseas education consultancy headquartered in Mohali, Punjab, with counselling services across popular study destinations.",
     master_agency_id: null },
   /* ---- National brands: verify city/destinations before launch ---- */
-  { id: "idp-education", name: "IDP Education (India)", slug: "idp-education",
+  { id: "00000000-0000-4000-8000-000000000004", name: "IDP Education (India)", slug: "idp-education",
     city: "New Delhi", city_slug: "new-delhi", state: "Delhi",
     destinations: ["Australia", "UK", "Canada", "USA", "New Zealand", "Ireland"],
     services: ["Overseas education counselling", "IELTS testing partner"],
     summary: "International education services organisation with counselling offices across Indian cities. Provisional profile from public information.",
     master_agency_id: null },
-  { id: "leap-scholar", name: "Leap Scholar", slug: "leap-scholar",
+  { id: "00000000-0000-4000-8000-000000000005", name: "Leap Scholar", slug: "leap-scholar",
     city: "Bengaluru", city_slug: "bengaluru", state: "Karnataka",
     destinations: ["UK", "USA", "Canada", "Australia", "Ireland"],
     services: ["Study abroad counselling", "Test prep", "Education financing"],
     summary: "Study abroad platform headquartered in Bengaluru offering counselling, test preparation, and financing products. Provisional profile from public information.",
     master_agency_id: null },
-  { id: "tc-global", name: "TC Global", slug: "tc-global",
+  { id: "00000000-0000-4000-8000-000000000006", name: "TC Global", slug: "tc-global",
     city: "New Delhi", city_slug: "new-delhi", state: "Delhi",
     destinations: ["UK", "Australia", "Canada", "USA", "Europe"],
     services: ["Global education counselling"],
     summary: "Global education and mobility organisation with centres across India. Provisional profile from public information.",
     master_agency_id: null },
-  { id: "canam-consultants", name: "Canam Consultants", slug: "canam-consultants",
+  { id: "00000000-0000-4000-8000-000000000007", name: "Canam Consultants", slug: "canam-consultants",
     city: "Chandigarh", city_slug: "chandigarh", state: "Chandigarh",
     destinations: ["Canada", "UK", "Australia", "USA", "New Zealand"],
     services: ["Study visa counselling", "Coaching"],
     summary: "Study abroad consultancy with a large branch network across North India. Provisional profile from public information.",
     master_agency_id: null },
-  { id: "edwise-international", name: "Edwise International", slug: "edwise-international",
+  { id: "00000000-0000-4000-8000-000000000008", name: "Edwise International", slug: "edwise-international",
     city: "Mumbai", city_slug: "mumbai", state: "Maharashtra",
     destinations: ["UK", "USA", "Canada", "Australia", "New Zealand", "Singapore"],
     services: ["Overseas education consultancy"],
     summary: "Overseas education consultancy headquartered in Mumbai with branches across India. Provisional profile from public information.",
     master_agency_id: null },
-  { id: "y-axis-overseas", name: "Y-Axis Overseas Careers", slug: "y-axis-overseas",
+  { id: "00000000-0000-4000-8000-000000000009", name: "Y-Axis Overseas Careers", slug: "y-axis-overseas",
     city: "Hyderabad", city_slug: "hyderabad", state: "Telangana",
     destinations: ["Canada", "Australia", "UK", "Germany", "USA"],
     services: ["Overseas careers and study visa services"],
     summary: "Immigration and overseas careers company headquartered in Hyderabad. Provisional profile from public information.",
     master_agency_id: null },
-  { id: "pyramid-eservices", name: "Pyramid eServices", slug: "pyramid-eservices",
+  { id: "00000000-0000-4000-8000-000000000010", name: "Pyramid eServices", slug: "pyramid-eservices",
     city: "Jalandhar", city_slug: "jalandhar", state: "Punjab",
     destinations: ["Canada", "Australia", "UK", "USA", "New Zealand"],
     services: ["Study visa counselling", "IELTS coaching"],
@@ -1003,6 +1007,10 @@ var DEMO_SURVEYS = [
   { slug: "edwise-international", daysAgo: 75,  fee: 3, comm: 4, visa: 3, post: 2, overall: 3, destination: "USA",       university: "Arizona State University" },
   { slug: "pyramid-eservices",    daysAgo: 30,  fee: 4, comm: 4, visa: 5, post: 3, overall: 4, destination: "Canada",    university: "University of Manitoba" }
 ];
+
+/* Fast lookup: which dropdown ids are local seed/demo placeholders. */
+var SEED_AGENT_IDS = {};
+SEED_AGENTS.forEach(function (a) { SEED_AGENT_IDS[a.id] = true; });
 
 var DEFAULT_TITLE = document.title;
 var cache = { agents: null, surveys: null, ts: 0, demo: false, offline: false };
@@ -1545,7 +1553,7 @@ function submitSurvey() {
     setSrvStatus("err", "The survey system is being upgraded and is temporarily offline. Please email " + CONTACT_EMAIL + " and we will record your review manually.");
     return;
   }
-  var fileInput = document.getElementById("srvFile");
+  var fileInput = document.getElementById("srvFile");   /* matches <input id="srvFile"> in the survey form */
   var file = fileInput.files && fileInput.files[0] ? fileInput.files[0] : null;
   if (file && file.size > 10 * 1024 * 1024) {
     setSrvStatus("err", "Please attach a file under 10 MB.");
@@ -1578,9 +1586,25 @@ function submitSurvey() {
   }
 
   chain.then(function () {
+    /* Seed/demo agents exist only in this file, not in the agents table.
+       Sending their placeholder UUIDs would violate the surveys.agent_id
+       foreign-key constraint, so they are submitted as a named unlisted
+       agency (agent_id null) and the insert always passes constraints. */
+    var isSeedAgent = agentVal !== "__other" && SEED_AGENT_IDS[agentVal] === true;
+    var seedAgentName = null;
+    if (isSeedAgent && cache.agents) {
+      for (var si = 0; si < cache.agents.length; si++) {
+        if (cache.agents[si].id === agentVal) {
+          seedAgentName = cache.agents[si].name + (cache.agents[si].city ? " (" + cache.agents[si].city + ")" : "");
+          break;
+        }
+      }
+    }
     var row = {
-      agent_id: agentVal === "__other" ? null : agentVal,
-      unlisted_agent_name: agentVal === "__other" ? (document.getElementById("srvUnlisted").value.trim() || null) : null,
+      agent_id: (agentVal === "__other" || isSeedAgent) ? null : agentVal,
+      unlisted_agent_name: agentVal === "__other"
+        ? (document.getElementById("srvUnlisted").value.trim() || null)
+        : (isSeedAgent ? seedAgentName : null),
       destination: dest,
       city: document.getElementById("srvCity").value.trim() || null,
       university: document.getElementById("srvUni").value.trim() || null,
