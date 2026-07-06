@@ -18,7 +18,7 @@
 <link rel="canonical" href="https://studyscore.in">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Pradeep Pandey">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="theme-color" content="#FAFAFA">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -70,21 +70,23 @@
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 /* =====================================================================
-   StudyScore design system - hand-written production CSS.
-   No CSS framework, no CDN build scripts, no console warnings.
+   StudyScore design system v3 - ivory fintech canvas.
+   Hand-written production CSS. No framework, no build step, no console
+   warnings. Geometric display type + mono system labels + thin borders.
 ===================================================================== */
 :root {
-  --ink:    #0F172A;
-  --body:   #475569;
-  --muted:  #64748B;
-  --faint:  #94A3B8;
-  --line:   #E2E8F0;
-  --bg:     #FFFFFF;
-  --bg2:    #F8FAFC;
+  --ticker-h: 34px;
+  --ink:    #16181D;   /* charcoal-slate headings */
+  --body:   #4B5563;
+  --muted:  #6B7280;
+  --faint:  #9CA3AF;
+  --line:   #EBEBE8;   /* ultra-thin borders */
+  --bg:     #FAFAFA;   /* ivory canvas */
+  --card:   #FFFFFF;
   --gold:   #B8944F;
   --goldlt: #D4B876;
   --amber:      #B45309;
@@ -92,8 +94,10 @@
   --amber-line: #FDE68A;
   --ok:  #15803D;
   --err: #B91C1C;
-  --shadow-sm: 0 1px 2px rgba(15,23,42,0.04);
-  --shadow-md: 0 10px 30px rgba(15,23,42,0.07);
+  --shadow-sm: 0 1px 2px rgba(22,24,29,0.04);
+  --shadow-md: 0 14px 34px rgba(22,24,29,0.08);
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+  --disp: "Space Grotesk", system-ui, sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -116,13 +120,35 @@ a { color: inherit; }
 
 .kicker {
   display: inline-block;
-  font-size: 11px; font-weight: 700;
-  letter-spacing: 0.2em; text-transform: uppercase;
+  font-family: var(--mono);
+  font-size: 10.5px; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--gold);
   margin-bottom: 14px;
 }
-.serif { font-family: "DM Serif Display", serif; font-weight: 400; color: var(--ink); }
-.lede  { color: var(--muted); font-size: 17px; }
+.lede { color: var(--muted); font-size: 17px; }
+
+/* ---- System ticker (Signal-style status strip) ---- */
+.ticker {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+  height: var(--ticker-h);
+  background: var(--ink); color: #E5E7EB;
+  overflow: hidden;
+  display: flex; align-items: center;
+}
+.ticker-track {
+  display: flex; white-space: nowrap;
+  animation: tick 30s linear infinite;
+  will-change: transform;
+}
+.ticker-track span {
+  font-family: var(--mono);
+  font-size: 10.5px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding-right: 48px;
+}
+.ticker-track span b { color: var(--goldlt); font-weight: 600; }
+@keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* ---- Buttons ---- */
 .btn {
@@ -133,24 +159,24 @@ a { color: inherit; }
   transition: transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
 }
 .btn-dark { background: var(--ink); color: #fff; }
-.btn-dark:hover { background: #1E293B; transform: translateY(-1px); box-shadow: var(--shadow-md); }
-.btn-line { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+.btn-dark:hover { background: #24272E; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.btn-line { background: var(--card); color: var(--ink); border: 1px solid var(--line); }
 .btn-line:hover { border-color: var(--gold); transform: translateY(-1px); box-shadow: var(--shadow-md); }
 .btn-sm { padding: 10px 20px; font-size: 14px; }
 
 /* ---- Nav ---- */
 .nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-  background: rgba(255,255,255,0.85);
+  position: fixed; top: var(--ticker-h); left: 0; right: 0; z-index: 50;
+  background: rgba(250,250,250,0.88);
   backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line);
 }
 .nav-inner { max-width: 1120px; margin: 0 auto; padding: 15px 22px; display: flex; align-items: center; justify-content: space-between; }
-.brand { font-family: "DM Serif Display", serif; font-size: 23px; color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
-.brand i { font-style: normal; color: var(--gold); font-weight: 300; }
+.brand { font-family: var(--disp); font-weight: 700; font-size: 22px; color: var(--ink); text-decoration: none; letter-spacing: -0.02em; }
+.brand i { font-style: normal; color: var(--gold); font-weight: 500; }
 .nav-links { display: flex; align-items: center; gap: 26px; }
 .nav-links .nl { font-size: 14px; font-weight: 600; color: var(--muted); text-decoration: none; transition: color .2s ease; }
-.nav-links .nl:hover { color: var(--gold); }
+.nav-links .nl:hover { color: var(--ink); }
 
 /* ---- Router views ---- */
 .route-view { display: none; }
@@ -159,34 +185,36 @@ a { color: inherit; }
 
 /* ---- Sections ---- */
 .sec { padding: 76px 0; border-top: 1px solid var(--line); }
-.sec-alt { background: var(--bg2); }
-.sec h2 { font-family: "DM Serif Display", serif; font-weight: 400; color: var(--ink); font-size: clamp(26px, 3.6vw, 38px); line-height: 1.22; margin-bottom: 14px; }
+.sec-alt { background: #F5F5F2; }
+.sec h2 { font-family: var(--disp); font-weight: 700; letter-spacing: -0.02em; color: var(--ink); font-size: clamp(26px, 3.6vw, 38px); line-height: 1.18; margin-bottom: 14px; }
 
 /* ---- Hero ---- */
-.hero { padding: 152px 22px 62px; max-width: 880px; margin: 0 auto; text-align: center; }
+.hero { padding: 186px 22px 62px; max-width: 900px; margin: 0 auto; text-align: center; }
 .badge-pill {
-  display: inline-block; font-size: 11px; font-weight: 700;
-  letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--gold); background: #FDF9F0;
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10.5px; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold); background: #FBF7EE;
   border: 1px solid rgba(184,148,79,0.4);
   border-radius: 999px; padding: 7px 18px; margin-bottom: 30px;
 }
-.hero h1 { font-family: "DM Serif Display", serif; font-weight: 400; color: var(--ink); font-size: clamp(36px, 5.6vw, 58px); line-height: 1.14; margin-bottom: 22px; }
+.hero h1 { font-family: var(--disp); font-weight: 700; letter-spacing: -0.03em; color: var(--ink); font-size: clamp(36px, 5.6vw, 60px); line-height: 1.08; margin-bottom: 22px; }
 .hero h1 em { font-style: normal; color: var(--gold); }
 .hero .lede { max-width: 620px; margin: 0 auto 34px; }
 .hero-note { font-size: 12.5px; color: var(--faint); margin-top: 15px; }
 
 /* ---- Stats bar ---- */
 .stats {
-  max-width: 820px; margin: 26px auto 0;
-  background: #fff; border: 1px solid var(--line); border-radius: 18px;
+  max-width: 820px; margin: 30px auto 0;
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px;
   box-shadow: var(--shadow-sm);
   display: grid; grid-template-columns: 1fr; overflow: hidden;
 }
 .stat { padding: 26px 22px; text-align: center; border-top: 1px solid var(--line); }
 .stat:first-child { border-top: 0; }
-.stat b { display: block; font-family: "DM Serif Display", serif; font-weight: 400; font-size: 30px; color: var(--ink); }
-.stat span { font-size: 12px; color: var(--muted); letter-spacing: 0.02em; }
+.stat b { display: block; font-family: var(--disp); font-weight: 700; font-size: 28px; letter-spacing: -0.02em; color: var(--ink); }
+.stat span { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
 @media (min-width: 640px) {
   .stats { grid-template-columns: repeat(3, 1fr); }
   .stat { border-top: 0; border-left: 1px solid var(--line); }
@@ -195,24 +223,24 @@ a { color: inherit; }
 
 /* ---- Cards ---- */
 .card {
-  background: #fff; border: 1px solid var(--line); border-radius: 16px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
   box-shadow: var(--shadow-sm);
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
-.card-hover:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: #CBD5E1; }
+.card-hover:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: #DDDDD8; }
 
-.grid3 { display: grid; grid-template-columns: 1fr; gap: 22px; }
+.grid3 { display: grid; grid-template-columns: 1fr; gap: 20px; }
 @media (min-width: 640px)  { .grid3 { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1000px) { .grid3 { grid-template-columns: repeat(3, 1fr); } }
 
 .pcard { padding: 30px; }
 .pcard .ic {
-  width: 44px; height: 44px; border-radius: 12px;
-  background: #FDF9F0; border: 1px solid rgba(184,148,79,0.25);
+  width: 42px; height: 42px; border-radius: 11px;
+  background: #FBF7EE; border: 1px solid rgba(184,148,79,0.25);
   display: flex; align-items: center; justify-content: center;
-  font-size: 20px; margin-bottom: 18px;
+  font-size: 19px; margin-bottom: 18px;
 }
-.pcard h3 { color: var(--ink); font-size: 17px; font-weight: 700; margin-bottom: 9px; }
+.pcard h3 { color: var(--ink); font-family: var(--disp); font-weight: 700; letter-spacing: -0.01em; font-size: 17px; margin-bottom: 9px; }
 .pcard p  { font-size: 14.5px; color: var(--muted); }
 
 /* ---- Steps ---- */
@@ -221,20 +249,20 @@ a { color: inherit; }
 @media (min-width: 1000px) { .steps { grid-template-columns: repeat(4, 1fr); } }
 .step { text-align: center; padding: 0 8px; }
 .step-num {
-  width: 54px; height: 54px; margin: 0 auto 18px;
+  width: 52px; height: 52px; margin: 0 auto 18px;
   border-radius: 50%; border: 1px solid rgba(184,148,79,0.55);
-  color: var(--gold); font-family: "DM Serif Display", serif; font-size: 20px;
+  color: var(--gold); font-family: var(--mono); font-weight: 600; font-size: 16px;
   display: flex; align-items: center; justify-content: center;
-  background: #fff;
+  background: var(--card);
 }
-.step h3 { color: var(--ink); font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.step h3 { color: var(--ink); font-family: var(--disp); font-weight: 700; font-size: 16px; margin-bottom: 8px; }
 .step p  { font-size: 14px; color: var(--muted); }
 
 /* ---- CTA panel ---- */
 .cta-panel {
   max-width: 720px; margin: 0 auto; text-align: center;
-  background: #fff; border: 1px solid var(--line); border-top: 3px solid var(--gold);
-  border-radius: 20px; padding: 54px 34px;
+  background: var(--card); border: 1px solid var(--line); border-top: 3px solid var(--gold);
+  border-radius: 18px; padding: 54px 34px;
   box-shadow: var(--shadow-md);
 }
 
@@ -243,93 +271,106 @@ a { color: inherit; }
 @media (min-width: 1000px) { .about-grid { grid-template-columns: 2fr 3fr; } }
 .founder-card { padding: 36px; text-align: center; }
 .avatar {
-  width: 76px; height: 76px; margin: 0 auto 18px;
-  border-radius: 50%; background: #FDF9F0; border: 1px solid rgba(184,148,79,0.45);
-  color: var(--gold); font-family: "DM Serif Display", serif; font-size: 24px;
+  width: 74px; height: 74px; margin: 0 auto 18px;
+  border-radius: 50%; background: #FBF7EE; border: 1px solid rgba(184,148,79,0.45);
+  color: var(--gold); font-family: var(--disp); font-weight: 700; font-size: 22px;
   display: flex; align-items: center; justify-content: center;
 }
-.founder-card .fname { font-family: "DM Serif Display", serif; font-size: 24px; color: var(--ink); }
-.founder-card .frole { font-size: 13px; font-weight: 700; color: var(--gold); margin: 4px 0 18px; }
+.founder-card .fname { font-family: var(--disp); font-weight: 700; letter-spacing: -0.01em; font-size: 23px; color: var(--ink); }
+.founder-card .frole { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; color: var(--gold); margin: 5px 0 18px; }
 .founder-card .cred  { font-size: 13.5px; color: var(--muted); line-height: 1.9; }
 .founder-card blockquote { font-size: 13.5px; color: var(--faint); font-style: italic; margin-top: 20px; }
 .about-copy p { margin-bottom: 18px; font-size: 15.5px; }
 .mini-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 26px; }
-.mini { background: var(--bg2); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; }
-.mini b { display: block; font-family: "DM Serif Display", serif; font-weight: 400; font-size: 22px; color: var(--ink); }
-.mini span { font-size: 11.5px; color: var(--muted); }
+.mini { background: #F5F5F2; border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; }
+.mini b { display: block; font-family: var(--disp); font-weight: 700; font-size: 21px; letter-spacing: -0.01em; color: var(--ink); }
+.mini span { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 
 /* ---- FAQ ---- */
 .faq-item { padding: 26px 30px; margin-bottom: 15px; }
-.faq-item h3 { color: var(--ink); font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.faq-item h3 { color: var(--ink); font-family: var(--disp); font-weight: 700; font-size: 16px; margin-bottom: 8px; }
 .faq-item p  { font-size: 14.5px; color: var(--muted); }
 
 /* ---- Footer ---- */
-.footer { border-top: 1px solid var(--line); background: var(--bg2); padding: 56px 22px; text-align: center; }
-.footer .brand { font-size: 24px; }
+.footer { border-top: 1px solid var(--line); background: #F5F5F2; padding: 56px 22px; text-align: center; }
+.footer .brand { font-size: 23px; }
 .footer .tag { font-size: 13.5px; color: var(--muted); margin: 8px 0 22px; }
 .flinks { margin-bottom: 20px; }
-.flinks a { font-size: 12.5px; color: var(--muted); text-decoration: none; margin: 0 11px; transition: color .2s ease; }
+.flinks a { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-decoration: none; margin: 0 11px; transition: color .2s ease; }
 .flinks a:hover { color: var(--gold); }
 .footer .mail a { color: var(--gold); text-decoration: none; font-size: 14px; }
 .footer .loc { font-size: 13px; color: var(--faint); margin-top: 4px; }
 .footer .legal { font-size: 11.5px; color: var(--faint); margin-top: 30px; }
 
 /* ---- Page heads ---- */
-.page-head { padding: 150px 0 22px; }
-.page-head h1 { font-family: "DM Serif Display", serif; font-weight: 400; color: var(--ink); font-size: clamp(30px, 4.4vw, 46px); line-height: 1.18; margin-bottom: 14px; }
+.page-head { padding: 184px 0 22px; }
+.page-head h1 { font-family: var(--disp); font-weight: 700; letter-spacing: -0.03em; color: var(--ink); font-size: clamp(30px, 4.4vw, 48px); line-height: 1.1; margin-bottom: 14px; }
 .page-head .lede { max-width: 680px; }
-.back-link { font-size: 14px; font-weight: 700; color: var(--gold); text-decoration: none; }
+.back-link { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; color: var(--gold); text-decoration: none; }
 .back-link:hover { color: var(--goldlt); }
 
 /* ---- Directory ---- */
-.toolbar { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0 30px; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0 26px; }
 .field {
   font: inherit; font-size: 14px; color: var(--ink);
-  background: #fff; border: 1px solid var(--line); border-radius: 11px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 11px;
   padding: 12px 15px;
   transition: border-color .2s ease, box-shadow .2s ease;
 }
-.field:hover { border-color: #CBD5E1; }
+.field:hover { border-color: #D6D6D1; }
 .field:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(184,148,79,0.14); }
 .toolbar .field { min-width: 230px; }
-.agents-grid { display: grid; grid-template-columns: 1fr; gap: 22px; padding-bottom: 90px; }
+.agents-grid { display: grid; grid-template-columns: 1fr; gap: 20px; padding-bottom: 90px; }
 @media (min-width: 640px)  { .agents-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1000px) { .agents-grid { grid-template-columns: repeat(3, 1fr); } }
-.agent-card { padding: 28px; display: flex; flex-direction: column; gap: 11px; }
-.agent-card h3 { font-family: "DM Serif Display", serif; font-weight: 400; font-size: 21px; color: var(--ink); }
+.agent-card { padding: 26px; display: flex; flex-direction: column; gap: 11px; }
+.agent-card h3 { font-family: var(--disp); font-weight: 700; letter-spacing: -0.01em; font-size: 19px; color: var(--ink); }
 .agent-card .loc { font-size: 12.5px; color: var(--faint); }
 .badge-prov {
   display: inline-block; width: fit-content;
-  font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  font-family: var(--mono);
+  font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--amber); background: var(--amber-bg);
   border: 1px solid var(--amber-line); border-radius: 999px; padding: 4px 11px;
+}
+.badge-demo {
+  display: inline-block; width: fit-content;
+  font-family: var(--mono);
+  font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: #6D28D9; background: #F5F3FF;
+  border: 1px solid #DDD6FE; border-radius: 999px; padding: 4px 11px;
 }
 .chiprow { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip {
   font-size: 11.5px; color: var(--body);
-  background: var(--bg2); border: 1px solid var(--line);
+  background: #F5F5F2; border: 1px solid var(--line);
   border-radius: 999px; padding: 4px 11px;
 }
-.chip-gold { background: #FDF9F0; border-color: rgba(184,148,79,0.3); color: #8A6D33; }
-.view-link { margin-top: auto; padding-top: 8px; font-size: 14px; font-weight: 700; color: var(--gold); text-decoration: none; }
+.chip-gold { background: #FBF7EE; border-color: rgba(184,148,79,0.3); color: #8A6D33; }
+.view-link { margin-top: auto; padding-top: 8px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: var(--gold); text-decoration: none; }
 .view-link:hover { color: var(--goldlt); }
 .dir-empty { grid-column: 1 / -1; text-align: center; color: var(--faint); padding: 60px 0; }
 .loading { grid-column: 1 / -1; text-align: center; color: var(--faint); padding: 60px 0; }
+.demo-note {
+  grid-column: 1 / -1;
+  background: #F5F3FF; border: 1px solid #DDD6FE; border-radius: 12px;
+  padding: 14px 18px; font-size: 13px; color: #5B21B6; line-height: 1.7;
+}
 
 /* ---- Leaderboard score elements ---- */
-.lb-rank { font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; }
+.lb-rank { font-family: var(--mono); font-size: 10px; font-weight: 600; color: var(--gold); letter-spacing: 0.1em; }
 .score-line { display: flex; align-items: baseline; gap: 9px; }
-.score-big { font-family: "DM Serif Display", serif; font-size: 30px; color: var(--ink); line-height: 1; }
+.score-big { font-family: var(--disp); font-weight: 700; letter-spacing: -0.02em; font-size: 28px; color: var(--ink); line-height: 1; }
 .score-sub { font-size: 11.5px; color: var(--muted); }
 .score-none { font-size: 12px; color: var(--faint); }
 
 /* ---- Profile ---- */
-.pf-hero { padding: 40px; margin-bottom: 22px; }
-.pf-hero h1 { font-family: "DM Serif Display", serif; font-weight: 400; color: var(--ink); font-size: clamp(28px, 4.4vw, 46px); line-height: 1.15; margin: 14px 0 4px; }
-.pf-hero .loc { font-size: 13.5px; color: var(--faint); margin-bottom: 22px; }
+.pf-hero { padding: 38px; margin-bottom: 22px; }
+.pf-hero h1 { font-family: var(--disp); font-weight: 700; letter-spacing: -0.03em; color: var(--ink); font-size: clamp(28px, 4.4vw, 44px); line-height: 1.1; margin: 14px 0 4px; }
+.pf-hero .loc { font-size: 13.5px; color: var(--faint); margin-bottom: 20px; }
 
 .prov-banner {
-  background: var(--amber-bg); border: 1px solid var(--amber-line); border-radius: 16px;
+  background: var(--amber-bg); border: 1px solid var(--amber-line); border-radius: 14px;
   padding: 22px 24px; margin-bottom: 30px;
   display: flex; flex-direction: column; gap: 16px;
 }
@@ -337,13 +378,13 @@ a { color: inherit; }
 .prov-left { display: flex; gap: 13px; flex: 1; }
 .prov-dot { width: 10px; height: 10px; border-radius: 50%; background: #F59E0B; margin-top: 7px; flex-shrink: 0; animation: breathe 2.4s ease-in-out infinite; }
 @keyframes breathe { 0%,100% { box-shadow: 0 0 0 0 rgba(245,158,11,0.45); } 50% { box-shadow: 0 0 0 9px rgba(245,158,11,0); } }
-.prov-title { font-size: 14px; font-weight: 700; color: var(--amber); letter-spacing: 0.02em; }
-.prov-sub { font-size: 12.5px; color: #92661C; margin-top: 4px; line-height: 1.7; }
+.prov-title { font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber); }
+.prov-sub { font-size: 12.5px; color: #92661C; margin-top: 5px; line-height: 1.7; }
 
 .pf-grid { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: start; padding-bottom: 90px; }
 @media (min-width: 1024px) {
   .pf-grid { grid-template-columns: 2fr 1fr; }
-  .pf-aside { position: sticky; top: 96px; }
+  .pf-aside { position: sticky; top: calc(var(--ticker-h) + 82px); }
 }
 
 /* ---- Metric dashboard matrix ---- */
@@ -351,20 +392,20 @@ a { color: inherit; }
 @media (min-width: 640px) { .metrics3 { grid-template-columns: repeat(3, 1fr); } }
 .metric {
   font: inherit; text-align: left; cursor: pointer; width: 100%;
-  background: #fff; border: 1px solid var(--line); border-radius: 16px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
   padding: 22px; box-shadow: var(--shadow-sm);
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
 .metric:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: rgba(184,148,79,0.5); }
-.metric .mlabel { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 13px; }
-.metric .mvalue { font-family: "DM Serif Display", serif; font-size: 30px; color: var(--ink); line-height: 1; }
-.metric .mvalue.pending { color: #CBD5E1; }
-.metric .munit { font-size: 15px; color: var(--muted); margin-left: 3px; }
+.metric .mlabel { font-family: var(--mono); font-size: 9.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 13px; }
+.metric .mvalue { font-family: var(--disp); font-weight: 700; letter-spacing: -0.02em; font-size: 28px; color: var(--ink); line-height: 1; }
+.metric .mvalue.pending { color: #D1D5DB; }
+.metric .munit { font-size: 14px; color: var(--muted); margin-left: 3px; }
 .spark { width: 100%; height: 26px; margin-top: 12px; }
-.spark line { stroke: #CBD5E1; stroke-width: 2; stroke-dasharray: 2 6; stroke-linecap: round; transition: stroke .25s ease; }
+.spark line { stroke: #D6D6D1; stroke-width: 2; stroke-dasharray: 2 6; stroke-linecap: round; transition: stroke .25s ease; }
 .metric:hover .spark line { stroke: var(--gold); }
 .track { height: 4px; border-radius: 999px; margin-top: 12px;
-  background: linear-gradient(90deg, #F1F5F9 25%, #EADFC8 50%, #F1F5F9 75%);
+  background: linear-gradient(90deg, #F1F1EE 25%, #EADFC8 50%, #F1F1EE 75%);
   background-size: 200% 100%; animation: shimmer 2.2s linear infinite; }
 @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 .metric .mwait { font-size: 11px; color: var(--amber); margin-top: 12px; font-weight: 600; }
@@ -375,14 +416,14 @@ a { color: inherit; }
 .about-card p { font-size: 14.5px; color: var(--muted); }
 
 .rate-card { padding: 32px; margin-top: 30px; border-top: 3px solid var(--gold); }
-.rate-card h3 { font-family: "DM Serif Display", serif; font-weight: 400; font-size: 23px; color: var(--ink); margin-bottom: 9px; }
+.rate-card h3 { font-family: var(--disp); font-weight: 700; letter-spacing: -0.01em; font-size: 21px; color: var(--ink); margin-bottom: 9px; }
 .rate-card p  { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
 @keyframes ringPing { 0% { box-shadow: 0 0 0 0 rgba(184,148,79,0.55); } 100% { box-shadow: 0 0 0 16px rgba(184,148,79,0); } }
 .ping-gold { animation: ringPing .9s ease-out 2; }
 
 /* ---- Forms (survey + lead gateway) ---- */
 .lf { padding: 28px; border-top: 3px solid var(--ink); }
-.lf h3 { font-family: "DM Serif Display", serif; font-weight: 400; font-size: 21px; color: var(--ink); margin-bottom: 6px; }
+.lf h3 { font-family: var(--disp); font-weight: 700; letter-spacing: -0.01em; font-size: 19px; color: var(--ink); margin-bottom: 6px; }
 .lf .small { font-size: 12.5px; color: var(--faint); margin-bottom: 14px; line-height: 1.7; }
 .lf label { display: block; font-size: 12.5px; font-weight: 600; color: var(--ink); margin: 13px 0 5px; }
 .lf .field { width: 100%; }
@@ -397,26 +438,25 @@ a { color: inherit; }
 .hp { position: absolute; left: -9999px; opacity: 0; height: 0; overflow: hidden; }
 
 .rate-form { padding: 34px; border-top: 3px solid var(--gold); margin-bottom: 90px; }
-.rate-form h3 { font-family: "DM Serif Display", serif; font-weight: 400; font-size: 22px; color: var(--ink); margin-bottom: 6px; }
 .rgrid { display: grid; grid-template-columns: 1fr; gap: 0 18px; }
 @media (min-width: 640px) { .rgrid { grid-template-columns: 1fr 1fr; } }
-.wtag { font-weight: 400; color: var(--faint); font-size: 11px; }
+.wtag { font-weight: 400; color: var(--faint); font-size: 11px; font-family: var(--mono); }
 .file-hint { font-size: 11px; color: var(--faint); margin-top: 5px; line-height: 1.6; }
 
 /* ---- Modal ---- */
 .modal-ov {
   position: fixed; inset: 0; z-index: 100;
-  background: rgba(15,23,42,0.45);
+  background: rgba(22,24,29,0.45);
   display: none; align-items: center; justify-content: center; padding: 22px;
 }
 .modal-ov.open { display: flex; animation: fadeUp .25s ease; }
-.modal { background: #fff; border: 1px solid var(--line); border-radius: 16px; max-width: 460px; width: 100%; padding: 30px; box-shadow: var(--shadow-md); }
-.modal h3 { font-family: "DM Serif Display", serif; font-weight: 400; font-size: 21px; color: var(--ink); margin-bottom: 10px; }
+.modal { background: var(--card); border: 1px solid var(--line); border-radius: 14px; max-width: 460px; width: 100%; padding: 30px; box-shadow: var(--shadow-md); }
+.modal h3 { font-family: var(--disp); font-weight: 700; font-size: 19px; color: var(--ink); margin-bottom: 10px; }
 .modal p { font-size: 14px; color: var(--body); margin-bottom: 20px; line-height: 1.7; }
 
 /* ---- Legal ---- */
 .legal { padding-bottom: 90px; }
-.legal h2 { font-family: "DM Serif Display", serif; font-weight: 400; color: var(--ink); font-size: 23px; margin: 30px 0 10px; }
+.legal h2 { font-family: var(--disp); font-weight: 700; letter-spacing: -0.01em; color: var(--ink); font-size: 21px; margin: 30px 0 10px; }
 .legal p, .legal li { font-size: 15px; color: var(--body); margin-bottom: 14px; }
 .legal ul { padding-left: 22px; }
 .legal a { color: var(--gold); }
@@ -428,6 +468,14 @@ a { color: inherit; }
 </head>
 <body>
 
+<!-- ============================ SYSTEM TICKER ============================ -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span id="tickerA"></span>
+    <span id="tickerB"></span>
+  </div>
+</div>
+
 <!-- ============================ NAV ============================ -->
 <nav class="nav">
   <div class="nav-inner">
@@ -435,7 +483,7 @@ a { color: inherit; }
     <div class="nav-links">
       <a href="#/" class="nl">Home</a>
       <a href="#/agents" class="nl">Agent Directory</a>
-      <a href="#/rate" class="btn btn-dark btn-sm">Rate Your Agent &#8594;</a>
+      <a href="#/survey" class="btn btn-dark btn-sm">Rate Your Agent &#8594;</a>
     </div>
   </div>
 </nav>
@@ -447,12 +495,12 @@ a { color: inherit; }
     <span class="badge-pill">India's First Independent Study</span>
     <h1>Your Agent Got a <em>Score.</em><br>You Just Don't Know It Yet.</h1>
     <p class="lede">We're building India's first independent, student-powered rating system for study abroad agents. No bias. No sponsorships. Just the truth from students who've been through it.</p>
-    <a href="#/rate" class="btn btn-dark">Share Your Experience &mdash; 3 Minutes</a>
+    <a href="#/survey" class="btn btn-dark">Share Your Experience &mdash; 3 Minutes</a>
     <p class="hero-note">Anonymous &middot; No login required &middot; Your identity is never shared</p>
     <div class="stats">
       <div class="stat"><b>25,000+</b><span>Education Agents in India</span></div>
       <div class="stat"><b>Zero</b><span>Independent Rating Systems</span></div>
-      <div class="stat"><b>&#8377;15-40L</b><span>Spent by Each Family on Blind Trust</span></div>
+      <div class="stat"><b>&#8377;15-40L</b><span>Spent per Family on Blind Trust</span></div>
     </div>
   </header>
 
@@ -478,21 +526,21 @@ a { color: inherit; }
       <h2>Students Rate. Data Speaks.<br>The Industry Transforms.</h2>
       <p class="lede" style="max-width:640px;margin:0 auto;">We collect anonymous feedback from students who've actually used study abroad agents and overseas education consultants. We verify it, weight it, and publish India's first independent agent quality scores.</p>
       <div class="steps">
-        <div class="step"><div class="step-num">1</div><h3>Students Share</h3><p>A 3-minute anonymous survey about your agent experience &mdash; communication, fee transparency, visa support, and overall satisfaction.</p></div>
-        <div class="step"><div class="step-num">2</div><h3>Reviews Are Verified</h3><p>Each submission is checked before it counts. Duplicate verification documents are blocked cryptographically, and only verified reviews feed the score.</p></div>
-        <div class="step"><div class="step-num">3</div><h3>Scores Are Born</h3><p>Recent experiences weigh more than old ones, and a Bayesian stabiliser resists review-bombing. Each agent earns a StudyScore out of 100.</p></div>
-        <div class="step"><div class="step-num">4</div><h3>Families Decide Better</h3><p>Future students and parents check StudyScores before choosing a consultant. Informed decisions replace blind trust. Trust before you sign.</p></div>
+        <div class="step"><div class="step-num">01</div><h3>Students Share</h3><p>A 3-minute anonymous survey about your agent experience &mdash; communication, fee transparency, visa support, and overall satisfaction.</p></div>
+        <div class="step"><div class="step-num">02</div><h3>Reviews Are Verified</h3><p>Each submission is checked before it counts. Duplicate verification documents are blocked cryptographically, and only verified reviews feed the score.</p></div>
+        <div class="step"><div class="step-num">03</div><h3>Scores Are Born</h3><p>Recent experiences weigh more than old ones, and a Bayesian stabiliser resists review-bombing. Each agent earns a StudyScore out of 100.</p></div>
+        <div class="step"><div class="step-num">04</div><h3>Families Decide Better</h3><p>Future students and parents check StudyScores before choosing a consultant. Informed decisions replace blind trust. Trust before you sign.</p></div>
       </div>
     </div>
   </section>
 
-  <section id="survey" class="sec" aria-label="Take the StudyScore survey">
+  <section class="sec" aria-label="Take the StudyScore survey">
     <div class="wrap">
       <div class="cta-panel">
         <div class="kicker">Your Voice Matters</div>
         <h2>Studied Abroad? Rate Your Agent.</h2>
         <p class="lede" style="max-width:540px;margin:0 auto 32px;">3 minutes. Anonymous. Your experience will help thousands of future students and parents make better choices. No agent will ever know who you are.</p>
-        <a href="#/rate" class="btn btn-dark">Take the 3-Minute Survey &#8594;</a>
+        <a href="#/survey" class="btn btn-dark">Take the 3-Minute Survey &#8594;</a>
         <p class="hero-note">We never ask for your name or email.<br>The survey covers communication, fee transparency, visa support, and overall experience.</p>
       </div>
     </div>
@@ -551,7 +599,7 @@ a { color: inherit; }
     <div class="wrap-sm">
       <h2>Every Response Brings Transparency<br>Closer to Reality.</h2>
       <p class="lede" style="max-width:560px;margin:0 auto 32px;">You spent months choosing your study abroad agent. It takes 3 minutes to help the next student choose better. Be the data point that protects a family.</p>
-      <a href="#/rate" class="btn btn-dark">Share Your Experience &#8594;</a>
+      <a href="#/survey" class="btn btn-dark">Share Your Experience &#8594;</a>
     </div>
   </section>
 
@@ -585,8 +633,8 @@ a { color: inherit; }
   </div>
 </main>
 
-<!-- ============================ RATE AN AGENT (route: #/rate) ============================ -->
-<main id="view-rate" class="route-view">
+<!-- ============================ RATE AN AGENT (route: #/survey) ============================ -->
+<main id="view-survey" class="route-view">
   <div class="wrap-sm">
     <div class="page-head">
       <div class="kicker">Student Survey</div>
@@ -594,7 +642,7 @@ a { color: inherit; }
       <p class="lede">3 minutes. We never ask for your name or email. Your ratings feed the StudyScore only after verification, so genuine experiences count and fake ones don't.</p>
     </div>
 
-    <form id="mainSurveyForm" novalidate class="card rate-form">
+    <form id="mainSurveyForm" novalidate class="card rate-form lf">
       <div class="hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
 
       <label for="srvAgent">Which agency did you use?</label>
@@ -618,10 +666,13 @@ a { color: inherit; }
           </select>
         </div>
         <div>
-          <label for="srvCity">Agent's city (optional)</label>
-          <input id="srvCity" name="city" type="text" class="field" placeholder="e.g. Jalandhar">
+          <label for="srvUni">University applied to (optional)</label>
+          <input id="srvUni" name="university" type="text" class="field" placeholder="e.g. University of Toronto">
         </div>
       </div>
+
+      <label for="srvCity">Agent's city (optional)</label>
+      <input id="srvCity" name="city" type="text" class="field" placeholder="e.g. Jalandhar">
 
       <div class="rgrid">
         <div>
@@ -717,7 +768,7 @@ a { color: inherit; }
       <h2>What StudyScore is</h2>
       <p>StudyScore is an independent, informational platform. We are not an education agent, recruiter, broker, or advisor, and we are not affiliated with any agency, university, or recruitment company. Nothing on this site is professional advice; students and families should do their own diligence before engaging any agency.</p>
       <h2>Provisional profiles and scores</h2>
-      <p>Directory profiles marked as provisional are compiled in good faith from publicly available information, such as an agency's own website and public listings. They are unclaimed and unverified. Inclusion in the directory is not an endorsement, and absence from it is not a criticism. No rating or performance metric is displayed for any agency until a minimum volume of verified, anonymous student reviews has been collected. Published StudyScores are statistical aggregates of verified student reviews, weighted toward recent experiences.</p>
+      <p>Directory profiles marked as provisional are compiled in good faith from publicly available information, such as an agency's own website and public listings. They are unclaimed and unverified. Inclusion in the directory is not an endorsement, and absence from it is not a criticism. No rating or performance metric is displayed for any agency until a minimum volume of verified, anonymous student reviews has been collected. Published StudyScores are statistical aggregates of verified student reviews, weighted toward recent experiences. Any figures explicitly labelled as simulated or demo data are synthetic test values, not student reviews.</p>
       <h2>Survey submissions</h2>
       <p>By submitting a review you confirm it reflects your own genuine experience with the agency. Submissions enter a verification queue and may be excluded if they cannot be verified or appear fraudulent. Duplicate verification documents are rejected automatically.</p>
       <h2>Claims and corrections</h2>
@@ -738,7 +789,7 @@ a { color: inherit; }
   <div class="tag">India's First Independent Rating for Study Abroad Agents &middot; Trust Before You Sign</div>
   <div class="flinks">
     <a href="#/agents">Agent Directory</a>
-    <a href="#/rate">Rate Your Agent</a>
+    <a href="#/survey">Rate Your Agent</a>
     <a href="#/privacy">Privacy Policy</a>
     <a href="#/terms">Terms of Use</a>
   </div>
@@ -758,8 +809,8 @@ a { color: inherit; }
 
 <script>
 /* =====================================================================
-   StudyScore App - Sequence 2 (Survey Ingestion + Anti-Fraud) and
-   Sequence 3 (Async Dynamic Leaderboards)
+   StudyScore App v3 - Sequence 2 (Survey Ingestion + Fallback Tracks)
+   and Sequence 3 (Async Dynamic Leaderboards) on the ivory design system.
 
    ------------------------- CONFIG (READ ME) --------------------------
    SUPABASE SETUP
@@ -771,8 +822,8 @@ a { color: inherit; }
       the duplicate-document block and review moderation are enforced by
       the database (unique constraint + status column), and this client
       simply surfaces them.
-   3. Run this SQL in the Supabase SQL editor (creates tables, B-Tree
-      indexes for the directory queries, and RLS policies):
+   3. Run this SQL in the Supabase SQL editor (tables, B-Tree indexes,
+      and RLS policies):
 
       create table agents (
         id uuid primary key default gen_random_uuid(),
@@ -791,7 +842,7 @@ a { color: inherit; }
         id uuid primary key default gen_random_uuid(),
         agent_id uuid references agents(id),
         unlisted_agent_name text,
-        destination text, city text,
+        destination text, city text, university text,
         fee_transparency smallint check (fee_transparency between 1 and 5),
         communication smallint check (communication between 1 and 5),
         visa_support smallint check (visa_support between 1 and 5),
@@ -819,20 +870,28 @@ a { color: inherit; }
       -- a policy allowing anon INSERT only. Never make it public.
 
    4. Until the placeholders are configured, the site falls back to the
-      built-in seed directory and the survey form explains that
-      submissions are temporarily offline. Nothing breaks.
+      built-in seed directory below and the survey form shows an offline
+      notice. Nothing on the live site breaks.
 
-   SCORING MODEL (all computed from verified rows only)
-     SurveyScore = 0.20*fee + 0.15*comm + 0.25*visa + 0.10*post + 0.30*overall  (1-5 scale)
-     Decay weight W(t) = exp(-LAMBDA * ageDays), LAMBDA = ln(2)/180  (half-life 180 days)
-     R = sum(W*score)/sum(W) per agent; C_global = pooled decayed mean across all agents
-     StudyScore = ( v/(v+m) )*R + ( m/(v+m) )*C_global, m = 10
-     Display rule: a score is shown only when v >= DISPLAY_FLOOR verified
-     reviews. No estimated or invented figures are ever rendered.
+   SMOKE-TEST DATA POLICY (important)
+   -  SEED_AGENTS lists real agencies with factual-only fields (name,
+      city, typical destinations) and NO ratings. City and destination
+      fields for the seven national brands come from general knowledge:
+      verify each one against the agency's own website before launch.
+   -  DEMO_SURVEYS contains SYNTHETIC review rows for smoke-testing the
+      decay + Bayesian engine. They mount ONLY when DEMO_MODE is true
+      AND the database returns zero verified surveys. Every score they
+      produce is labelled "simulated" in the UI and a banner is shown.
+      Publishing invented ratings for real agencies as if they were
+      student reviews would be fabricated data and a legal risk, so
+      DEMO_MODE ships as false. Flip it to true locally to smoke-test.
 
-   NOTE ON O(log N): index-backed lookups happen inside Postgres B-Trees
-   on the Supabase side; this client issues filtered queries that use
-   those indexes and renders the returned rows.
+   SCORING MODEL (verified rows only in production)
+     SurveyScore = 0.20*fee + 0.15*comm + 0.25*visa + 0.10*post + 0.30*overall  (1-5)
+     Decay W(t) = exp(-LAMBDA * ageDays), LAMBDA = ln(2)/180 (50% per 180 days)
+     R = sum(W*score)/sum(W) per agent; C_global = pooled decayed mean
+     FinalScore = ( v/(v+m) )*R + ( m/(v+m) )*C_global, m = 10
+     Display rule: score renders only when v >= DISPLAY_FLOOR reviews.
 ===================================================================== */
 var SUPABASE_URL      = "YOUR_SUPABASE_URL_PLACEHOLDER";
 var SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY_PLACEHOLDER";
@@ -845,16 +904,22 @@ try {
 } catch (e) { sb = null; }
 
 var CONTACT_EMAIL = "pradeep@studyscore.in";
-var CRM_BASE_URL  = "";  /* TODO: absolute origin of your CRM for the profile lead form */
+var CRM_BASE_URL  = "";     /* absolute origin of your CRM for the profile lead form */
 
-var LAMBDA        = Math.LN2 / 180;   /* half-life: 180 days */
-var M_FLOOR       = 10;               /* Bayesian stability floor (reviews) */
-var DISPLAY_FLOOR = 3;                /* min verified reviews before a score is shown */
-var CACHE_TTL     = 60000;            /* 60s in-memory cache: credit-efficient reads */
+var DEMO_MODE     = false;  /* true = mount synthetic DEMO_SURVEYS for smoke-testing.
+                               Simulated scores are clearly labelled in the UI. */
 
-/* Seed fallback so the live site keeps working before Supabase is
-   configured. Fields mirror the agents table. Data drawn from each
-   agency's own public website; verify before extending. */
+var LAMBDA        = Math.LN2 / 180;
+var M_FLOOR       = 10;
+var DISPLAY_FLOOR = 3;
+var CACHE_TTL     = 60000;
+
+/* --------------------------------------------------------------------
+   SEED DIRECTORY (fallback track). Factual-only fields, no ratings.
+   The first three were checked against their own public websites
+   earlier; the seven national brands below carry best-effort city and
+   destination data from general knowledge. VERIFY EACH before launch.
+-------------------------------------------------------------------- */
 var SEED_AGENTS = [
   { id: "chd-consultants", name: "CHD Consultants", slug: "chd-consultants",
     city: "Bathinda", city_slug: "bathinda", state: "Punjab",
@@ -873,11 +938,74 @@ var SEED_AGENTS = [
     destinations: ["Canada", "Australia", "UK", "Europe", "New Zealand"],
     services: ["Overseas education counselling", "IELTS coaching"],
     summary: "Overseas education consultancy headquartered in Mohali, Punjab, with counselling services across popular study destinations.",
+    master_agency_id: null },
+  /* ---- National brands: verify city/destinations before launch ---- */
+  { id: "idp-education", name: "IDP Education (India)", slug: "idp-education",
+    city: "New Delhi", city_slug: "new-delhi", state: "Delhi",
+    destinations: ["Australia", "UK", "Canada", "USA", "New Zealand", "Ireland"],
+    services: ["Overseas education counselling", "IELTS testing partner"],
+    summary: "International education services organisation with counselling offices across Indian cities. Provisional profile from public information.",
+    master_agency_id: null },
+  { id: "leap-scholar", name: "Leap Scholar", slug: "leap-scholar",
+    city: "Bengaluru", city_slug: "bengaluru", state: "Karnataka",
+    destinations: ["UK", "USA", "Canada", "Australia", "Ireland"],
+    services: ["Study abroad counselling", "Test prep", "Education financing"],
+    summary: "Study abroad platform headquartered in Bengaluru offering counselling, test preparation, and financing products. Provisional profile from public information.",
+    master_agency_id: null },
+  { id: "tc-global", name: "TC Global", slug: "tc-global",
+    city: "New Delhi", city_slug: "new-delhi", state: "Delhi",
+    destinations: ["UK", "Australia", "Canada", "USA", "Europe"],
+    services: ["Global education counselling"],
+    summary: "Global education and mobility organisation with centres across India. Provisional profile from public information.",
+    master_agency_id: null },
+  { id: "canam-consultants", name: "Canam Consultants", slug: "canam-consultants",
+    city: "Chandigarh", city_slug: "chandigarh", state: "Chandigarh",
+    destinations: ["Canada", "UK", "Australia", "USA", "New Zealand"],
+    services: ["Study visa counselling", "Coaching"],
+    summary: "Study abroad consultancy with a large branch network across North India. Provisional profile from public information.",
+    master_agency_id: null },
+  { id: "edwise-international", name: "Edwise International", slug: "edwise-international",
+    city: "Mumbai", city_slug: "mumbai", state: "Maharashtra",
+    destinations: ["UK", "USA", "Canada", "Australia", "New Zealand", "Singapore"],
+    services: ["Overseas education consultancy"],
+    summary: "Overseas education consultancy headquartered in Mumbai with branches across India. Provisional profile from public information.",
+    master_agency_id: null },
+  { id: "y-axis-overseas", name: "Y-Axis Overseas Careers", slug: "y-axis-overseas",
+    city: "Hyderabad", city_slug: "hyderabad", state: "Telangana",
+    destinations: ["Canada", "Australia", "UK", "Germany", "USA"],
+    services: ["Overseas careers and study visa services"],
+    summary: "Immigration and overseas careers company headquartered in Hyderabad. Provisional profile from public information.",
+    master_agency_id: null },
+  { id: "pyramid-eservices", name: "Pyramid eServices", slug: "pyramid-eservices",
+    city: "Jalandhar", city_slug: "jalandhar", state: "Punjab",
+    destinations: ["Canada", "Australia", "UK", "USA", "New Zealand"],
+    services: ["Study visa counselling", "IELTS coaching"],
+    summary: "Study abroad and IELTS company based in Jalandhar with branches across Punjab. Provisional profile from public information.",
     master_agency_id: null }
 ];
 
+/* --------------------------------------------------------------------
+   DEMO_SURVEYS: synthetic smoke-test rows. NOT real student reviews.
+   Mounted only when DEMO_MODE === true and the live query returns zero
+   rows. Ages vary to exercise the 180-day half-life; counts vary so
+   some agents cross DISPLAY_FLOOR (ranked) and others show
+   "collecting", which is exactly what a smoke test must cover.
+-------------------------------------------------------------------- */
+var DEMO_SURVEYS = [
+  { slug: "leap-scholar", daysAgo: 12,  fee: 4, comm: 5, visa: 4, post: 3, overall: 4, destination: "UK",        university: "University of Leeds" },
+  { slug: "leap-scholar", daysAgo: 60,  fee: 3, comm: 4, visa: 4, post: 2, overall: 4, destination: "Canada",    university: "University of Toronto" },
+  { slug: "leap-scholar", daysAgo: 210, fee: 5, comm: 4, visa: 5, post: 4, overall: 5, destination: "Australia", university: "Deakin University" },
+  { slug: "canam-consultants", daysAgo: 25,  fee: 2, comm: 3, visa: 4, post: 2, overall: 3, destination: "Canada",    university: "Conestoga College" },
+  { slug: "canam-consultants", daysAgo: 95,  fee: 3, comm: 3, visa: 3, post: 3, overall: 3, destination: "Canada",    university: "University of Windsor" },
+  { slug: "canam-consultants", daysAgo: 400, fee: 4, comm: 4, visa: 4, post: 3, overall: 4, destination: "UK",        university: "Coventry University" },
+  { slug: "idp-education", daysAgo: 40,  fee: 4, comm: 4, visa: 4, post: 4, overall: 4, destination: "Australia", university: "Monash University" },
+  { slug: "idp-education", daysAgo: 150, fee: 4, comm: 3, visa: 4, post: 3, overall: 4, destination: "UK",        university: "University of Birmingham" },
+  { slug: "edwise-international", daysAgo: 75,  fee: 3, comm: 4, visa: 3, post: 2, overall: 3, destination: "USA",       university: "Arizona State University" },
+  { slug: "pyramid-eservices",    daysAgo: 30,  fee: 4, comm: 4, visa: 5, post: 3, overall: 4, destination: "Canada",    university: "University of Manitoba" }
+];
+
 var DEFAULT_TITLE = document.title;
-var cache = { agents: null, surveys: null, ts: 0 };
+var cache = { agents: null, surveys: null, ts: 0, demo: false, offline: false };
 
 /* ------------------------------ Utils ------------------------------ */
 function esc(s) {
@@ -885,8 +1013,8 @@ function esc(s) {
     .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
 }
-function profileHash(a) { return "#/agents/" + a.city_slug + "/" + a.slug; }
-function profileUrl(a)  { return "https://studyscore.in/" + profileHash(a); }
+function profileHashOf(a) { return "#/agents/" + a.city_slug + "/" + a.slug; }
+function profileUrl(a)    { return "https://studyscore.in/" + profileHashOf(a); }
 function showModal(title, msg) {
   document.getElementById("modalTitle").textContent = title;
   document.getElementById("modalMsg").textContent = msg;
@@ -894,15 +1022,59 @@ function showModal(title, msg) {
 }
 function closeModal() { document.getElementById("modalOv").classList.remove("open"); }
 
+/* ---------------------- System ticker (truthful) ---------------------- */
+function updateTicker() {
+  var segs = [];
+  segs.push(sb ? "LIVE DATABASE CONNECTED" : "FALLBACK DIRECTORY ACTIVE");
+  if (cache.demo) segs.push("DEMO MODE · SIMULATED REVIEWS");
+  else segs.push("VERIFIED REVIEWS ONLY");
+  segs.push("TIME-DECAY ENGINE · 180-DAY HALF-LIFE");
+  segs.push("BAYESIAN STABILISER · m=10");
+  segs.push("SHA-256 DOCUMENT DEDUP");
+  segs.push("INDEPENDENT · NO AGENCY FUNDING");
+  segs.push("TRUST BEFORE YOU SIGN");
+  var text = segs.join("  \u2022  ") + "  \u2022  ";
+  document.getElementById("tickerA").textContent = text;
+  document.getElementById("tickerB").textContent = text;
+}
+
+/* ------------------- Demo mount (synthetic rows) ------------------- */
+function mountDemoSurveys(agents) {
+  var bySlug = {};
+  agents.forEach(function (a) { bySlug[a.slug] = a.id; });
+  return DEMO_SURVEYS.map(function (d) {
+    return {
+      agent_id: bySlug[d.slug] || null,
+      destination: d.destination,
+      university: d.university,
+      fee_transparency: d.fee,
+      communication: d.comm,
+      visa_support: d.visa,
+      post_visa_support: d.post,
+      overall_satisfaction: d.overall,
+      created_at: new Date(Date.now() - d.daysAgo * 86400000).toISOString()
+    };
+  }).filter(function (r) { return r.agent_id; });
+}
+
 /* ------------------------- Data layer (async) ------------------------- */
 function loadData(force) {
   var now = Date.now();
   if (!force && cache.agents && (now - cache.ts) < CACHE_TTL) {
     return Promise.resolve(cache);
   }
+  var finish = function (agents, surveys, offline) {
+    var demo = false;
+    if (DEMO_MODE && (!surveys || surveys.length === 0)) {
+      surveys = mountDemoSurveys(agents);
+      demo = true;
+    }
+    cache = { agents: agents, surveys: surveys || [], ts: Date.now(), demo: demo, offline: offline };
+    updateTicker();
+    return cache;
+  };
   if (!sb) {
-    cache = { agents: SEED_AGENTS.slice(), surveys: [], ts: now, offline: true };
-    return Promise.resolve(cache);
+    return Promise.resolve(finish(SEED_AGENTS.slice(), [], true));
   }
   var agentsQ = sb.from("agents").select("*").order("name", { ascending: true });
   var surveysQ = sb.from("surveys")
@@ -910,16 +1082,11 @@ function loadData(force) {
     .eq("status", "verified");   /* uses surveys_agent_status_idx B-Tree */
   return Promise.all([agentsQ, surveysQ]).then(function (res) {
     var aErr = res[0].error, sErr = res[1].error;
-    cache = {
-      agents: (!aErr && res[0].data && res[0].data.length) ? res[0].data : SEED_AGENTS.slice(),
-      surveys: (!sErr && res[1].data) ? res[1].data : [],
-      ts: Date.now(),
-      offline: !!(aErr || sErr)
-    };
-    return cache;
+    var agents = (!aErr && res[0].data && res[0].data.length) ? res[0].data : SEED_AGENTS.slice();
+    var surveys = (!sErr && res[1].data) ? res[1].data : [];
+    return finish(agents, surveys, !!(aErr || sErr));
   }).catch(function () {
-    cache = { agents: SEED_AGENTS.slice(), surveys: [], ts: Date.now(), offline: true };
-    return cache;
+    return finish(SEED_AGENTS.slice(), [], true);
   });
 }
 function findAgent(agents, citySlug, slug) {
@@ -935,13 +1102,12 @@ function surveyScore(s) {
          0.15 * s.communication +
          0.25 * s.visa_support +
          0.10 * s.post_visa_support +
-         0.30 * s.overall_satisfaction;   /* 1-5 scale */
+         0.30 * s.overall_satisfaction;
 }
 function decayWeight(createdAt) {
   var ageDays = Math.max(0, (Date.now() - new Date(createdAt).getTime()) / 86400000);
   return Math.exp(-LAMBDA * ageDays);
 }
-/* Returns { byAgent: { agentId: {v, R} }, cGlobal } from verified surveys */
 function computeScores(surveys) {
   var byAgent = {}, gW = 0, gWS = 0;
   for (var i = 0; i < surveys.length; i++) {
@@ -962,25 +1128,25 @@ function computeScores(surveys) {
   }
   return { byAgent: out, cGlobal: cGlobal };
 }
-/* Bayesian stabilised score on 1-5 scale, rendered /100 */
 function studyScore(entry, cGlobal) {
   if (!entry || entry.R === null || cGlobal === null) return null;
   var v = entry.v, m = M_FLOOR;
   var s5 = (v / (v + m)) * entry.R + (m / (v + m)) * cGlobal;
-  return Math.round(s5 * 20);   /* 1-5 -> /100 */
+  return Math.round(s5 * 20);
 }
-function scoreBlock(agent, scores) {
+function scoreBlock(agent, scores, demo) {
   var e = scores.byAgent[agent.id];
   var v = e ? e.v : 0;
+  var simTag = demo ? " &middot; simulated" : "";
   if (v >= DISPLAY_FLOOR) {
     var sc = studyScore(e, scores.cGlobal);
     if (sc !== null) {
       return '<div class="score-line"><span class="score-big">' + sc + '</span>' +
-             '<span class="score-sub">StudyScore &middot; ' + v + ' verified reviews</span></div>';
+             '<span class="score-sub">StudyScore &middot; ' + v + ' ' + (demo ? 'simulated' : 'verified') + ' reviews</span></div>';
     }
   }
   if (v > 0) {
-    return '<div class="score-none">Collecting reviews &middot; ' + v + ' verified so far (score appears at ' + DISPLAY_FLOOR + ')</div>';
+    return '<div class="score-none">Collecting reviews &middot; ' + v + (demo ? ' simulated' : ' verified') + ' so far (score appears at ' + DISPLAY_FLOOR + ')' + '</div>';
   }
   return '<div class="score-none">Not yet rated &middot; awaiting verified student reviews</div>';
 }
@@ -993,17 +1159,18 @@ function allDestinations(agents) {
   });
   return out.sort();
 }
-function agentCard(a, scores, rank) {
+function agentCard(a, scores, rank, demo) {
   return '<article class="card card-hover agent-card">' +
     (rank ? '<span class="lb-rank">RANK #' + rank + '</span>' : '') +
     '<span class="badge-prov">Unclaimed Provisional Profile</span>' +
+    (demo && scores.byAgent[a.id] ? '<span class="badge-demo">Simulated Demo Data</span>' : '') +
     '<h3>' + esc(a.name) + '</h3>' +
     '<div class="loc">' + esc(a.city || "") + (a.state ? ', ' + esc(a.state) : '') + ', India</div>' +
-    scoreBlock(a, scores) +
+    scoreBlock(a, scores, demo) +
     '<div class="chiprow">' +
       (a.destinations || []).map(function (d) { return '<span class="chip">' + esc(d) + '</span>'; }).join('') +
     '</div>' +
-    '<a class="view-link" href="' + profileHash(a) + '">View profile &#8594;</a>' +
+    '<a class="view-link" href="' + profileHashOf(a) + '">View profile &#8594;</a>' +
   '</article>';
 }
 function renderDirectory() {
@@ -1017,7 +1184,6 @@ function renderDirectory() {
       var text = ((a.name || "") + " " + (a.city || "") + " " + (a.state || "")).toLowerCase();
       return (!q || text.indexOf(q) !== -1) && (!dest || (a.destinations || []).indexOf(dest) !== -1);
     });
-    /* Leaderboard order: displayable scores first (desc), then the rest A-Z */
     list.sort(function (x, y) {
       var ex = scores.byAgent[x.id], ey = scores.byAgent[y.id];
       var sx = (ex && ex.v >= DISPLAY_FLOOR) ? studyScore(ex, scores.cGlobal) : null;
@@ -1028,13 +1194,16 @@ function renderDirectory() {
       return (x.name || "").localeCompare(y.name || "");
     });
     var rank = 0;
-    grid.innerHTML = list.length
+    var head = data.demo
+      ? '<div class="demo-note"><b>Demo mode is on.</b> The scores below are computed from synthetic smoke-test rows to demonstrate the decay and Bayesian engine. They are not real student reviews. Set DEMO_MODE to false before publishing.</div>'
+      : '';
+    grid.innerHTML = head + (list.length
       ? list.map(function (a) {
           var e = scores.byAgent[a.id];
           var scored = e && e.v >= DISPLAY_FLOOR && studyScore(e, scores.cGlobal) !== null;
-          return agentCard(a, scores, scored ? ++rank : 0);
+          return agentCard(a, scores, scored ? ++rank : 0, data.demo);
         }).join("")
-      : '<div class="dir-empty">No agencies match that search yet. The directory is growing; check back soon.</div>';
+      : '<div class="dir-empty">No agencies match that search yet. The directory is growing; check back soon.</div>');
   });
 }
 function initDirectoryControls() {
@@ -1120,7 +1289,7 @@ function renderProfile(citySlug, agentSlug) {
     var a = findAgent(data.agents, citySlug, agentSlug);
     if (!a) {
       wrap.innerHTML = '<div class="card" style="padding:40px;margin-bottom:90px;">' +
-        '<h1 class="serif" style="font-size:30px;margin-bottom:10px;">Profile not found</h1>' +
+        '<h1 style="font-family:var(--disp);font-weight:700;font-size:30px;color:var(--ink);margin-bottom:10px;">Profile not found</h1>' +
         '<p style="color:var(--muted);">This agency is not in the directory yet. <a href="#/agents" style="color:var(--gold);">Browse the full directory</a>.</p></div>';
       document.title = "Profile not found | StudyScore";
       injectSchema(null);
@@ -1130,6 +1299,7 @@ function renderProfile(citySlug, agentSlug) {
     var e = scores.byAgent[a.id];
     var v = e ? e.v : 0;
     var displayable = v >= DISPLAY_FLOOR ? studyScore(e, scores.cGlobal) : null;
+    var demoTag = data.demo && v > 0;
     var master = null;
     if (a.master_agency_id) {
       for (var i = 0; i < data.agents.length; i++) {
@@ -1140,10 +1310,11 @@ function renderProfile(citySlug, agentSlug) {
 
     wrap.innerHTML =
       '<section class="card pf-hero">' +
-        '<span class="badge-prov">Unclaimed Provisional Profile</span>' +
+        '<span class="badge-prov">Unclaimed Provisional Profile</span> ' +
+        (demoTag ? '<span class="badge-demo">Simulated Demo Data</span>' : '') +
         '<h1>' + esc(a.name) + '</h1>' +
         '<div class="loc">' + esc(a.city || "") + (a.state ? ', ' + esc(a.state) : '') + ', India</div>' +
-        scoreBlock(a, scores) +
+        scoreBlock(a, scores, data.demo) +
         '<div class="chiprow" style="margin:14px 0 10px;">' +
           (a.destinations || []).map(function (d) { return '<span class="chip">' + esc(d) + '</span>'; }).join('') +
         '</div>' +
@@ -1158,7 +1329,7 @@ function renderProfile(citySlug, agentSlug) {
           '<span class="prov-dot"></span>' +
           '<div>' +
             '<div class="prov-title">Provisional Listing &bull; Independent Audit Pending</div>' +
-            '<div class="prov-sub">Compiled from publicly available information. Not claimed or verified by ' + esc(a.name) + '. Scores appear only from verified, anonymous student reviews.</div>' +
+            '<div class="prov-sub">Compiled from publicly available information. Not claimed or verified by ' + esc(a.name) + '. Scores appear only from verified, anonymous student reviews' + (data.demo ? ', except values explicitly labelled as simulated demo data' : '') + '.</div>' +
           '</div>' +
         '</div>' +
         '<a href="' + mailClaim + '" class="btn btn-dark btn-sm" style="flex-shrink:0;text-align:center;">Claim Workspace</a>' +
@@ -1169,14 +1340,14 @@ function renderProfile(citySlug, agentSlug) {
           '<div class="kicker">Performance Matrix</div>' +
           '<div class="metrics3">' +
             metricWidget("StudyScore", displayable !== null ? (displayable + '<span class="munit">/100</span>') : "", displayable === null,
-              v > 0 ? ("Collecting: " + v + " of " + DISPLAY_FLOOR + " verified reviews") : "Awaiting verified student data",
-              displayable !== null ? ("Bayesian, time-decayed, " + v + " verified reviews") : "Unlocks after verified anonymous reviews") +
-            metricWidget("Verified Alumni Count", v > 0 ? String(v) : "", v === 0,
-              "Awaiting verified student data", v > 0 ? "Students with verified reviews" : "Unlocks after verified anonymous reviews") +
+              v > 0 ? ("Collecting: " + v + " of " + DISPLAY_FLOOR + " reviews") : "Awaiting verified student data",
+              displayable !== null ? ("Bayesian, time-decayed, " + v + (data.demo ? " simulated" : " verified") + " reviews") : "Unlocks after verified anonymous reviews") +
+            metricWidget((data.demo ? "Simulated" : "Verified") + " Alumni Count", v > 0 ? String(v) : "", v === 0,
+              "Awaiting verified student data", v > 0 ? ("Students with " + (data.demo ? "simulated" : "verified") + " reviews") : "Unlocks after verified anonymous reviews") +
             metricWidget("Visa Success Coefficient", "", true,
               "Awaiting verified student data", "Requires verified outcome data") +
           '</div>' +
-          '<p class="matrix-foot">StudyScore publishes figures only from verified, anonymous student reviews. Nothing on this page is estimated or invented. Recent reviews weigh more than old ones (180-day half-life), and a Bayesian floor of ' + M_FLOOR + ' resists review-bombing.</p>' +
+          '<p class="matrix-foot">StudyScore publishes figures only from verified, anonymous student reviews' + (data.demo ? ' (demo mode currently shows clearly labelled synthetic values)' : '') + '. Recent reviews weigh more than old ones (180-day half-life), and a Bayesian floor of ' + M_FLOOR + ' resists review-bombing.</p>' +
 
           '<div class="card about-card">' +
             '<div class="kicker">About (as publicly listed)</div>' +
@@ -1186,7 +1357,7 @@ function renderProfile(citySlug, agentSlug) {
           '<div class="card rate-card" id="rateCta">' +
             '<h3>Used this agency? Your review builds the score.</h3>' +
             '<p>Ratings on StudyScore come only from verified, anonymous student reviews. 3 minutes. No login. No agent ever sees who you are.</p>' +
-            '<a href="#/rate?agent=' + encodeURIComponent(a.slug) + '" class="btn btn-dark btn-sm">Rate this agency (3 min, anonymous) &#8594;</a>' +
+            '<a href="#/survey?agent=' + encodeURIComponent(a.slug) + '" class="btn btn-dark btn-sm">Rate this agency (3 min, anonymous) &#8594;</a>' +
           '</div>' +
         '</div>' +
 
@@ -1292,8 +1463,8 @@ function setSrvStatus(kind, msg) {
   status.className = "fstatus " + (kind === "ok" ? "ok" : "err");
   status.textContent = msg;
 }
-/* SHA-256 of the ORIGINAL file bytes -> stable 64-char hex fingerprint.
-   Hashing happens locally in the browser (Web Crypto, needs https). */
+/* SHA-256 of the ORIGINAL file bytes: stable 64-char hex fingerprint.
+   Runs locally in the browser via Web Crypto (requires https). */
 function hashFileSHA256(file) {
   return file.arrayBuffer().then(function (buf) {
     return crypto.subtle.digest("SHA-256", buf);
@@ -1345,7 +1516,7 @@ function fillSurveyAgentSelect(agents, preselectSlug) {
   other.textContent = "My agency is not listed";
   sel.appendChild(other);
 }
-function initRateView(preselectSlug) {
+function initSurveyView(preselectSlug) {
   loadData(false).then(function (data) {
     fillSurveyAgentSelect(data.agents, preselectSlug || "");
   });
@@ -1381,7 +1552,7 @@ function submitSurvey() {
     return;
   }
   btn.disabled = true;
-  setSrvStatus("ok", "Processing your submission locally&hellip;");
+  setSrvStatus("ok", "Processing your submission locally\u2026");
 
   var docHash = null, docPath = null;
   var chain = Promise.resolve();
@@ -1412,6 +1583,7 @@ function submitSurvey() {
       unlisted_agent_name: agentVal === "__other" ? (document.getElementById("srvUnlisted").value.trim() || null) : null,
       destination: dest,
       city: document.getElementById("srvCity").value.trim() || null,
+      university: document.getElementById("srvUni").value.trim() || null,
       fee_transparency: ratings.fee_transparency,
       communication: ratings.communication,
       visa_support: ratings.visa_support,
@@ -1438,7 +1610,7 @@ function submitSurvey() {
     f.reset();
     document.getElementById("srvUnlistedWrap").style.display = "none";
     setSrvStatus("ok", "Thank you. Your review has been received and is pending verification. Verified reviews power the public StudyScore.");
-    cache.ts = 0;   /* invalidate cache so new verified data reflects after moderation */
+    cache.ts = 0;
   }).catch(function () {
     btn.disabled = false;
     setSrvStatus("err", "We could not save your review right now. Please try again, or email " + CONTACT_EMAIL + ".");
@@ -1446,7 +1618,7 @@ function submitSurvey() {
 }
 
 /* ------------------------------ Router ------------------------------ */
-var VIEWS = ["view-home", "view-agents", "view-profile", "view-rate", "view-privacy", "view-terms"];
+var VIEWS = ["view-home", "view-agents", "view-profile", "view-survey", "view-privacy", "view-terms"];
 function activate(id) {
   VIEWS.forEach(function (v) {
     var el = document.getElementById(v);
@@ -1455,7 +1627,7 @@ function activate(id) {
 }
 function router() {
   var raw = location.hash || "";
-  if (raw && raw.indexOf("#/") !== 0) {   /* plain in-page anchors like #survey */
+  if (raw && raw.indexOf("#/") !== 0) {   /* plain in-page anchors */
     activate("view-home");
     document.title = DEFAULT_TITLE;
     injectSchema(null);
@@ -1486,9 +1658,13 @@ function router() {
     });
     renderDirectory();
     document.title = "Study Abroad Agent Leaderboard | StudyScore";
-  } else if (parts[0] === "rate") {
-    activate("view-rate");
-    initRateView(query.agent || "");
+  } else if (parts[0] === "survey" || parts[0] === "rate") {
+    if (parts[0] === "rate") {   /* legacy alias */
+      location.replace("#/survey" + (query.agent ? ("?agent=" + encodeURIComponent(query.agent)) : ""));
+      return;
+    }
+    activate("view-survey");
+    initSurveyView(query.agent || "");
     document.title = "Rate Your Study Abroad Agent | StudyScore";
     injectSchema(null);
   } else if (parts[0] === "privacy") {
@@ -1507,6 +1683,7 @@ function router() {
   window.scrollTo(0, 0);
 }
 document.addEventListener("DOMContentLoaded", function () {
+  updateTicker();
   initDirectoryControls();
   document.getElementById("srvAgent").addEventListener("change", function () {
     document.getElementById("srvUnlistedWrap").style.display = (this.value === "__other") ? "block" : "none";
