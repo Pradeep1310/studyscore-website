@@ -101,6 +101,7 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { overflow-x: hidden; width: 100%; max-width: 100%; }
 html { scroll-behavior: smooth; }
 body {
   font-family: "Plus Jakarta Sans", system-ui, sans-serif;
@@ -453,6 +454,18 @@ a { color: inherit; }
 .modal { background: var(--card); border: 1px solid var(--line); border-radius: 14px; max-width: 460px; width: 100%; padding: 30px; box-shadow: var(--shadow-md); }
 .modal h3 { font-family: var(--disp); font-weight: 700; font-size: 19px; color: var(--ink); margin-bottom: 10px; }
 .modal p { font-size: 14px; color: var(--body); margin-bottom: 20px; line-height: 1.7; }
+
+/* ---- Universal fluid geometry (zero-overlap rule) ---- */
+.wrap, .wrap-md, .wrap-sm { padding-left: clamp(14px, 4vw, 22px); padding-right: clamp(14px, 4vw, 22px); }
+.agent-card, .blog-card, .event-card, .pcard { padding: clamp(14px, 3vw, 26px); }
+.agent-card h3, .blog-card h3, .event-card h3 { font-size: clamp(16px, 2.5vw, 19px); overflow-wrap: break-word; }
+.agent-card .loc, .agent-bio, .blog-card p { font-size: clamp(12px, 2.3vw, 13.5px); }
+.lede { font-size: clamp(14px, 2.5vw, 17px); }
+.toolbar { gap: clamp(8px, 2vw, 12px); }
+.toolbar .field { min-width: 0; flex: 1 1 200px; }
+.page-head h1, .pf-hero h1, .hero h1 { overflow-wrap: break-word; }
+img, svg { max-width: 100%; }
+.chiprow { max-width: 100%; }
 
 /* ---- Directory 2-column geometric workspace ---- */
 .dir-layout { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: start; padding-bottom: 90px; }
@@ -1245,6 +1258,25 @@ try {
   }
 } catch (e) { sb = null; }
 
+/* Localhost Sandbox Mode: when served from localhost / 127.0.0.1, every
+   form submission is stored in this browser's localStorage instead of the
+   live database, keeping production tables clean during testing. Inspect
+   captured test rows via DevTools > Application > Local Storage
+   (keys prefixed 'studyscore_sandbox_'). */
+var SANDBOX = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+function sandboxInsert(table, row) {
+  try {
+    var key = "studyscore_sandbox_" + table;
+    var arr = JSON.parse(localStorage.getItem(key) || "[]");
+    row._sandbox_saved_at = new Date().toISOString();
+    arr.push(row);
+    localStorage.setItem(key, JSON.stringify(arr));
+    return Promise.resolve({ error: null, sandbox: true });
+  } catch (e) {
+    return Promise.resolve({ error: { message: "Sandbox storage failed: " + (e && e.message ? e.message : e) } });
+  }
+}
+
 var CONTACT_EMAIL = "pradeep@studyscore.in";
 var CRM_BASE_URL  = "";     /* absolute origin of your CRM for the profile lead form */
 var DOC_BUCKET    = "verification-vault";   /* PRIVATE storage bucket for document proofs */
@@ -1379,15 +1411,13 @@ function closeModal() { document.getElementById("modalOv").classList.remove("ope
 /* ---------------------- System ticker (truthful) ---------------------- */
 function updateTicker() {
   var segs = [];
-  segs.push(sb ? "DATABASE SYNC SECURE" : "FALLBACK DIRECTORY ACTIVE");
+  if (SANDBOX) segs.push("LOCAL SANDBOX MODE · TEST DATA STAYS ON THIS DEVICE");
+  if (!sb) segs.push("DIRECTORY PREVIEW MODE");
   if (cache.demo) segs.push("DEMO MODE · SIMULATED REVIEWS");
-  else segs.push("VERIFIED REVIEWS ONLY");
-  segs.push("CRYPTOGRAPHIC VAULT LOCKED");
-  segs.push("TRACKING ICEF TRANSIT COEFFICIENTS");
-  segs.push("CONSUMER PROTECTION AUDIT MATRIX ACTIVE");
-  segs.push("TIME-DECAY ENGINE · 180-DAY HALF-LIFE");
-  segs.push("BAYESIAN STABILISER · m=10");
-  segs.push("INDEPENDENT · NO AGENCY FUNDING");
+  segs.push("STUDENT REVIEWS REGISTER MATRIX");
+  segs.push("100% INDEPENDENT CONSUMER AUDIT NETWORK");
+  segs.push("INDEPENDENT PERFORMANCE DIRECTORY");
+  segs.push("PROTECTING OVERSEAS EDUCATION ASPIRANTS");
   segs.push("TRUST BEFORE YOU SIGN");
   var text = segs.join("  \u2022  ") + "  \u2022  ";
   document.getElementById("tickerA").textContent = text;
@@ -1961,6 +1991,12 @@ function submitClaim() {
     page_url: profileUrl(claimAgent),
     status: "new"
   };
+  if (SANDBOX) {
+    sandboxInsert("profile_claims", payload);
+    f.reset();
+    setClaimStatus("ok", "Sandbox mode: claim stored locally on this device only.");
+    return;
+  }
   if (!sb) { claimMailtoFallback(payload); setClaimStatus("ok", "An email draft has been opened with your claim. Press send in your mail app to complete it."); return; }
   btn.disabled = true;
   fetch(SUPABASE_URL + "/rest/v1/profile_claims", {
@@ -2132,7 +2168,7 @@ function submitSurvey() {
   var docHash = null, docPath = null, secureUrl = null;
   var chain = Promise.resolve();
 
-  if (file) {
+  if (file && !SANDBOX) {                      /* sandbox mode never uploads binaries */
     chain = chain
       .then(function () { return hashFileSHA256(file); })      /* hash ORIGINAL bytes */
       .then(function (hex) {
@@ -2193,7 +2229,7 @@ function submitSurvey() {
       secure_proof_url: secureUrl,
       status: "pending"
     };
-    return sb.from("surveys").insert(row);
+    return SANDBOX ? sandboxInsert("surveys", row) : sb.from("surveys").insert(row);
   }).then(function (res) {
     btn.disabled = false;
     if (res.error) {
@@ -2230,11 +2266,16 @@ function submitSurvey() {
    leadAgent) and the blog instance suffixes them to keep the DOM valid.
    Inserts into public.leads (see leads_setup.sql; anon INSERT only). */
 var LEAD_MAGNET_COPY = "Download the 2026 Bureaucratic Strategy Playbook: How to Bypass Hidden Forex Markups, Private College Traps, and Agent Document Rejections in India. 100% Free Safeguard Report.";
-function leadMagnetHtml(sfx) {
+function leadMagnetHeading(agencyName) {
+  return agencyName
+    ? "Interested in applying via " + agencyName + "? Get the 2026 Bureaucratic Strategy Playbook"
+    : "Interested in applying for overseas education? Get the 2026 Bureaucratic Strategy Playbook";
+}
+function leadMagnetHtml(sfx, agencyName) {
   return '<div class="card lm-card">' +
-    '<h3>&#128274; Secure StudyScore Inbound Gateway</h3>' +
+    '<h3>' + esc(leadMagnetHeading(agencyName)) + '</h3>' +
     '<p class="lm-copy">' + LEAD_MAGNET_COPY + '</p>' +
-    '<form class="lead-magnet-form lf" style="padding:0;border-top:none;" novalidate>' +
+    '<form class="lead-magnet-form lf" data-agency="' + esc(agencyName || "") + '" style="padding:0;border-top:none;" novalidate>' +
       '<div class="hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>' +
       '<label for="leadName' + sfx + '">Student full name</label>' +
       '<input type="text" id="leadName' + sfx + '" name="leadName" class="field" required minlength="2" autocomplete="name" placeholder="Your name">' +
@@ -2274,13 +2315,14 @@ function submitLeadMagnet(form, sourcePage) {
     return;
   }
   btn.disabled = true;                                    /* prevent request pooling */
-  sb.from("leads").insert([{
+  var leadRow = {
     full_name: name,
     whatsapp_number: wa,
     target_destination: dest,
     current_consultant: agent,
     source_page: window.location.hash || sourcePage   /* snake_case column; live route context for GEO analytics */
-  }]).then(function (res) {
+  };
+  (SANDBOX ? sandboxInsert("leads", leadRow) : sb.from("leads").insert([leadRow])).then(function (res) {
     btn.disabled = false;
     if (res.error) {
       console.error("StudyScore: lead insert failed", res.error);
@@ -2296,7 +2338,7 @@ function submitLeadMagnet(form, sourcePage) {
         '<a href="./' + PLAYBOOK_URL + '" download="' + PLAYBOOK_URL + '" class="btn btn-dark">&#128229; Download Playbook PDF Instantly</a>' +
       '</div>';
     if (card) {
-      card.innerHTML = '<h3>&#128274; Secure StudyScore Inbound Gateway</h3>' + successHtml;
+      card.innerHTML = '<h3>' + esc(leadMagnetHeading(form.getAttribute("data-agency") || "")) + '</h3>' + successHtml;
     } else {
       form.reset();
       setSt("ok", "Access Credentials Verified. Download your playbook: " + PLAYBOOK_URL);
@@ -2307,9 +2349,9 @@ function submitLeadMagnet(form, sourcePage) {
     setSt("err", "Network error. Please try again, or email " + CONTACT_EMAIL + ".");
   });
 }
-function initLeadMagnet(container, sfx, sourcePage) {
+function initLeadMagnet(container, sfx, sourcePage, agencyName) {
   if (!container) return;
-  container.innerHTML = leadMagnetHtml(sfx);
+  container.innerHTML = leadMagnetHtml(sfx, agencyName || "");
   var form = container.querySelector(".lead-magnet-form");
   form.addEventListener("submit", function (e) {
     e.preventDefault();
