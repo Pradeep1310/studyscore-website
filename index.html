@@ -454,6 +454,37 @@ a { color: inherit; }
 .modal h3 { font-family: var(--disp); font-weight: 700; font-size: 19px; color: var(--ink); margin-bottom: 10px; }
 .modal p { font-size: 14px; color: var(--body); margin-bottom: 20px; line-height: 1.7; }
 
+/* ---- Enterprise claim panel (Zomato-style prestige header) ---- */
+.claim-panel {
+  background: var(--card); border: 1px solid var(--line); border-top: 3px solid #F59E0B;
+  border-radius: 16px; padding: 26px 28px; margin-bottom: 30px;
+  box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column; gap: 18px;
+}
+@media (min-width: 760px) { .claim-panel { flex-direction: row; align-items: center; } }
+.claim-left { display: flex; gap: 14px; flex: 1; }
+.pulse-amber {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #F59E0B; margin-top: 6px; flex-shrink: 0;
+  animation: pulseAmber 2.2s ease-in-out infinite;
+}
+@keyframes pulseAmber {
+  0%, 100% { transform: scale(1);    opacity: 1;    box-shadow: 0 0 0 0 rgba(245,158,11,0.55); }
+  50%      { transform: scale(1.35); opacity: 0.65; box-shadow: 0 0 0 12px rgba(245,158,11,0); }
+}
+.claim-title {
+  font-family: var(--mono); font-size: 12px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber);
+}
+.claim-sub { font-size: 12.5px; color: #92661C; margin-top: 5px; line-height: 1.7; }
+.claim-disclaimer {
+  font-size: 12.5px; color: var(--body); margin-top: 10px; line-height: 1.75;
+  border-left: 2px solid var(--line); padding-left: 12px;
+}
+.btn-claim { box-shadow: var(--shadow-sm); }
+.btn-claim:hover { box-shadow: var(--shadow-md); }
+.modal-claim { max-width: 520px; }
+
 /* ---- Legal ---- */
 .legal { padding-bottom: 90px; }
 .legal h2 { font-family: var(--disp); font-weight: 700; letter-spacing: -0.01em; color: var(--ink); font-size: 21px; margin: 30px 0 10px; }
@@ -804,6 +835,28 @@ a { color: inherit; }
     <h3 id="modalTitle">Notice</h3>
     <p id="modalMsg"></p>
     <button type="button" class="btn btn-dark btn-sm" onclick="closeModal()">Understood</button>
+  </div>
+</div>
+
+<!-- ============================ CLAIM WORKSPACE MODAL ============================ -->
+<div id="claimOv" class="modal-ov" role="dialog" aria-modal="true" aria-labelledby="claimTitle">
+  <div class="modal modal-claim">
+    <h3 id="claimTitle">Secure &amp; Claim Workspace</h3>
+    <p id="claimAgentLine" style="font-size:13px;color:var(--muted);margin-bottom:6px;"></p>
+    <form id="claimForm" novalidate class="lf" style="padding:0;border-top:none;">
+      <div class="hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <label for="clName">Full corporate name</label>
+      <input id="clName" type="text" class="field" required autocomplete="organization" placeholder="e.g. Canam Consultants Ltd.">
+      <label for="clEmail">Verified business email</label>
+      <input id="clEmail" type="email" class="field" required autocomplete="email" placeholder="name@yourcompany.com">
+      <p id="clEmailWarn" class="file-hint" style="display:none;color:var(--amber);">Generic mailbox domains (gmail.com and similar) are systematically filtered during verification. Use an email on your company domain if you have one.</p>
+      <label for="clRegId">EAO Corporate ID / Registration number</label>
+      <input id="clRegId" type="text" class="field" required placeholder="e.g. U74999DL2005PTC123456">
+      <button type="submit" id="clBtn" class="btn btn-dark">Submit claim for verification</button>
+      <div id="clStatus" role="status" class="fstatus"></div>
+      <p class="fineprint">Claims are reviewed manually before any profile change is made. See our <a href="#/privacy">Privacy Policy</a>.</p>
+    </form>
+    <button type="button" class="btn btn-line btn-sm" style="margin-top:14px;width:100%;" onclick="closeClaimModal()">Cancel</button>
   </div>
 </div>
 
@@ -1332,15 +1385,16 @@ function renderProfile(citySlug, agentSlug) {
         '</div>' +
       '</section>' +
 
-      '<div class="prov-banner">' +
-        '<div class="prov-left">' +
-          '<span class="prov-dot"></span>' +
+      '<div class="claim-panel">' +
+        '<div class="claim-left">' +
+          '<span class="pulse-amber" aria-hidden="true"></span>' +
           '<div>' +
-            '<div class="prov-title">Provisional Listing &bull; Independent Audit Pending</div>' +
-            '<div class="prov-sub">Compiled from publicly available information. Not claimed or verified by ' + esc(a.name) + '. Scores appear only from verified, anonymous student reviews' + (data.demo ? ', except values explicitly labelled as simulated demo data' : '') + '.</div>' +
+            '<div class="claim-title">Provisional Listing &bull; Independent Performance Audit Active</div>' +
+            '<div class="claim-sub">Compiled from publicly available information. Not claimed or verified by ' + esc(a.name) + '. Scores appear only from verified, anonymous student reviews' + (data.demo ? ', except values explicitly labelled as simulated demo data' : '') + '.</div>' +
+            '<div class="claim-disclaimer">This workspace is indexed by the StudyScore student verification network based on public operational records. Ratings are immutable by unverified third parties. Are you the managing administrator?</div>' +
           '</div>' +
         '</div>' +
-        '<a href="' + mailClaim + '" class="btn btn-dark btn-sm" style="flex-shrink:0;text-align:center;">Claim Workspace</a>' +
+        '<button type="button" id="claimBtn" class="btn btn-dark btn-sm btn-claim" style="flex-shrink:0;text-align:center;">Secure &amp; Claim Workspace</button>' +
       '</div>' +
 
       '<div class="pf-grid">' +
@@ -1398,6 +1452,8 @@ function renderProfile(citySlug, agentSlug) {
       ev.preventDefault();
       submitLead(a);
     });
+    var cbtn = document.getElementById("claimBtn");
+    if (cbtn) cbtn.addEventListener("click", function () { openClaimModal(a); });
     document.title = a.name + " (" + (a.city || "India") + ") | Provisional Profile | StudyScore";
     injectSchema(agentSchemaLD(a));
   });
@@ -1462,6 +1518,90 @@ function submitLead(a) {
     btn.disabled = false;
     setLeadStatus("err", "We could not reach our lead system, so an email draft has been opened instead.");
     mailtoFallback(a, payload);
+  });
+}
+
+/* ---------------- Enterprise claim capture (profile_claims) ----------------
+   Vanilla fetch() POST to the Supabase REST endpoint. Requires the
+   'profile_claims' table + anon INSERT policy (see claims_setup.sql).
+   agent_id is sent only for live database agents; local seed/demo ids
+   are placeholder UUIDs, so only slug + name are sent for them. */
+var claimAgent = null;
+var FREE_MAIL_RX = /@(gmail|googlemail|yahoo|ymail|hotmail|outlook|live|msn|rediffmail|protonmail|icloud|aol)\./i;
+function openClaimModal(a) {
+  claimAgent = a;
+  document.getElementById("claimAgentLine").textContent =
+    "Claiming: " + a.name + (a.city ? " (" + a.city + ")" : "");
+  var st = document.getElementById("clStatus");
+  st.className = "fstatus"; st.textContent = "";
+  document.getElementById("claimOv").classList.add("open");
+}
+function closeClaimModal() { document.getElementById("claimOv").classList.remove("open"); }
+function setClaimStatus(kind, msg) {
+  var st = document.getElementById("clStatus");
+  st.className = "fstatus " + (kind === "ok" ? "ok" : "err");
+  st.textContent = msg;
+}
+function claimMailtoFallback(payload) {
+  window.location.href = "mailto:" + CONTACT_EMAIL +
+    "?subject=" + encodeURIComponent("Profile claim: " + payload.agent_name) +
+    "&body=" + encodeURIComponent(
+      "Agency: " + payload.agent_name + "\nCorporate name: " + payload.corporate_name +
+      "\nBusiness email: " + payload.business_email + "\nRegistration ID: " + (payload.registration_id || "-") +
+      "\nProfile: " + payload.page_url);
+}
+function submitClaim() {
+  var f = document.getElementById("claimForm");
+  var btn = document.getElementById("clBtn");
+  if (f.website && f.website.value) {          /* honeypot */
+    setClaimStatus("ok", "Thank you. Your claim has been recorded for verification.");
+    return;
+  }
+  var name = document.getElementById("clName").value.trim();
+  var email = document.getElementById("clEmail").value.trim();
+  var regId = document.getElementById("clRegId").value.trim();
+  if (!claimAgent || !name || !email || !regId) {
+    setClaimStatus("err", "Please fill in the corporate name, business email, and registration number.");
+    return;
+  }
+  var payload = {
+    agent_id: SEED_AGENT_IDS[claimAgent.id] ? null : claimAgent.id,
+    agent_slug: claimAgent.slug,
+    agent_name: claimAgent.name,
+    corporate_name: name,
+    business_email: email,
+    registration_id: regId,
+    page_url: profileUrl(claimAgent),
+    status: "new"
+  };
+  if (!sb) { claimMailtoFallback(payload); setClaimStatus("ok", "An email draft has been opened with your claim. Press send in your mail app to complete it."); return; }
+  btn.disabled = true;
+  fetch(SUPABASE_URL + "/rest/v1/profile_claims", {
+    method: "POST",
+    headers: {
+      "apikey": SUPABASE_ANON_KEY,
+      "Authorization": "Bearer " + SUPABASE_ANON_KEY,
+      "Content-Type": "application/json",
+      "Prefer": "return=minimal"
+    },
+    body: JSON.stringify(payload)
+  }).then(function (res) {
+    btn.disabled = false;
+    if (!res.ok) {
+      return res.text().then(function (t) {
+        console.error("StudyScore: claim insert failed", res.status, t);
+        setClaimStatus("err", "We could not record your claim right now (HTTP " + res.status + "). An email draft has been opened instead.");
+        claimMailtoFallback(payload);
+      });
+    }
+    f.reset();
+    document.getElementById("clEmailWarn").style.display = "none";
+    setClaimStatus("ok", "Claim received. Our verification team reviews every claim manually and will contact you on the business email provided.");
+  }).catch(function (err) {
+    btn.disabled = false;
+    console.error("StudyScore: claim submit crashed", err);
+    setClaimStatus("err", "Network error - an email draft has been opened with your claim instead.");
+    claimMailtoFallback(payload);
   });
 }
 
@@ -1742,6 +1882,16 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   document.getElementById("modalOv").addEventListener("click", function (e) {
     if (e.target === this) closeModal();
+  });
+  document.getElementById("claimOv").addEventListener("click", function (e) {
+    if (e.target === this) closeClaimModal();
+  });
+  document.getElementById("claimForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    submitClaim();
+  });
+  document.getElementById("clEmail").addEventListener("input", function () {
+    document.getElementById("clEmailWarn").style.display = FREE_MAIL_RX.test(this.value) ? "block" : "none";
   });
   router();
 });
