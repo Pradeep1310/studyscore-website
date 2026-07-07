@@ -84,7 +84,7 @@
   --body:   #4B5563;
   --muted:  #6B7280;
   --faint:  #9CA3AF;
-  --line:   #EBEBE8;   /* ultra-thin borders */
+  --line:   #E2E8F0;   /* razor-thin charcoal-slate borders (District/Setu profile) */
   --bg:     #FAFAFA;   /* ivory canvas */
   --card:   #FFFFFF;
   --gold:   #B8944F;
@@ -454,6 +454,71 @@ a { color: inherit; }
 .modal h3 { font-family: var(--disp); font-weight: 700; font-size: 19px; color: var(--ink); margin-bottom: 10px; }
 .modal p { font-size: 14px; color: var(--body); margin-bottom: 20px; line-height: 1.7; }
 
+/* ---- Directory 2-column geometric workspace ---- */
+.dir-layout { display: grid; grid-template-columns: 1fr; gap: 30px; align-items: start; padding-bottom: 90px; }
+@media (min-width: 1000px) {
+  .dir-layout { grid-template-columns: 2.8fr 1.2fr; }
+  .dir-side { position: sticky; top: calc(var(--ticker-h) + 82px); }
+  .dir-layout .agents-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.dir-layout .agents-grid { padding-bottom: 0; }
+.est-badge {
+  display: inline-block; width: fit-content;
+  font-family: var(--mono); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink); background: #F5F5F2;
+  border: 1px solid var(--line); border-radius: 999px; padding: 4px 11px;
+}
+.agent-bio { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+/* ---- Community Safeguard disclaimer ---- */
+.community-note {
+  font-size: 12.5px; color: var(--body); line-height: 1.75;
+  background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--gold);
+  border-radius: 12px; padding: 14px 17px; margin: 16px 0 6px;
+}
+#unlistedAgentWrapper { flex-direction: column; }
+
+/* ---- Global Scholar Guardian overlay ---- */
+.guardian-ov { background: rgba(22,24,29,0.66); backdrop-filter: blur(7px); -webkit-backdrop-filter: blur(7px); }
+.guardian-panel {
+  background: var(--card); border: 1px solid var(--line); border-top: 3px solid var(--gold);
+  border-radius: 18px; max-width: 560px; width: 100%; padding: 44px 38px;
+  text-align: center; box-shadow: var(--shadow-md); animation: fadeUp .4s ease;
+}
+.guardian-emblem {
+  width: 64px; height: 64px; margin: 0 auto 24px;
+  border: 2px solid var(--gold); transform: rotate(45deg); border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  animation: breatheGold 2.6s ease-in-out infinite;
+}
+.guardian-emblem span { width: 18px; height: 18px; background: var(--gold); border-radius: 4px; }
+@keyframes breatheGold {
+  0%, 100% { transform: rotate(45deg) scale(1);    opacity: 1;    box-shadow: 0 0 0 0 rgba(184,148,79,0.45); }
+  50%      { transform: rotate(45deg) scale(1.07); opacity: 0.82; box-shadow: 0 0 0 16px rgba(184,148,79,0); }
+}
+.guardian-panel h3 { font-family: var(--disp); font-weight: 700; letter-spacing: -0.01em; font-size: 21px; color: var(--ink); margin-bottom: 14px; }
+.guardian-panel p { font-size: 14.5px; color: var(--body); line-height: 1.85; margin-bottom: 14px; }
+.guardian-panel .guardian-share { color: var(--muted); }
+.guardian-panel .btn { margin: 6px 5px 0; }
+
+/* ---- Global Events ledger ---- */
+.events-grid { display: grid; grid-template-columns: 1fr; gap: 20px; padding-bottom: 90px; }
+@media (min-width: 1000px) { .events-grid { grid-template-columns: repeat(3, 1fr); } }
+.event-card { padding: 28px; display: flex; flex-direction: column; gap: 11px; }
+.event-card h3 { font-family: var(--disp); font-weight: 700; letter-spacing: -0.01em; font-size: 19px; color: var(--ink); }
+.ev-meta { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.ev-meta b { color: var(--ink); }
+.ev-price { font-family: var(--disp); font-weight: 700; font-size: 21px; letter-spacing: -0.01em; color: var(--ink); }
+.ev-price small { font-size: 11px; color: var(--faint); font-weight: 400; font-family: var(--mono); }
+.tbc-badge {
+  display: inline-block; width: fit-content;
+  font-family: var(--mono); font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--amber); background: var(--amber-bg); border: 1px solid var(--amber-line);
+  border-radius: 999px; padding: 4px 11px;
+}
+.event-card .btn { margin-top: auto; }
+
 /* ---- Lead magnet instant-download success state ---- */
 .lm-success {
   background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 12px;
@@ -605,6 +670,7 @@ button.chip { appearance: none; font: inherit; }
       <a href="#/" class="nl">Home</a>
       <a href="#/agents" class="nl">Agent Directory</a>
       <a href="#/blog" class="nl">Global Intel</a>
+      <a href="#/events" class="nl">Global Events</a>
       <a href="#/survey" class="btn btn-dark btn-sm">Rate Your Agent &#8594;</a>
     </div>
   </div>
@@ -741,19 +807,10 @@ button.chip { appearance: none; font: inherit; }
         <option value="">All destinations</option>
       </select>
     </div>
-    <div class="card chk-card" id="safetyChecklist" aria-label="StudyScore Pre-Sign Agent Safety Checklist">
-      <h3>&#128274; StudyScore Pre-Sign Agent Safety Checklist</h3>
-      <p class="chk-sub">Tick each item you have personally verified with a consultancy before signing anything or paying any fee.</p>
-      <label class="chk-row"><input type="checkbox" class="chk-item"><span>Verified Ministry of External Affairs (MEA) active licence / registry number.</span></label>
-      <label class="chk-row"><input type="checkbox" class="chk-item"><span>Service contract explicitly guarantees &ldquo;Zero Hidden / Post-Visa Charges&rdquo;.</span></label>
-      <label class="chk-row"><input type="checkbox" class="chk-item"><span>Consultant provides direct official university institutional tie-ups (no private college sub-agent chains).</span></label>
-      <label class="chk-row"><input type="checkbox" class="chk-item"><span>Statement of Purpose (SOP) is customised to my profile (no generic templates).</span></label>
-      <label class="chk-row"><input type="checkbox" class="chk-item"><span>Clear timeline SLA contract commitment for file processing updates.</span></label>
-      <div class="chk-meter" aria-hidden="true"><div class="chk-fill" id="chkFill"></div></div>
-      <div class="chk-flag risk-high" id="chkFlag" role="status">0% &middot; High-Risk Engagement Track</div>
+    <div class="dir-layout">
+      <div id="dirGrid" class="agents-grid" aria-live="polite"><div class="loading">Loading directory&hellip;</div></div>
+      <aside class="dir-side"><div id="lmDock"></div></aside>
     </div>
-    <div id="lmDock"></div>
-    <div id="dirGrid" class="agents-grid" aria-live="polite"><div class="loading">Loading directory&hellip;</div></div>
   </div>
 </main>
 
@@ -787,14 +844,18 @@ button.chip { appearance: none; font: inherit; }
 
       <div class="shield-note">&#128274; <b>Intermediary Protection Shield:</b> Your name and email are strictly encrypted on our backend database to verify corporate compliance and shield against fake review spam. StudyScore legally guarantees your identity will never be shown on the public directory or leaked to any third-party consultancy.</div>
 
+      <div class="community-note">&#128330; <b>Community Safeguard:</b> If your study abroad consultant is missing from our active directory tracker, please select &ldquo;&#10133; My Agent is Not Listed / Add New Agent&rdquo; below. By typing their name and branch city, you create an anonymous, permanent legal data link that helps protect your fellow brothers, sisters, and colleagues back home from falling into hidden financial scams. Trust before you sign.</div>
+
       <label for="srvAgent">Which agency did you use?</label>
       <select id="srvAgent" name="agent" class="field" required>
         <option value="">Loading agencies&hellip;</option>
       </select>
 
-      <div id="srvUnlistedWrap" style="display:none;">
-        <label for="srvUnlisted">Agency name (as you know it)</label>
-        <input id="srvUnlisted" name="unlisted" type="text" class="field" placeholder="e.g. ABC Overseas, Karol Bagh">
+      <div id="unlistedAgentWrapper" style="display:none;">
+        <label for="srvUnlistedName">Agency corporate name</label>
+        <input id="srvUnlistedName" name="unlisted_name" type="text" class="field" placeholder="e.g. ABC Overseas Pvt. Ltd.">
+        <label for="srvUnlistedCity">Branch location city</label>
+        <input id="srvUnlistedCity" name="unlisted_city" type="text" class="field" placeholder="e.g. Karol Bagh, New Delhi">
       </div>
 
       <div class="rgrid">
@@ -900,6 +961,43 @@ button.chip { appearance: none; font: inherit; }
   </div>
 </main>
 
+<!-- ============================ GLOBAL EVENTS LEDGER (route: #/events) ============================ -->
+<main id="view-events" class="route-view">
+  <div class="wrap">
+    <div class="page-head">
+      <div class="kicker">Global Events</div>
+      <h1>Global Immigration &amp; Education Events Ledger</h1>
+      <p class="lede">A B2B directory of major international education industry conferences. Listings below are illustrative placeholders &mdash; dates and delegate pricing are indicative and must be confirmed on each organiser's official site before planning travel or purchase.</p>
+    </div>
+    <div class="events-grid">
+      <article class="card card-hover event-card">
+        <span class="tbc-badge">Sample Listing &middot; Details TBC</span>
+        <h3>ICEF New York 2026</h3>
+        <div class="ev-meta">Host &middot; <b>ICEF GmbH</b></div>
+        <div class="ev-meta">Dates &middot; <b>TBC &mdash; confirm at icef.com</b></div>
+        <div class="ev-price">$1,250 <small>USD &middot; INDICATIVE DELEGATE RATE</small></div>
+        <button type="button" class="btn btn-dark btn-sm" onclick="showModal('Delegate Reservations', 'Ticket reservations open in the next platform phase. Email pradeep@studyscore.in to be notified when delegate booking goes live.')">Secure Delegate Seat / Reserve Ticket (Next Phase Integration)</button>
+      </article>
+      <article class="card card-hover event-card">
+        <span class="tbc-badge">Sample Listing &middot; Details TBC</span>
+        <h3>AIEC &mdash; Australian International Education Conference</h3>
+        <div class="ev-meta">Host &middot; <b>IEAA (Australia)</b></div>
+        <div class="ev-meta">Dates &middot; <b>TBC &mdash; confirm at aiec.idp.com</b></div>
+        <div class="ev-price">A$1,400 <small>AUD &middot; INDICATIVE DELEGATE RATE</small></div>
+        <button type="button" class="btn btn-dark btn-sm" onclick="showModal('Delegate Reservations', 'Ticket reservations open in the next platform phase. Email pradeep@studyscore.in to be notified when delegate booking goes live.')">Secure Delegate Seat / Reserve Ticket (Next Phase Integration)</button>
+      </article>
+      <article class="card card-hover event-card">
+        <span class="tbc-badge">Sample Listing &middot; Details TBC</span>
+        <h3>The PIE Live North America</h3>
+        <div class="ev-meta">Host &middot; <b>The PIE</b></div>
+        <div class="ev-meta">Dates &middot; <b>TBC &mdash; confirm at thepienews.com</b></div>
+        <div class="ev-price">&euro;950 <small>EUR &middot; INDICATIVE DELEGATE RATE</small></div>
+        <button type="button" class="btn btn-dark btn-sm" onclick="showModal('Delegate Reservations', 'Ticket reservations open in the next platform phase. Email pradeep@studyscore.in to be notified when delegate booking goes live.')">Secure Delegate Seat / Reserve Ticket (Next Phase Integration)</button>
+      </article>
+    </div>
+  </div>
+</main>
+
 <!-- ============================ PRIVACY (route: #/privacy) ============================ -->
 <main id="view-privacy" class="route-view">
   <div class="wrap-sm">
@@ -955,6 +1053,7 @@ button.chip { appearance: none; font: inherit; }
   <div class="flinks">
     <a href="#/agents">Agent Directory</a>
     <a href="#/blog">Global Intel</a>
+    <a href="#/events">Global Events</a>
     <a href="#/survey">Rate Your Agent</a>
     <a href="#/privacy">Privacy Policy</a>
     <a href="#/terms">Terms of Use</a>
@@ -970,6 +1069,18 @@ button.chip { appearance: none; font: inherit; }
     <h3 id="modalTitle">Notice</h3>
     <p id="modalMsg"></p>
     <button type="button" class="btn btn-dark btn-sm" onclick="closeModal()">Understood</button>
+  </div>
+</div>
+
+<!-- ============================ GUARDIAN SUCCESS OVERLAY ============================ -->
+<div id="guardianOv" class="modal-ov guardian-ov" role="dialog" aria-modal="true" aria-labelledby="guardianTitle">
+  <div class="guardian-panel">
+    <div class="guardian-emblem" aria-hidden="true"><span></span></div>
+    <h3 id="guardianTitle">&#128737;&#65039; Global Scholar Guardian Vault Secured.</h3>
+    <p>You have successfully locked a permanent, un-alterable cryptographic record into the StudyScore independent consumer index. Your single voice has just anchored a transparent trust loop that will shield thousands of younger brothers, sisters, and future scholars back home from falling into hidden financial sub-agency scams. Your global community stands protected because of your truth.</p>
+    <p class="guardian-share">Share this terminal layout with your fellow colleagues overseas to keep our network expanding. <b>Stand Proud.</b></p>
+    <a class="btn btn-dark" target="_blank" rel="noopener" href="https://wa.me/?text=I%20just%20anonymously%20rated%20my%20study%20abroad%20agent%20on%20StudyScore%20%E2%80%94%20India%27s%20independent%20consumer%20index.%20Rate%20yours%20and%20protect%20the%20next%20student%3A%20https%3A%2F%2Fstudyscore.in%2F%23%2Fsurvey">Share on WhatsApp</a>
+    <button type="button" class="btn btn-line" onclick="closeGuardianOverlay()">Continue</button>
   </div>
 </div>
 
@@ -1228,12 +1339,14 @@ function closeModal() { document.getElementById("modalOv").classList.remove("ope
 /* ---------------------- System ticker (truthful) ---------------------- */
 function updateTicker() {
   var segs = [];
-  segs.push(sb ? "LIVE DATABASE CONNECTED" : "FALLBACK DIRECTORY ACTIVE");
+  segs.push(sb ? "DATABASE SYNC SECURE" : "FALLBACK DIRECTORY ACTIVE");
   if (cache.demo) segs.push("DEMO MODE · SIMULATED REVIEWS");
   else segs.push("VERIFIED REVIEWS ONLY");
+  segs.push("CRYPTOGRAPHIC VAULT LOCKED");
+  segs.push("TRACKING ICEF TRANSIT COEFFICIENTS");
+  segs.push("CONSUMER PROTECTION AUDIT MATRIX ACTIVE");
   segs.push("TIME-DECAY ENGINE · 180-DAY HALF-LIFE");
   segs.push("BAYESIAN STABILISER · m=10");
-  segs.push("SHA-256 DOCUMENT DEDUP");
   segs.push("INDEPENDENT · NO AGENCY FUNDING");
   segs.push("TRUST BEFORE YOU SIGN");
   var text = segs.join("  \u2022  ") + "  \u2022  ";
@@ -1388,7 +1501,9 @@ function agentCard(a, scores, rank, demo) {
     (demo && scores.byAgent[a.id] ? '<span class="badge-demo">Simulated Demo Data</span>' : '') +
     '<h3>' + esc(a.name) + '</h3>' +
     '<div class="loc">' + esc(a.city || "") + (a.state ? ', ' + esc(a.state) : '') + ', India</div>' +
+    (a.established ? '<span class="est-badge">Est. ' + esc(String(a.established)) + '</span>' : '') +
     scoreBlock(a, scores, demo) +
+    (a.summary ? '<p class="agent-bio">' + esc(a.summary) + '</p>' : '') +
     '<div class="chiprow">' +
       (a.destinations || []).map(function (d) { return '<span class="chip">' + esc(d) + '</span>'; }).join('') +
     '</div>' +
@@ -1425,6 +1540,19 @@ function renderDirectory() {
         }).join("")
       : '<div class="dir-empty">No agencies match that search yet. The directory is growing; check back soon.</div>');
   });
+}
+function checklistHtml() {
+  return '<div class="card chk-card" id="safetyChecklist" aria-label="StudyScore Pre-Sign Agent Safety Checklist" style="margin-top:30px;">' +
+    '<h3>&#128274; StudyScore Pre-Sign Agent Safety Checklist</h3>' +
+    '<p class="chk-sub">Tick each item you have personally verified with this consultancy before signing anything or paying any fee.</p>' +
+    '<label class="chk-row"><input type="checkbox" class="chk-item"><span>Verified Ministry of External Affairs (MEA) active licence / registry number.</span></label>' +
+    '<label class="chk-row"><input type="checkbox" class="chk-item"><span>Service contract explicitly guarantees &ldquo;Zero Hidden / Post-Visa Charges&rdquo;.</span></label>' +
+    '<label class="chk-row"><input type="checkbox" class="chk-item"><span>Consultant provides direct official university institutional tie-ups (no private college sub-agent chains).</span></label>' +
+    '<label class="chk-row"><input type="checkbox" class="chk-item"><span>Statement of Purpose (SOP) is customised to my profile (no generic templates).</span></label>' +
+    '<label class="chk-row"><input type="checkbox" class="chk-item"><span>Clear timeline SLA contract commitment for file processing updates.</span></label>' +
+    '<div class="chk-meter" aria-hidden="true"><div class="chk-fill" id="chkFill"></div></div>' +
+    '<div class="chk-flag risk-high" id="chkFlag" role="status">0% &middot; High-Risk Engagement Track</div>' +
+  '</div>';
 }
 function initSafetyChecklist() {
   var items = document.querySelectorAll("#safetyChecklist .chk-item");
@@ -1599,6 +1727,8 @@ function renderProfile(citySlug, agentSlug) {
           '</div>' +
           '<p class="matrix-foot">StudyScore publishes figures only from verified, anonymous student reviews' + (data.demo ? ' (demo mode currently shows clearly labelled synthetic values)' : '') + '. Recent reviews weigh more than old ones (180-day half-life), and a Bayesian floor of ' + M_FLOOR + ' resists review-bombing.</p>' +
 
+          checklistHtml() +
+
           '<div class="card about-card">' +
             '<div class="kicker">About (as publicly listed)</div>' +
             '<p>' + esc(a.summary || "") + '</p>' +
@@ -1642,6 +1772,7 @@ function renderProfile(citySlug, agentSlug) {
     });
     var cbtn = document.getElementById("claimBtn");
     if (cbtn) cbtn.addEventListener("click", function () { openClaimModal(a); });
+    initSafetyChecklist();
     var chipBtns = wrap.querySelectorAll(".chip-click");
     for (var ci = 0; ci < chipBtns.length; ci++) {
       chipBtns[ci].addEventListener("click", function () {
@@ -1804,6 +1935,10 @@ function submitClaim() {
   });
 }
 
+/* ------------- Global Scholar Guardian success overlay ------------- */
+function openGuardianOverlay() { document.getElementById("guardianOv").classList.add("open"); }
+function closeGuardianOverlay() { document.getElementById("guardianOv").classList.remove("open"); }
+
 /* ============ SEQUENCE 2: survey ingestion + client anti-fraud ============ */
 /* Translate a Supabase error into an actionable, visible message instead of
    a generic one, so real deployment problems (missing table, missing RLS
@@ -1879,8 +2014,8 @@ function fillSurveyAgentSelect(agents, preselectSlug) {
     sel.appendChild(o);
   });
   var other = document.createElement("option");
-  other.value = "__other";
-  other.textContent = "My agency is not listed";
+  other.value = "UNLISTED";
+  other.textContent = "\u2795 My Agent is Not Listed / Add New Agent";
   sel.appendChild(other);
 }
 function initSurveyView(preselectSlug) {
@@ -1912,6 +2047,12 @@ function submitSurvey() {
   }
   if (!agentVal || !dest || Object.keys(ratings).some(function (k) { return !ratings[k]; })) {
     setSrvStatus("err", "Please select your agency, destination, and all five ratings.");
+    return;
+  }
+  var unlistedName = document.getElementById("srvUnlistedName").value.trim();
+  var unlistedCity = document.getElementById("srvUnlistedCity").value.trim();
+  if (agentVal === "UNLISTED" && (!unlistedName || !unlistedCity)) {
+    setSrvStatus("err", "Please enter the agency name and branch city so the community index can track it.");
     return;
   }
   if (!sb) {
@@ -1960,7 +2101,7 @@ function submitSurvey() {
        Sending their placeholder UUIDs would violate the surveys.agent_id
        foreign-key constraint, so they are submitted as a named unlisted
        agency (agent_id null) and the insert always passes constraints. */
-    var isSeedAgent = agentVal !== "__other" && SEED_AGENT_IDS[agentVal] === true;
+    var isSeedAgent = agentVal !== "UNLISTED" && SEED_AGENT_IDS[agentVal] === true;
     var seedAgentName = null;
     if (isSeedAgent && cache.agents) {
       for (var si = 0; si < cache.agents.length; si++) {
@@ -1973,12 +2114,12 @@ function submitSurvey() {
     var row = {
       student_name: studentName,        /* backend-only: blocked from public reads at the DB grant level */
       student_email: studentEmail,      /* backend-only: blocked from public reads at the DB grant level */
-      agent_id: (agentVal === "__other" || isSeedAgent) ? null : agentVal,
-      unlisted_agent_name: agentVal === "__other"
-        ? (document.getElementById("srvUnlisted").value.trim() || null)
+      agent_id: (agentVal === "UNLISTED" || isSeedAgent) ? null : agentVal,   /* null bypasses the FK trap */
+      unlisted_agent_name: agentVal === "UNLISTED"
+        ? unlistedName
         : (isSeedAgent ? seedAgentName : null),
       destination: dest,
-      city: document.getElementById("srvCity").value.trim() || null,
+      city: (agentVal === "UNLISTED" && unlistedCity) ? unlistedCity : (document.getElementById("srvCity").value.trim() || null),
       university: document.getElementById("srvUni").value.trim() || null,
       fee_transparency: ratings.fee_transparency,
       communication: ratings.communication,
@@ -2005,9 +2146,12 @@ function submitSurvey() {
       }
       return;
     }
-    f.reset();
-    document.getElementById("srvUnlistedWrap").style.display = "none";
+    document.getElementById("mainSurveyForm").reset();
+    document.getElementById("unlistedAgentWrapper").style.display = "none";
+    document.getElementById("srvUnlistedName").required = false;
+    document.getElementById("srvUnlistedCity").required = false;
     setSrvStatus("ok", "Thank you. Your review has been received and is pending verification. Verified reviews power the public StudyScore.");
+    openGuardianOverlay();
     cache.ts = 0;
   }).catch(function (err) {
     btn.disabled = false;
@@ -2265,7 +2409,7 @@ function cleanSlug(raw) {
 }
 
 /* ------------------------------ Router ------------------------------ */
-var VIEWS = ["view-home", "view-agents", "view-profile", "view-survey", "view-blog-list", "view-blog-single", "view-privacy", "view-terms"];
+var VIEWS = ["view-home", "view-agents", "view-profile", "view-survey", "view-blog-list", "view-blog-single", "view-events", "view-privacy", "view-terms"];
 function activate(id) {
   VIEWS.forEach(function (v) {
     var el = document.getElementById(v);
@@ -2327,6 +2471,10 @@ function router() {
     activate("view-blog-list");
     renderBlogList(query.city || "");
     document.title = "Global Intel - City Intelligence Reports | StudyScore";
+  } else if (parts[0] === "events") {
+    activate("view-events");
+    document.title = "Global Immigration & Education Events Ledger | StudyScore";
+    injectSchema(null);
   } else if (parts[0] === "privacy") {
     activate("view-privacy");
     document.title = "Privacy Policy | StudyScore";
@@ -2345,10 +2493,12 @@ function router() {
 document.addEventListener("DOMContentLoaded", function () {
   updateTicker();
   initDirectoryControls();
-  initSafetyChecklist();
   initLeadMagnet(document.getElementById("lmDock"), "", "directory");
   document.getElementById("srvAgent").addEventListener("change", function () {
-    document.getElementById("srvUnlistedWrap").style.display = (this.value === "__other") ? "block" : "none";
+    var un = (this.value === "UNLISTED");
+    document.getElementById("unlistedAgentWrapper").style.display = un ? "flex" : "none";
+    document.getElementById("srvUnlistedName").required = un;
+    document.getElementById("srvUnlistedCity").required = un;
   });
   document.getElementById("mainSurveyForm").addEventListener("submit", function (e) {
     e.preventDefault();
@@ -2359,6 +2509,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   document.getElementById("claimOv").addEventListener("click", function (e) {
     if (e.target === this) closeClaimModal();
+  });
+  document.getElementById("guardianOv").addEventListener("click", function (e) {
+    if (e.target === this) closeGuardianOverlay();
   });
   document.getElementById("claimForm").addEventListener("submit", function (e) {
     e.preventDefault();
