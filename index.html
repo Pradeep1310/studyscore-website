@@ -116,7 +116,7 @@ a { color: inherit; }
 ::selection { background: rgba(26,43,72,0.25); }
 :focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; border-radius: 4px; }
 
-.wrap    { max-width: 1120px; margin: 0 auto; padding: 0 22px; }
+.wrap    { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 .wrap-md { max-width: 880px;  margin: 0 auto; padding: 0 22px; }
 .wrap-sm { max-width: 760px;  margin: 0 auto; padding: 0 22px; }
 
@@ -173,34 +173,13 @@ a { color: inherit; }
   backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line);
 }
-.nav-inner { max-width: 1120px; margin: 0 auto; padding: 15px 22px; display: flex; align-items: center; justify-content: space-between; }
+.nav-inner { width: 100%; max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
 .brand { font-family: var(--disp); font-weight: 700; font-size: 22px; color: var(--ink); text-decoration: none; letter-spacing: -0.02em; }
 .brand i { font-style: normal; color: var(--gold); font-weight: 500; }
 .nav-links { display: flex; align-items: center; gap: 26px; }
 .nav-links .nl { font-size: 14px; font-weight: 600; color: var(--muted); text-decoration: none; border-left: 4px solid transparent; padding-left: 8px; transition: color .2s ease-in-out, border-color .2s ease-in-out; }
 .nav-links .nl.active { color: var(--ink); border-left-color: var(--coral); }
 .nav-links .nl:hover { color: var(--ink); }
-
-/* ---- Manifest dashboard shell: left sidebar navigation on desktop ---- */
-@media (min-width: 1100px) {
-  .nav {
-    top: var(--ticker-h); bottom: 0; right: auto; width: 232px;
-    background: var(--card);
-    border-bottom: 0; border-right: 1px solid var(--line);
-  }
-  .nav-inner {
-    flex-direction: column; align-items: stretch; gap: 26px;
-    max-width: none; padding: 26px 16px;
-  }
-  .nav-links { flex-direction: column; align-items: stretch; gap: 6px; }
-  .nav-links .nl {
-    padding: 10px 10px 10px 12px; border-left: 4px solid transparent;
-    border-radius: 0 8px 8px 0;
-  }
-  .nav-links .nl.active { border-left-color: var(--coral); background: #F0F4FA; color: var(--ink); }
-  .nav-links .btn { text-align: center; margin-top: 10px; }
-  body { padding-left: 232px; }
-}
 
 /* ---- Router views ---- */
 .route-view { display: none; }
