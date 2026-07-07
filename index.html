@@ -454,6 +454,52 @@ a { color: inherit; }
 .modal h3 { font-family: var(--disp); font-weight: 700; font-size: 19px; color: var(--ink); margin-bottom: 10px; }
 .modal p { font-size: 14px; color: var(--body); margin-bottom: 20px; line-height: 1.7; }
 
+/* ---- Global Intel blog (Setu-style high-contrast text grid) ---- */
+.blog-grid { display: grid; grid-template-columns: 1fr; gap: 20px; padding-bottom: 90px; }
+@media (min-width: 640px)  { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .blog-grid { grid-template-columns: repeat(3, 1fr); } }
+.blog-card { padding: 28px; display: flex; flex-direction: column; gap: 12px; }
+.blog-card .bmeta { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+.blog-card h3 { font-family: var(--disp); font-weight: 700; letter-spacing: -0.02em; font-size: 20px; line-height: 1.25; color: var(--ink); }
+.blog-card p  { font-size: 14px; color: var(--muted); }
+.blog-empty { grid-column: 1 / -1; text-align: center; color: var(--faint); padding: 60px 0; font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* ---- Single article: pure ivory canvas, midnight-charcoal type ---- */
+.article { padding-bottom: 90px; }
+.article .apills { display: flex; flex-wrap: wrap; gap: 7px; margin: 18px 0 10px; }
+.article h1 { font-family: var(--disp); font-weight: 700; letter-spacing: -0.03em; color: var(--ink); font-size: clamp(30px, 4.6vw, 50px); line-height: 1.12; margin: 6px 0 14px; }
+.article .abyline { font-size: 13px; color: var(--faint); margin-bottom: 8px; }
+.src-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--mono); font-size: 10.5px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gold); background: #FBF7EE;
+  border: 1px solid rgba(184,148,79,0.4); border-radius: 999px;
+  padding: 6px 14px; text-decoration: none; margin: 6px 0 26px;
+}
+.src-badge:hover { border-color: var(--gold); }
+.article .abody { font-size: 16.5px; color: var(--body); line-height: 1.9; }
+.article .abody p { margin-bottom: 20px; }
+.article .abody h2 { font-family: var(--disp); font-weight: 700; letter-spacing: -0.02em; color: var(--ink); font-size: 23px; margin: 34px 0 12px; }
+.cta-sticky {
+  position: sticky; bottom: 16px;
+  background: var(--card); border: 1px solid var(--line); border-top: 3px solid var(--gold);
+  border-radius: 16px; padding: 24px 26px; margin-top: 44px;
+  box-shadow: var(--shadow-md);
+}
+.cta-sticky p { font-size: 14.5px; color: var(--body); margin-bottom: 14px; line-height: 1.75; }
+.intel-banner {
+  grid-column: 1 / -1;
+  background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+  padding: 13px 18px;
+}
+.intel-banner a, .intel-inline a {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  font-weight: 600; color: var(--gold); text-decoration: none;
+}
+.intel-banner a:hover, .intel-inline a:hover { color: var(--goldlt); }
+.intel-inline { margin-top: 14px; }
+
 /* ---- Enterprise claim panel (Zomato-style prestige header) ---- */
 .claim-panel {
   background: var(--card); border: 1px solid var(--line); border-top: 3px solid #F59E0B;
@@ -514,6 +560,7 @@ a { color: inherit; }
     <div class="nav-links">
       <a href="#/" class="nl">Home</a>
       <a href="#/agents" class="nl">Agent Directory</a>
+      <a href="#/blog" class="nl">Global Intel</a>
       <a href="#/survey" class="btn btn-dark btn-sm">Rate Your Agent &#8594;</a>
     </div>
   </div>
@@ -766,6 +813,29 @@ a { color: inherit; }
   </div>
 </main>
 
+<!-- ============================ GLOBAL INTEL FEED (route: #/blog) ============================ -->
+<main id="view-blog-list" class="route-view">
+  <div class="wrap">
+    <div class="page-head">
+      <div class="kicker">Global Intel</div>
+      <h1>City Intelligence Reports</h1>
+      <p class="lede">Regional updates and industry news for students and families evaluating study abroad consultancies, published by the StudyScore audit desk with source attribution.</p>
+      <div id="blogCityNote"></div>
+    </div>
+    <div id="blogGrid" class="blog-grid" aria-live="polite"><div class="loading">Loading reports&hellip;</div></div>
+  </div>
+</main>
+
+<!-- ============================ GLOBAL INTEL ARTICLE (route: #/blog/:slug) ============================ -->
+<main id="view-blog-single" class="route-view">
+  <div class="wrap-sm">
+    <div class="page-head" style="padding-bottom:10px;">
+      <a href="#/blog" class="back-link">&#8592; All intelligence reports</a>
+    </div>
+    <div id="view-blog-content-wrapper" class="article"><div class="loading">Loading report&hellip;</div></div>
+  </div>
+</main>
+
 <!-- ============================ PRIVACY (route: #/privacy) ============================ -->
 <main id="view-privacy" class="route-view">
   <div class="wrap-sm">
@@ -820,6 +890,7 @@ a { color: inherit; }
   <div class="tag">India's First Independent Rating for Study Abroad Agents &middot; Trust Before You Sign</div>
   <div class="flinks">
     <a href="#/agents">Agent Directory</a>
+    <a href="#/blog">Global Intel</a>
     <a href="#/survey">Rate Your Agent</a>
     <a href="#/privacy">Privacy Policy</a>
     <a href="#/terms">Terms of Use</a>
@@ -1258,6 +1329,7 @@ function renderDirectory() {
     var head = data.demo
       ? '<div class="demo-note"><b>Demo mode is on.</b> The scores below are computed from synthetic smoke-test rows to demonstrate the decay and Bayesian engine. They are not real student reviews. Set DEMO_MODE to false before publishing.</div>'
       : '';
+    head += '<div class="intel-banner"><a href="#/blog">Global Intel: city-level industry reports and news updates &#8594;</a></div>';
     grid.innerHTML = head + (list.length
       ? list.map(function (a) {
           var e = scores.byAgent[a.id];
@@ -1383,6 +1455,7 @@ function renderProfile(citySlug, agentSlug) {
           (a.services || []).map(function (s) { return '<span class="chip chip-gold">' + esc(s) + '</span>'; }).join('') +
           (master ? '<span class="chip">Processing partner: ' + esc(master.name) + '</span>' : '') +
         '</div>' +
+        (a.city ? '<div class="intel-inline"><a href="#/blog?city=' + encodeURIComponent(a.city) + '">Latest ' + esc(a.city) + ' intelligence reports &#8594;</a></div>' : '') +
       '</section>' +
 
       '<div class="claim-panel">' +
@@ -1805,8 +1878,148 @@ function submitSurvey() {
   });
 }
 
+/* ================== GLOBAL INTEL: programmatic content views ==================
+   Data source: public.blogs (status = 'published' only; see blogs_setup.sql).
+   Strict null-guards everywhere; on empty datasets or network faults the UI
+   falls back to a single validation notice instead of breaking. */
+var blogCache = { rows: null, ts: 0 };
+var BLOG_FALLBACK = '<div class="blog-empty">Intelligence Report Under Structural Validation Review.</div>';
+
+function fetchBlogs(force) {
+  var now = Date.now();
+  if (!force && blogCache.rows && (now - blogCache.ts) < CACHE_TTL) {
+    return Promise.resolve(blogCache.rows);
+  }
+  if (!sb) return Promise.resolve(null);
+  return sb.from("blogs").select("*")
+    .eq("status", "published")
+    .order("created_at", { ascending: false })
+    .then(function (res) {
+      if (res.error || !res.data) return null;
+      blogCache = { rows: res.data, ts: Date.now() };
+      return res.data;
+    })
+    .catch(function () { return null; });
+}
+function blogDate(iso) {
+  try { return new Date(iso).toLocaleDateString("en-IN", { year: "numeric", month: "short", day: "numeric" }); }
+  catch (e) { return ""; }
+}
+function blogParagraphs(txt) {
+  var blocks = String(txt || "").split(/\n{2,}/);
+  return blocks.map(function (b) {
+    var t = b.trim();
+    if (!t) return "";
+    if (t.indexOf("## ") === 0) return "<h2>" + esc(t.slice(3)) + "</h2>";
+    return "<p>" + esc(t).replace(/\n/g, "<br>") + "</p>";
+  }).join("");
+}
+function blogCard(b) {
+  if (!b || !b.slug) return "";
+  return '<article class="card card-hover blog-card">' +
+    '<span class="bmeta">' + esc(blogDate(b.created_at)) + (b.target_city ? ' &middot; ' + esc(b.target_city) : '') + '</span>' +
+    '<h3>' + esc(b.title || "Untitled report") + '</h3>' +
+    '<p>' + esc(b.excerpt || "") + '</p>' +
+    '<a class="view-link" href="#/blog/' + encodeURIComponent(b.slug) + '">Read report &#8594;</a>' +
+  '</article>';
+}
+function blogListSchemaLD(rows) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "StudyScore Global Intel - City Intelligence Reports",
+    "itemListElement": (rows || []).map(function (b, i) {
+      return { "@type": "ListItem", "position": i + 1,
+               "url": "https://studyscore.in/#/blog/" + b.slug, "name": b.title || "" };
+    })
+  };
+}
+function blogSchemaLD(b) {
+  var ld = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": b.title || "",
+    "description": b.excerpt || "",
+    "datePublished": b.created_at || "",
+    "dateModified": b.updated_at || b.created_at || "",
+    "author": { "@type": "Organization", "name": b.author || "StudyScore Audit Network" },
+    "publisher": { "@type": "Organization", "name": "StudyScore", "url": "https://studyscore.in" },
+    "mainEntityOfPage": "https://studyscore.in/#/blog/" + (b.slug || "")
+  };
+  if (b.target_city) {
+    ld.contentLocation = {
+      "@type": "Place",
+      "name": b.target_city,
+      "address": { "@type": "PostalAddress", "addressLocality": b.target_city,
+                   "addressRegion": b.target_region || "", "addressCountry": "IN" }
+    };
+  }
+  if (b.source_reference_url) {
+    ld.citation = { "@type": "CreativeWork", "url": b.source_reference_url,
+                    "name": b.source_name || b.source_reference_url };
+  }
+  return ld;
+}
+function renderBlogList(cityFilter) {
+  var grid = document.getElementById("blogGrid");
+  var note = document.getElementById("blogCityNote");
+  if (!grid) return;
+  grid.innerHTML = '<div class="loading">Loading reports&hellip;</div>';
+  if (note) note.innerHTML = cityFilter
+    ? '<p style="font-size:13px;color:var(--faint);">Filtered to reports tagged <b>' + esc(cityFilter) + '</b>. <a href="#/blog" style="color:var(--gold);">Clear filter</a></p>'
+    : '';
+  fetchBlogs(false).then(function (rows) {
+    if (!rows || !rows.length) { grid.innerHTML = BLOG_FALLBACK; injectSchema(null); return; }
+    var list = rows;
+    if (cityFilter) {
+      var cf = cityFilter.toLowerCase();
+      list = rows.filter(function (b) { return b && b.target_city && b.target_city.toLowerCase() === cf; });
+    }
+    if (!list.length) { grid.innerHTML = BLOG_FALLBACK; injectSchema(null); return; }
+    grid.innerHTML = list.map(blogCard).join("");
+    injectSchema(blogListSchemaLD(list));
+  });
+}
+function renderBlogSingle(slug) {
+  var wrap = document.getElementById("view-blog-content-wrapper");
+  if (!wrap) return;
+  wrap.innerHTML = '<div class="loading">Loading report&hellip;</div>';
+  if (!sb) { wrap.innerHTML = BLOG_FALLBACK; injectSchema(null); return; }
+  sb.from("blogs").select("*")
+    .eq("slug", slug)
+    .eq("status", "published")
+    .single()
+    .then(function (res) {
+      var b = (res && !res.error) ? res.data : null;
+      if (!b) { wrap.innerHTML = BLOG_FALLBACK; document.title = "Report | StudyScore"; injectSchema(null); return; }
+      var srcHost = "";
+      if (b.source_reference_url) {
+        try { srcHost = new URL(b.source_reference_url).hostname.replace(/^www\./, ""); } catch (e) { srcHost = ""; }
+      }
+      wrap.innerHTML =
+        '<span class="kicker">' + esc(blogDate(b.created_at)) + ' &middot; Global Intel</span>' +
+        '<h1>' + esc(b.title || "Untitled report") + '</h1>' +
+        '<div class="apills">' +
+          (b.target_city ? '<span class="chip chip-gold">' + esc(b.target_city) + '</span>' : '') +
+          (b.target_region ? '<span class="chip">' + esc(b.target_region) + '</span>' : '') +
+        '</div>' +
+        '<div class="abyline">By ' + esc(b.author || "StudyScore Audit Network") + '</div>' +
+        (b.source_reference_url
+          ? '<a class="src-badge" href="' + esc(b.source_reference_url) + '" target="_blank" rel="noopener nofollow">Source: ' + esc(b.source_name || srcHost || "attribution") + ' &#8599;</a>'
+          : '') +
+        '<div class="abody">' + blogParagraphs(b.content) + '</div>' +
+        '<div class="cta-sticky">' +
+          '<p>Processing an application from ' + esc(b.target_city || "your city") + '? Protect your parents\' hard-earned money. Check the verified independent tracking statistics of local consultancies in our student network directory right now.</p>' +
+          '<a href="#/agents" class="btn btn-dark btn-sm">Open the Agent Directory &#8594;</a>' +
+        '</div>';
+      document.title = (b.title || "Report") + " | Global Intel | StudyScore";
+      injectSchema(blogSchemaLD(b));
+    })
+    .catch(function () { wrap.innerHTML = BLOG_FALLBACK; injectSchema(null); });
+}
+
 /* ------------------------------ Router ------------------------------ */
-var VIEWS = ["view-home", "view-agents", "view-profile", "view-survey", "view-privacy", "view-terms"];
+var VIEWS = ["view-home", "view-agents", "view-profile", "view-survey", "view-blog-list", "view-blog-single", "view-privacy", "view-terms"];
 function activate(id) {
   VIEWS.forEach(function (v) {
     var el = document.getElementById(v);
@@ -1855,6 +2068,13 @@ function router() {
     initSurveyView(query.agent || "");
     document.title = "Rate Your Study Abroad Agent | StudyScore";
     injectSchema(null);
+  } else if (parts[0] === "blog" && parts.length === 2) {
+    activate("view-blog-single");
+    renderBlogSingle(decodeURIComponent(parts[1]));
+  } else if (parts[0] === "blog") {
+    activate("view-blog-list");
+    renderBlogList(query.city || "");
+    document.title = "Global Intel - City Intelligence Reports | StudyScore";
   } else if (parts[0] === "privacy") {
     activate("view-privacy");
     document.title = "Privacy Policy | StudyScore";
