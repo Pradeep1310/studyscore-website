@@ -454,6 +454,15 @@ a { color: inherit; }
 .modal h3 { font-family: var(--disp); font-weight: 700; font-size: 19px; color: var(--ink); margin-bottom: 10px; }
 .modal p { font-size: 14px; color: var(--body); margin-bottom: 20px; line-height: 1.7; }
 
+/* ---- Lead magnet instant-download success state ---- */
+.lm-success {
+  background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 12px;
+  padding: 22px 24px; margin-top: 4px;
+  animation: fadeUp .35s ease;
+}
+.lm-success .lms-title { font-family: var(--disp); font-weight: 700; font-size: 16.5px; color: var(--ok); margin-bottom: 6px; }
+.lm-success p { font-size: 14px; color: var(--body); line-height: 1.7; margin-bottom: 16px; }
+
 /* ---- Intermediary Protection Shield notice ---- */
 .shield-note {
   font-size: 12.5px; color: #8A6D33; line-height: 1.75;
@@ -1088,6 +1097,8 @@ try {
 var CONTACT_EMAIL = "pradeep@studyscore.in";
 var CRM_BASE_URL  = "";     /* absolute origin of your CRM for the profile lead form */
 var DOC_BUCKET    = "verification-vault";   /* PRIVATE storage bucket for document proofs */
+var PLAYBOOK_URL  = "studyscore-playbook-2026.pdf";   /* lead-magnet PDF: commit this file
+                               next to index.html in the GitHub Pages repo */
 
 var DEMO_MODE     = false; /* LIVE MODE: real database records only. Flip to true
                                locally to smoke-test with synthetic rows. */
@@ -2070,10 +2081,20 @@ function submitLeadMagnet(form, sourcePage) {
       setSt("err", sbErrText(res.error));
       return;
     }
-    form.reset();
-    setSt("ok", "Strategy Playbook Access Granted. Your secure operational guide has been routed for dispatch via verified WhatsApp network links.");
-    showModal("Strategy Playbook Access Granted",
-      "Your secure operational guide has been routed for dispatch via verified WhatsApp network links.");
+    /* Fast-path dispatch: fulfil the promise on-screen, instantly. */
+    var card = form.closest ? form.closest(".lm-card") : null;
+    var successHtml =
+      '<div class="lm-success" role="status">' +
+        '<div class="lms-title">&#9989; Access Credentials Verified.</div>' +
+        '<p>Your copy of the 2026 Bureaucratic Strategy Playbook is ready for download.</p>' +
+        '<a class="btn btn-dark" href="' + PLAYBOOK_URL + '" download target="_blank" rel="noopener">&#128229; Download Playbook PDF Instantly</a>' +
+      '</div>';
+    if (card) {
+      card.innerHTML = '<h3>&#128274; Secure StudyScore Inbound Gateway</h3>' + successHtml;
+    } else {
+      form.reset();
+      setSt("ok", "Access Credentials Verified. Download your playbook: " + PLAYBOOK_URL);
+    }
   }).catch(function (err) {
     btn.disabled = false;
     console.error("StudyScore: lead submit crashed", err);
