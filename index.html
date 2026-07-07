@@ -2073,7 +2073,7 @@ function submitLeadMagnet(form, sourcePage) {
     whatsapp_number: wa,
     target_destination: dest,
     current_consultant: agent,
-    source_page: sourcePage
+    source_page: window.location.hash || sourcePage   /* snake_case column; live route context for GEO analytics */
   }]).then(function (res) {
     btn.disabled = false;
     if (res.error) {
@@ -2087,7 +2087,7 @@ function submitLeadMagnet(form, sourcePage) {
       '<div class="lm-success" role="status">' +
         '<div class="lms-title">&#9989; Access Credentials Verified.</div>' +
         '<p>Your copy of the 2026 Bureaucratic Strategy Playbook is ready for download.</p>' +
-        '<a class="btn btn-dark" href="' + PLAYBOOK_URL + '" download target="_blank" rel="noopener">&#128229; Download Playbook PDF Instantly</a>' +
+        '<a href="./' + PLAYBOOK_URL + '" download="' + PLAYBOOK_URL + '" class="btn btn-dark">&#128229; Download Playbook PDF Instantly</a>' +
       '</div>';
     if (card) {
       card.innerHTML = '<h3>&#128274; Secure StudyScore Inbound Gateway</h3>' + successHtml;
@@ -2253,6 +2253,17 @@ function renderBlogSingle(slug) {
     .catch(function () { wrap.innerHTML = BLOG_FALLBACK; injectSchema(null); });
 }
 
+/* Slug sanitiser: isolates a clean route parameter - decodes, trims,
+   strips trailing slashes/spaces and any stray query/hash fragments -
+   so a malformed URL can never feed a dirty key into a template. */
+function cleanSlug(raw) {
+  var t = String(raw == null ? "" : raw);
+  try { t = decodeURIComponent(t); } catch (e) { /* keep raw on bad encoding */ }
+  t = t.split("?")[0].split("#")[0];
+  t = t.replace(/\/+$/, "").replace(/\s+/g, " ").trim();
+  return t;
+}
+
 /* ------------------------------ Router ------------------------------ */
 var VIEWS = ["view-home", "view-agents", "view-profile", "view-survey", "view-blog-list", "view-blog-single", "view-privacy", "view-terms"];
 function activate(id) {
@@ -2304,9 +2315,14 @@ function router() {
     initSurveyView(query.agent || "");
     document.title = "Rate Your Study Abroad Agent | StudyScore";
     injectSchema(null);
-  } else if (parts[0] === "blog" && parts.length === 2) {
+  } else if (parts[0] === "blog" && parts.length >= 2) {
     activate("view-blog-single");
-    renderBlogSingle(decodeURIComponent(parts[1]));
+    var blogSlug = cleanSlug(parts[1]);
+    if (blogSlug) { renderBlogSingle(blogSlug); }
+    else {
+      var bw = document.getElementById("view-blog-content-wrapper");
+      if (bw) bw.innerHTML = BLOG_FALLBACK;
+    }
   } else if (parts[0] === "blog") {
     activate("view-blog-list");
     renderBlogList(query.city || "");
